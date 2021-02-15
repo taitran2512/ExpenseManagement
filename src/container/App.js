@@ -1,14 +1,60 @@
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
 import 'react-native-gesture-handler';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import { colors } from '../res/style/theme';
 
 ////////////////////////////////////////////////////////////
 import LoginContainer from './login/LoginContainer';
 import HomeContainer from './home/HomeContainer';
+import StatisticContainer from './statistic/StatisticContainer';
+import DrawerComponent from '../component/drawer/DrawerComponent';
 ////////////////////////////////////////////////////////////
-const Stack = createStackNavigator();
+//bottom-tab
+const Tab = createMaterialBottomTabNavigator();
+const bottomTab = () => {
+   return (
+      <Tab.Navigator
+         initialRouteName="Home"
+         activeColor={colors.white}
+         inactiveColor={colors.black1}
+         shifting={true}
+         barStyle={{ backgroundColor: colors.red2, height: 48, justifyContent: 'center' }}>
+         <Tab.Screen
+            name="Home"
+            component={HomeContainer}
+            options={{
+               tabBarLabel: 'Trang chủ',
+               tabBarIcon: ({ color }) => <Icon name="home" color={color} size={26} />,
+            }}
+         />
+         <Tab.Screen
+            name="Statistic"
+            component={StatisticContainer}
+            options={{
+               tabBarLabel: 'Thống kê',
+               tabBarIcon: ({ color }) => <Icon name="chart-bar" color={color} size={26} />,
+            }}
+         />
+      </Tab.Navigator>
+   );
+};
+//Drawer navigation
+const Drawer = createDrawerNavigator();
 
+const Drawers = () => {
+   return (
+      <Drawer.Navigator drawerContent={(props) => <DrawerComponent {...props} />}>
+         <Drawer.Screen name="Drawer" component={bottomTab} />
+      </Drawer.Navigator>
+   );
+};
+//stack navigation
+const Stack = createStackNavigator();
 const App = () => {
    return (
       <NavigationContainer>
@@ -18,7 +64,7 @@ const App = () => {
                ...TransitionPresets.SlideFromRightIOS,
             }}>
             <Stack.Screen name="Login" component={LoginContainer} />
-            <Stack.Screen name="Home" component={HomeContainer} />
+            <Stack.Screen name="Home" component={Drawers} />
          </Stack.Navigator>
       </NavigationContainer>
    );

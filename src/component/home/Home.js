@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text } from 'react-native';
+import Header from '../custom/Header';
 
 export default class Home extends Component {
    constructor(props) {
@@ -10,8 +11,8 @@ export default class Home extends Component {
    render() {
       return (
          <View style={{ flex: 1 }}>
+            <Header isShowMenu onPressMenu={() => this.props.navigation.openDrawer()} title="Trang chủ" />
             <Text> Home </Text>
-            <Button title="go backk" onPress={() => this.props.navigation.goBack()} />
          </View>
       );
    }
