@@ -3,17 +3,14 @@ import {
    View,
    Text,
    StyleSheet,
-   StatusBar,
-   Image,
    TouchableNativeFeedback,
-   SafeAreaView,
-   KeyboardAvoidingView,
-   TouchableWithoutFeedback,
    Keyboard,
    Animated,
+   ScrollView,
 } from 'react-native';
 import Images from '../../res/image';
 import { colors, screenWidth } from '../../res/style/theme';
+import StatusBarView from '../custom/StatusBarView';
 import TextInputAnimated from '../custom/TextInputAnimated';
 
 const logoSize = screenWidth * 0.5;
@@ -29,7 +26,7 @@ export default class Login extends Component {
       this.keyboardDidShow = this.keyboardDidShow.bind(this);
       this.keyboardDidHide = this.keyboardDidHide.bind(this);
    }
-   componentWillMount() {
+   componentDidMount() {
       this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
       this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
    }
@@ -65,52 +62,50 @@ export default class Login extends Component {
    onChangeUsername = (text) => {
       this.setState({ username: text });
    };
-
+   onClearUsername = () => {
+      this.setState({ username: '' });
+   };
+   onClearPassword = () => {
+      this.setState({ password: '' });
+   };
    onChangePassword = (text) => {
       this.setState({ password: text });
    };
    onPressLogin = () => {
-      this.props.navigation.navigate('Home');
+      this.props.navigation.replace('Home');
    };
    render() {
       return (
-         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <KeyboardAvoidingView style={styles.container} behavior={'padding'}>
-               <SafeAreaView />
-               <StatusBar
-                  barStyle="dark-content"
-                  backgroundColor={'transparent'}
-                  hidden={false}
-                  translucent={true}
-               />
-               <View style={{ height: StatusBar.currentHeight, backgroundColor: colors.white }} />
-               {/* /////////logo////////// */}
-               <Animated.Image
-                  source={Images.wallet}
-                  style={[styles.logo, { height: this.zoomLogo, width: this.zoomLogo }]}
-               />
-               {/* /////////////////////////// */}
-               <Text style={styles.login}>Expense Management</Text>
-               <TextInputAnimated
-                  label="Username"
-                  style={styles.input}
-                  value={this.state.username}
-                  onChangeText={this.onChangeUsername}
-               />
-               <TextInputAnimated
-                  isPassword
-                  style={styles.input}
-                  label="Password"
-                  value={this.state.password}
-                  onChangeText={this.onChangePassword}
-               />
-               <TouchableNativeFeedback onPress={this.onPressLogin}>
-                  <View style={styles.btnLogin}>
-                     <Text style={styles.txtBtnLogin}>Đăng nhập</Text>
-                  </View>
-               </TouchableNativeFeedback>
-            </KeyboardAvoidingView>
-         </TouchableWithoutFeedback>
+         <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+            <StatusBarView />
+            {/* /////////logo////////// */}
+            <Animated.Image
+               source={Images.wallet}
+               style={[styles.logo, { height: this.zoomLogo, width: this.zoomLogo }]}
+            />
+            {/* /////////////////////////// */}
+            <Text style={styles.login}>Expense Management</Text>
+            <TextInputAnimated
+               label="Username"
+               style={styles.input}
+               value={this.state.username}
+               onChangeText={this.onChangeUsername}
+               onPressClear={this.onClearUsername}
+            />
+            <TextInputAnimated
+               isPassword
+               style={styles.input}
+               label="Password"
+               value={this.state.password}
+               onChangeText={this.onChangePassword}
+               onPressClear={this.onClearPassword}
+            />
+            <TouchableNativeFeedback onPress={this.onPressLogin}>
+               <View style={styles.btnLogin}>
+                  <Text style={styles.txtBtnLogin}>Đăng nhập</Text>
+               </View>
+            </TouchableNativeFeedback>
+         </ScrollView>
       );
    }
 }

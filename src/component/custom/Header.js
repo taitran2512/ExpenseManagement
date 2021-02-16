@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, StatusBar, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome5';
 import { colors } from '../../res/style/theme';
+import StatusBarView from './StatusBarView';
 
 const Header = (props) => {
    const iconBack = () => (
@@ -9,7 +10,7 @@ const Header = (props) => {
          android_ripple={{ color: colors.black_transparent, borderless: true }}
          style={styles.iconBack}
          onPress={() => props.onPressBack()}>
-         <Icon name="arrow-left" size={20} />
+         <Icon name="arrow-left" size={20} color={colors.white} />
       </Pressable>
    );
    const iconMenu = () => (
@@ -17,22 +18,16 @@ const Header = (props) => {
          android_ripple={{ color: colors.black_transparent, borderless: true }}
          style={styles.iconBack}
          onPress={() => props.onPressMenu()}>
-         <Icon name="align-justify" size={20} />
+         <Icon name="align-justify" size={20} color={colors.white} />
       </Pressable>
    );
    //////////////////////////////////
    return (
       <View>
-         <SafeAreaView />
-         <View style={{ height: StatusBar.currentHeight, backgroundColor: colors.white }} />
-         <StatusBar
-            barStyle="dark-content"
-            backgroundColor={'transparent'}
-            hidden={false}
-            translucent={true}
-         />
+         <StatusBarView />
          <View style={styles.container}>
-            {props.isShowMenu ? iconMenu() : iconBack()}
+            {props.isShowMenu ? iconMenu() : null}
+            {props.isShowBack ? iconBack() : null}
             <Text style={styles.title}>{props.title}</Text>
          </View>
       </View>
@@ -50,13 +45,14 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: colors.white,
-      borderColor: colors.gray,
-      borderBottomWidth: 1,
+      backgroundColor: colors.blue,
+      // borderColor: colors.gray,
+      // borderBottomWidth: 1,
    },
    title: {
-      fontSize: 16,
+      fontSize: 18,
       fontWeight: 'bold',
+      color: colors.white,
    },
    iconBack: {
       position: 'absolute',

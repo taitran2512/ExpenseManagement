@@ -23,7 +23,8 @@ const bottomTab = () => {
          activeColor={colors.white}
          inactiveColor={colors.black1}
          shifting={true}
-         barStyle={{ backgroundColor: colors.red2, height: 48, justifyContent: 'center' }}>
+         barStyle={{ backgroundColor: colors.red2, height: 48, justifyContent: 'center' }}
+         backBehavior="initialRoute">
          <Tab.Screen
             name="Home"
             component={HomeContainer}

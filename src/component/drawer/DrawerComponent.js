@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text,  StyleSheet } from 'react-native';
+import { colors } from '../../res/style/theme';
+import StatusBarView from '../custom/StatusBarView';
 
 export default class DrawerComponent extends Component {
    constructor(props) {
@@ -10,8 +12,18 @@ export default class DrawerComponent extends Component {
    render() {
       return (
          <View>
-            <Text> DrawerComponent </Text>
+            <StatusBarView />
+            <View style={styles.container}></View>
          </View>
       );
    }
 }
+const styles = StyleSheet.create({
+   container: {
+      height: 48,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: colors.blue,
+   },
+});

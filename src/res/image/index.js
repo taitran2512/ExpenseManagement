@@ -4,5 +4,6 @@ const Images = {
    logo: require('./img/logo.png'),
    ic_cancel: require('./img/ic_cancel.png'),
    wallet: require('./img/wallet.png'),
+   card: require('./img/card.png'),
 };
 export default Images;

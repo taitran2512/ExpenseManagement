@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { colors } from '../../res/style/theme';
+import Header from '../custom/Header';
 
 export default class Statistic extends Component {
    render() {
       return (
-         <View>
-            <Text> textInComponent </Text>
+         <View style={styles.container}>
+            <Header isShowMenu onPressMenu={() => this.props.navigation.openDrawer()} title="Thống kê" />
+            <ScrollView></ScrollView>
          </View>
       );
    }
 }
+const styles = StyleSheet.create({
+   container: {
+      flex: 1,
+      backgroundColor: colors.white,
+   },
+});
