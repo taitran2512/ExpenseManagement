@@ -7,6 +7,7 @@ import {
    Keyboard,
    Animated,
    ScrollView,
+   TouchableOpacity,
 } from 'react-native';
 import Images from '../../res/image';
 import { colors, screenWidth } from '../../res/style/theme';
@@ -105,6 +106,12 @@ export default class Login extends Component {
                   <Text style={styles.txtBtnLogin}>Đăng nhập</Text>
                </View>
             </TouchableNativeFeedback>
+            <TouchableOpacity>
+               <Text style={styles.txtsignup}>Quên mật khẩu</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+               <Text style={styles.txtsignup}>Đăng ký</Text>
+            </TouchableOpacity>
          </ScrollView>
       );
    }
@@ -126,7 +133,7 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       color: colors.red2,
       textAlign: 'center',
-      marginVertical: 32,
+      marginVertical: 16,
    },
    btnLogin: {
       height: 44,
@@ -141,5 +148,10 @@ const styles = StyleSheet.create({
       fontSize: 18,
       color: colors.white,
       fontWeight: 'bold',
+   },
+   txtsignup: {
+      fontSize: 16,
+      textAlign: 'center',
+      marginTop: 8,
    },
 });

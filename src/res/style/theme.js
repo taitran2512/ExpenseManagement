@@ -8,7 +8,7 @@ const colors = {
    black: '#333333',
    black1: '#262626',
    black2: '#595959',
-   black_transparent: '#00000020',
+   black_transparent: '#00000025',
    green: '#2EB553',
    blue: '#4D89FF',
    lightblue: '#F1F6FF',

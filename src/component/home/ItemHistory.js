@@ -9,7 +9,10 @@ const ItemHistory = (props) => {
       <View style={styles.container}>
          <View style={styles.type}>
             <Image source={Images.ic_cancel} style={styles.icon} />
-            <Text style={styles.txt}>asdasd</Text>
+            <View>
+               <Text style={styles.date}>22/02/2021</Text>
+               <Text style={styles.txt}>Ăn uống</Text>
+            </View>
          </View>
          <Text style={styles.txt}>{formatMoney(props.money)}</Text>
       </View>
@@ -40,5 +43,9 @@ const styles = StyleSheet.create({
    },
    txt: {
       fontSize: 18,
+   },
+   date: {
+      color: colors.gray,
+      fontSize: 14,
    },
 });

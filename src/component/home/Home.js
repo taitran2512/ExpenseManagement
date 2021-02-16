@@ -7,30 +7,28 @@ import ItemCard from './ItemCard';
 import ActionButton from './ActionButton';
 import ItemHistory from './ItemHistory';
 const data = [
-   { type: 'card', money: 123456 },
-   { type: 'wallet', money: 456789 },
-   { type: 'wallet', money: 1000000000 },
-   { type: 'card', money: 1000000000 },
-   { type: 'wallet', money: 456789 },
+   { title: 'Vietcombank', money: 123456 },
+   { title: 'Tiền trong ví', money: 456789 },
+   { title: 'Tiền trong tủ', money: 1000000000 },
 ];
 
 const history = [
-   { type: '', money: 10000 },
-   { type: '', money: 10000 },
-   { type: '', money: 10000 },
-   { type: '', money: 10000 },
-   { type: '', money: 10000 },
-   { type: '', money: 10000 },
-   { type: '', money: 10000 },
-   { type: '', money: 10000 },
-   { type: '', money: 10000 },
-   { type: '', money: 10000 },
-   { type: '', money: 10000 },
-   { type: '', money: 10000 },
-   { type: '', money: 10000 },
-   { type: '', money: 10000 },
-   { type: '', money: 10000 },
-   { type: '', money: 10000 },
+   { type: '', money: 300000 },
+   { type: '', money: 300000 },
+   { type: '', money: 300000 },
+   { type: '', money: 300000 },
+   { type: '', money: 300000 },
+   { type: '', money: 300000 },
+   { type: '', money: 300000 },
+   { type: '', money: 300000 },
+   { type: '', money: 300000 },
+   { type: '', money: 300000 },
+   { type: '', money: 300000 },
+   { type: '', money: 300000 },
+   { type: '', money: 300000 },
+   { type: '', money: 300000 },
+   { type: '', money: 300000 },
+   { type: '', money: 300000 },
 ];
 
 export default class Home extends Component {
@@ -38,7 +36,7 @@ export default class Home extends Component {
       super(props);
       this.state = {};
    }
-   renderItemCard = ({ item, index }) => <ItemCard index={index} type={item.type} money={item.money} />;
+   renderItemCard = ({ item, index }) => <ItemCard index={index} title={item.title} money={item.money} />;
    renderHistory = ({ item, index }) => <ItemHistory index={index} type={item.type} money={item.money} />;
    render() {
       return (
@@ -106,8 +104,9 @@ const styles = StyleSheet.create({
       fontSize: 35,
    },
    txtHistory: {
-      fontSize: 24,
+      fontSize: 20,
       fontWeight: 'bold',
-      padding: 12,
+      paddingVertical: 10,
+      paddingHorizontal: 16,
    },
 });
