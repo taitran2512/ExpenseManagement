@@ -161,44 +161,7 @@ export default class TextInputAnimated extends Component {
                      />
                   </TouchableOpacity>
                </>
-            ) : this.props.isHideInput ? (
-               ///text input hide text/////
-               <>
-                  <TextInput
-                     {...props}
-                     maxLength={100}
-                     onChange={(e) => {
-                        e.nativeEvent.text.length === 100 &&
-                           setTimeout(() => {
-                              Alert.alert('Thông báo', 'Không được nhập quá 100 kí tự');
-                           }, 10);
-                     }}
-                     ref={this.textInput}
-                     autoCorrect={false}
-                     autoCompleteType="off"
-                     editable={!this.props.disabled}
-                     style={[styles.textInput, this.props.disabled && { color: colors.gray }]}
-                     secureTextEntry={this.state.hidePassword}
-                     onFocus={this.handleFocus}
-                     onBlur={this.handleBlur}
-                     blurOnSubmit
-                  />
-                  {this.props.value !== '' && isFocused === true ? (
-                     <TouchableOpacity
-                        style={{
-                           position: 'absolute',
-                           right: BASE_SIZE / 2,
-                        }}
-                        onPress={() => this.props.onPressClear()}>
-                        <Image
-                           resizeMode="contain"
-                           style={{ width: 32, height: 32 }}
-                           source={Images.ic_cancel}
-                        />
-                     </TouchableOpacity>
-                  ) : null}
-               </>
-            ) : this.props.isPicker ? (
+            )  : this.props.isPicker ? (
                //textinput disable edit tích hợp vào picker
                <>
                   <TextInput

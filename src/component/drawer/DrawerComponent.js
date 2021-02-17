@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableNativeFeedback } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
 import { colors } from '../../res/style/theme';
 import Header from '../custom/Header';
-import StatusBarView from '../custom/StatusBarView';
 
 const listMenu = [
-   { title: 'Đổi mật khẩu', icon: 'user-lock', screen: '' },
-   { title: 'Xuất file Excel', icon: 'file-excel', screen: '' },
-   { title: 'Thông tin chi tiết', icon: 'info-circle', screen: '' },
-   { title: 'Hướng dẫn sử dụng', icon: 'chalkboard-teacher', screen: '' },
+   { title: 'Đổi mật khẩu', icon: 'user-lock', screen: '', color: colors.cyan2 },
+   { title: 'Xuất file Excel', icon: 'file-excel', screen: '', color: colors.green1 },
+   { title: 'Thông tin chi tiết', icon: 'info-circle', screen: '', color: colors.blue2 },
+   { title: 'Hướng dẫn sử dụng', icon: 'chalkboard-teacher', screen: '', color: colors.yellow },
 ];
 
 export default class DrawerComponent extends Component {
@@ -18,12 +17,12 @@ export default class DrawerComponent extends Component {
       this.state = {};
    }
    renderMenu = ({ item, index }) => (
-      <TouchableNativeFeedback>
+      <Pressable android_ripple={{ color: colors.black_transparent }}>
          <View style={styles.itemMenu}>
-            <FontAwesome5 name={item.icon} size={25} color={colors.gray5} />
+            <FontAwesome5 name={item.icon} size={25} color={item.color} />
             <Text style={styles.txtMenu}>{item.title}</Text>
          </View>
-      </TouchableNativeFeedback>
+      </Pressable>
    );
    render() {
       return (
@@ -34,12 +33,13 @@ export default class DrawerComponent extends Component {
                keyExtractor={(item, index) => String(index)}
                renderItem={this.renderMenu}
                ListFooterComponent={
-                  <TouchableNativeFeedback onPress={() => this.props.navigation.replace('Login')}>
-                     <View style={styles.itemMenu}>
-                        <FontAwesome5 name="sign-out-alt" size={25} color={colors.red2} />
-                        <Text style={styles.txtMenu}>Đăng xuất</Text>
-                     </View>
-                  </TouchableNativeFeedback>
+                  <Pressable
+                     android_ripple={{ color: colors.black_transparent }}
+                     style={styles.itemMenu}
+                     onPress={() => this.props.navigation.replace('Login')}>
+                     <FontAwesome5 name="sign-out-alt" size={25} color={colors.red1} />
+                     <Text style={styles.txtMenu}>Đăng xuất</Text>
+                  </Pressable>
                }
             />
          </View>

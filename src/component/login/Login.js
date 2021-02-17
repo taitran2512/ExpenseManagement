@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
-import {
-   View,
-   Text,
-   StyleSheet,
-   TouchableNativeFeedback,
-   Keyboard,
-   Animated,
-   ScrollView,
-   TouchableOpacity,
-} from 'react-native';
+import { View, Text, StyleSheet, Keyboard, Animated, ScrollView, TouchableOpacity } from 'react-native';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../../res/image';
 import { colors, screenWidth } from '../../res/style/theme';
 import StatusBarView from '../custom/StatusBarView';
 import TextInputAnimated from '../custom/TextInputAnimated';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const logoSize = screenWidth * 0.5;
 const duration = 350;
@@ -22,14 +15,26 @@ export default class Login extends Component {
       this.state = {
          username: '',
          password: '',
+         saveLogin: false,
       };
       this.zoomLogo = new Animated.Value(logoSize);
       this.keyboardDidShow = this.keyboardDidShow.bind(this);
       this.keyboardDidHide = this.keyboardDidHide.bind(this);
    }
-   componentDidMount() {
+   async componentDidMount() {
       this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
       this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+
+      //get username and password remember login
+      try {
+         const jsonValue = await AsyncStorage.getItem('@saveLogin');
+         if (jsonValue != null) {
+            var data = JSON.parse(jsonValue);
+            this.setState({ username: data.username, password: data.password, saveLogin: true });
+         }
+      } catch (e) {
+         // error reading value
+      }
    }
    componentWillUnmount() {
       this.keyboardDidShowListener.remove();
@@ -75,9 +80,33 @@ export default class Login extends Component {
    onPressLogin = () => {
       this.props.navigation.replace('Home');
    };
+   onPressSaveLogin = () => {
+      this.setState({ saveLogin: !this.state.saveLogin }, async () => {
+         if (this.state.saveLogin) {
+            try {
+               const jsonValue = JSON.stringify({
+                  username: this.state.username,
+                  password: this.state.password,
+               });
+               await AsyncStorage.setItem('@saveLogin', jsonValue);
+            } catch (e) {
+               // saving error
+            }
+         } else {
+            try {
+               await AsyncStorage.removeItem('@saveLogin');
+            } catch (e) {
+               // remove error
+            }
+         }
+      });
+   };
    render() {
       return (
-         <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+         <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.container}
+            keyboardShouldPersistTaps="handled">
             <StatusBarView />
             {/* /////////logo////////// */}
             <Animated.Image
@@ -87,7 +116,7 @@ export default class Login extends Component {
             {/* /////////////////////////// */}
             <Text style={styles.login}>Expense Management</Text>
             <TextInputAnimated
-               label="Username"
+               label="Tên đăng nhập"
                style={styles.input}
                value={this.state.username}
                onChangeText={this.onChangeUsername}
@@ -96,22 +125,35 @@ export default class Login extends Component {
             <TextInputAnimated
                isPassword
                style={styles.input}
-               label="Password"
+               label="Mật khẩu"
                value={this.state.password}
                onChangeText={this.onChangePassword}
                onPressClear={this.onClearPassword}
             />
-            <TouchableNativeFeedback onPress={this.onPressLogin}>
-               <View style={styles.btnLogin}>
-                  <Text style={styles.txtBtnLogin}>Đăng nhập</Text>
-               </View>
-            </TouchableNativeFeedback>
-            <TouchableOpacity>
-               <Text style={styles.txtsignup}>Quên mật khẩu</Text>
+            {/* ////////////////////////// */}
+            <TouchableOpacity style={styles.save} onPress={this.onPressSaveLogin}>
+               <FontAwesome5Icon
+                  name={this.state.saveLogin ? 'check-circle' : 'circle'}
+                  size={16}
+                  color={colors.blue}
+               />
+               <Text style={styles.txtSave}>Ghi nhớ đăng nhập</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
-               <Text style={styles.txtsignup}>Đăng ký</Text>
+            <TouchableOpacity style={styles.btnLogin} onPress={this.onPressLogin}>
+               <Text style={styles.txtBtnLogin}>Đăng nhập</Text>
             </TouchableOpacity>
+
+            {/* ////////////////////// */}
+            <View style={styles.view}>
+               <TouchableOpacity style={styles.subView}>
+                  <Text style={styles.txtsignup}>Quên mật khẩu</Text>
+               </TouchableOpacity>
+               <TouchableOpacity
+                  style={styles.subView}
+                  onPress={() => this.props.navigation.navigate('SignUp')}>
+                  <Text style={styles.txtsignup}>Đăng ký</Text>
+               </TouchableOpacity>
+            </View>
          </ScrollView>
       );
    }
@@ -142,16 +184,41 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       marginHorizontal: 16,
       marginTop: 20,
-      borderRadius: 8,
+      borderRadius: 50,
    },
    txtBtnLogin: {
       fontSize: 18,
       color: colors.white,
       fontWeight: 'bold',
    },
+   view: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      padding: 16,
+   },
+   subView: {
+      height: 44,
+      borderRadius: 50,
+      backgroundColor: colors.green1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '47%',
+   },
    txtsignup: {
       fontSize: 16,
       textAlign: 'center',
-      marginTop: 8,
+      color: colors.white,
+      fontWeight: 'bold',
+   },
+   save: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: 28,
+      marginTop: 12,
+   },
+   txtSave: {
+      fontSize: 16,
+      color: colors.blue,
+      marginLeft: 8,
    },
 });

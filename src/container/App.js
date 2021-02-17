@@ -10,6 +10,7 @@ import { colors } from '../res/style/theme';
 
 ////////////////////////////////////////////////////////////
 import LoginContainer from './login/LoginContainer';
+import SignUpContainer from './login/SignUpContainer';
 import HomeContainer from './home/HomeContainer';
 import StatisticContainer from './statistic/StatisticContainer';
 import DrawerComponent from '../component/drawer/DrawerComponent';
@@ -23,7 +24,7 @@ const bottomTab = () => {
          activeColor={colors.white}
          inactiveColor={colors.black1}
          shifting={true}
-         barStyle={{ backgroundColor: colors.red2, height: 48, justifyContent: 'center' }}
+         barStyle={{ backgroundColor: colors.red1, height: 48, justifyContent: 'center' }}
          backBehavior="initialRoute">
          <Tab.Screen
             name="Home"
@@ -46,7 +47,6 @@ const bottomTab = () => {
 };
 //Drawer navigation
 const Drawer = createDrawerNavigator();
-
 const Drawers = () => {
    return (
       <Drawer.Navigator drawerContent={(props) => <DrawerComponent {...props} />}>
@@ -65,6 +65,7 @@ const App = () => {
                ...TransitionPresets.SlideFromRightIOS,
             }}>
             <Stack.Screen name="Login" component={LoginContainer} />
+            <Stack.Screen name="SignUp" component={SignUpContainer} />
             <Stack.Screen name="Home" component={Drawers} />
          </Stack.Navigator>
       </NavigationContainer>

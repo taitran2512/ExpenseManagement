@@ -1,12 +1,5 @@
 import React, { useRef, useState } from 'react';
-import {
-   View,
-   Text,
-   ImageBackground,
-   StyleSheet,
-   TouchableOpacity,
-   TouchableNativeFeedback,
-} from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
 import { formatMoney } from '../../res/function/Functions';
 import Images from '../../res/image';
@@ -58,21 +51,20 @@ const ItemCard = (props) => {
                />
                <View style={styles.viewBtn}>
                   {/* //cancel edit */}
-                  <TouchableNativeFeedback onPress={onCancelEdit}>
-                     <View style={[styles.btn, { backgroundColor: colors.red2 }]}>
-                        <Text style={styles.txtBtn}>Hủy</Text>
-                     </View>
-                  </TouchableNativeFeedback>
+                  <TouchableOpacity
+                     onPress={onCancelEdit}
+                     style={[styles.btn, { backgroundColor: colors.red2 }]}>
+                     <Text style={styles.txtBtn}>Hủy</Text>
+                  </TouchableOpacity>
                   {/* //ok edit */}
-                  <TouchableNativeFeedback
+                  <TouchableOpacity
+                     style={styles.btn}
                      onPress={() => {
                         props.onEdit(cardName, money);
                         modalRef.current.close();
                      }}>
-                     <View style={styles.btn}>
-                        <Text style={styles.txtBtn}>Sửa</Text>
-                     </View>
-                  </TouchableNativeFeedback>
+                     <Text style={styles.txtBtn}>Sửa</Text>
+                  </TouchableOpacity>
                </View>
             </View>
          </Modals>
