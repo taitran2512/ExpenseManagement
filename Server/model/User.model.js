@@ -13,6 +13,12 @@ const UserSchema = new Schema({
 	dob: {
 		type: Date,
 	},
+	email: {
+		type: String,
+	},
+	phone: {
+		type: String,
+	},
 });
 
 const UserModel = mongoose.model("users", UserSchema);

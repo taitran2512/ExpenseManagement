@@ -16,13 +16,13 @@ router.route("/").get((req, res) => {
 		.catch((err) => res.status(400).json("Error:", +err));
 });
 
-//đăng kí tài khoản
+////////////////đăng kí tài khoản//////////////////////////////
 router.route("/signup").post((req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
 	const dob = req.body.dob;
 
-	const newUser = new User({ username, password, dob });
+	const newUser = new User({ username, dob, email, phone });
 	User.findOne({ username: username })
 		.then((data) => {
 			if (data) {
@@ -37,19 +37,20 @@ router.route("/signup").post((req, res) => {
 		.catch((err) => res.status(400).json("Error", err));
 });
 
-//đăng nhập
+///////////////đăng nhập////////////////////
 router.route("/login").post((req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
-	const newUser = new User({ username, password });
+	const newUser = new User({ username, dob, email, phone });
+	
 	User.findOne({ username: username, password: password })
 		.then((data) => {
 			if (data) {
-				res.json(ResultModel("error", "Đăng nhập thành công", new User()));
+				res.json(ResultModel("success", "Đăng nhập thành công", newUser));
 			} else {
 				res.json(ResultModel("error", "Đăng nhập thất bại"));
 			}
 		})
-		.catch((err) => res.status(400));
+		.catch((err) => res.status(400).json("Error:", err));
 });
 module.exports = router;
