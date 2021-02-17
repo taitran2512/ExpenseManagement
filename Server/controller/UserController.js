@@ -31,15 +31,18 @@ router.route("/signup").post((req, res) => {
 			res.json({ error: err });
 		} else {
 			const newUser = new User({ username, password: hashPassword, dob, email, phone });
-			User.findOne({ username: username })
+			//nếu email hoặc username đã tồn tại sẽ ko cho đăng kí
+			User.findOne({ $or: [{ username: username }, { email: email }] })
 				.then((data) => {
 					if (data) {
-						res.json(ResultModel("error", "Tài khoản đã tồn tại"));
+						res.json(ResultModel("error", "Tên tài khoản hoặc email đã tồn tại"));
 					} else {
 						newUser
 							.save()
 							.then(() => {
-								return res.json(ResultModel("success", "Đăng kí thành công", newUser));
+								const dataUser = newUser.toObject();
+								delete dataUser.password;
+								return res.json(ResultModel("success", "Đăng kí thành công", dataUser));
 							})
 							.catch((err) => res.status(400).json("Error:", err));
 					}
@@ -54,9 +57,8 @@ router.route("/login").post((req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
 
-	const newUser = new User({ username });
-
-	User.findOne({ username: username })
+	//login by username or email
+	User.findOne({ $or: [{ username: username }, { email: username }] })
 		.then((user) => {
 			if (user) {
 				bcrypt.compare(password, user.password, (err, result) => {
@@ -64,7 +66,9 @@ router.route("/login").post((req, res) => {
 						res.json({ error: err });
 					}
 					if (result) {
-						res.json(ResultModel("success", "Đăng nhập thành công", newUser));
+						var dataUser = user.toObject();
+						delete dataUser.password;
+						res.json(ResultModel("success", "Đăng nhập thành công", dataUser));
 					} else {
 						res.json(ResultModel("error", "Tài khoản hoặc mật khẩu không chính xác"));
 					}
