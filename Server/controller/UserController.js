@@ -30,9 +30,15 @@ router.route("/signup").post((req, res) => {
 		if (err) {
 			res.json({ error: err });
 		} else {
-			const newUser = new User({ username, password: hashPassword, dob, email, phone });
+			const newUser = new User({
+				username: username.toLowerCase(),
+				password: hashPassword,
+				dob,
+				email: email.toLowerCase(),
+				phone,
+			});
 			//nếu email hoặc username đã tồn tại sẽ ko cho đăng kí
-			User.findOne({ $or: [{ username: username }, { email: email }] })
+			User.findOne({ $or: [{ username: username.toLowerCase() }, { email: email.toLowerCase() }] })
 				.then((data) => {
 					if (data) {
 						res.json(ResultModel("error", "Tên tài khoản hoặc email đã tồn tại"));
@@ -58,7 +64,7 @@ router.route("/login").post((req, res) => {
 	const password = req.body.password;
 
 	//login by username or email
-	User.findOne({ $or: [{ username: username }, { email: username }] })
+	User.findOne({ $or: [{ username: username.toLowerCase() }, { email: username.toLowerCase() }] })
 		.then((user) => {
 			if (user) {
 				bcrypt.compare(password, user.password, (err, result) => {
