@@ -13,8 +13,8 @@ export default class Login extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         username: '',
-         password: '',
+         username: 'admin1',
+         password: '123456',
          saveLogin: false,
       };
       this.zoomLogo = new Animated.Value(logoSize);
@@ -77,9 +77,8 @@ export default class Login extends Component {
    onChangePassword = (text) => {
       this.setState({ password: text });
    };
-   onPressLogin = () => {
-      this.props.navigation.replace('Home');
-   };
+
+   //remember login
    onPressSaveLogin = () => {
       this.setState({ saveLogin: !this.state.saveLogin }, async () => {
          if (this.state.saveLogin) {
@@ -101,6 +100,11 @@ export default class Login extends Component {
          }
       });
    };
+   //press login
+   onPressLogin = () => {
+      this.props.navigation.replace('Home');
+      // this.props.loginAction(this.state.username, this.state.password);
+   };
    render() {
       return (
          <ScrollView
@@ -116,7 +120,7 @@ export default class Login extends Component {
             {/* /////////////////////////// */}
             <Text style={styles.login}>Expense Management</Text>
             <TextInputAnimated
-               label="Tên đăng nhập"
+               label="Tên đăng nhập hoặc Email"
                style={styles.input}
                value={this.state.username}
                onChangeText={this.onChangeUsername}

@@ -10,6 +10,7 @@ import {
    Alert,
    Text,
 } from 'react-native';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../../res/image/index';
 import { colors } from '../../res/style/theme';
 
@@ -161,7 +162,7 @@ export default class TextInputAnimated extends Component {
                      />
                   </TouchableOpacity>
                </>
-            )  : this.props.isPicker ? (
+            ) : this.props.isPicker ? (
                //textinput disable edit tích hợp vào picker
                <>
                   <TextInput
@@ -177,15 +178,7 @@ export default class TextInputAnimated extends Component {
                      blurOnSubmit
                   />
                   <View style={{ position: 'absolute', right: BASE_SIZE }}>
-                     <Image
-                        resizeMode="contain"
-                        style={{
-                           width: 24,
-                           height: 24,
-                           tintColor: colors.gray,
-                        }}
-                        source={Images.ic_down_arrow}
-                     />
+                     <FontAwesome5Icon name="angle-down" size={18} color={colors.gray} />
                   </View>
                </>
             ) : (

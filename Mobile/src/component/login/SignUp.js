@@ -14,29 +14,53 @@ import { colors, screenWidth } from '../../res/style/theme';
 import StatusBarView from '../custom/StatusBarView';
 import TextInputAnimated from '../custom/TextInputAnimated';
 
-const duration = 350;
 export default class SignUp extends Component {
    constructor(props) {
       super(props);
-      this.state = { username: '', password: '', confirmPassword: '' };
+      this.state = {
+         username: '',
+         password: '',
+         confirmPassword: '',
+         fullname: '',
+         dob: '',
+         email: '',
+         phone: '',
+      };
    }
+   //input text
    onChangeUsername = (text) => {
       this.setState({ username: text });
    };
-   onClearUsername = () => {
-      this.setState({ username: '' });
+   onChangeEmail = (text) => {
+      this.setState({ email: text });
    };
-   onClearPassword = () => {
-      this.setState({ password: '' });
+   onChangeDOB = () => {
+      this.setState({ /* dob: selectedDate,*/ isShowDatePicker: false });
+   };
+   onChangePhone = (text) => {
+      this.setState({ phone: text });
    };
    onChangePassword = (text) => {
       this.setState({ password: text });
    };
-   onClearConfirmPassword = () => {
-      this.setState({ confirmPassword: '' });
-   };
    onChangeConfirmPassword = (text) => {
       this.setState({ confirmPassword: text });
+   };
+   ////clear text
+   onClearUsername = () => {
+      this.setState({ username: '' });
+   };
+   onClearEmail = () => {
+      this.setState({ email: '' });
+   };
+   onClearPhone = () => {
+      this.setState({ phone: '' });
+   };
+   onClearPassword = () => {
+      this.setState({ password: '' });
+   };
+   onClearConfirmPassword = () => {
+      this.setState({ confirmPassword: '' });
    };
    render() {
       return (
@@ -58,6 +82,31 @@ export default class SignUp extends Component {
                   onPressClear={this.onClearUsername}
                />
                <TextInputAnimated
+                  label="Email"
+                  style={styles.input}
+                  value={this.state.email}
+                  onChangeText={this.onChangeEmail}
+                  onPressClear={this.onClearEmail}
+               />
+               <TextInputAnimated
+                  label="Ngày sinh"
+                  isPicker
+                  onPress={() => this.setState({ isShowDatePicker: true })}
+                  style={styles.input}
+                  value={String(this.state.dob)}
+                  onPressClear={this.onClearUsername}
+               />
+
+               <TextInputAnimated
+                  label="Số điện thoại"
+                  keyboardType="number-pad"
+                  style={styles.input}
+                  value={this.state.phone}
+                  onChangeText={this.onChangePhone}
+                  onPressClear={this.onClearPhone}
+               />
+
+               <TextInputAnimated
                   isPassword
                   style={styles.input}
                   label="Mật khẩu"
@@ -77,7 +126,7 @@ export default class SignUp extends Component {
                   <Text style={styles.txtBtn}>Đăng ký</Text>
                </TouchableOpacity>
                <TouchableOpacity
-                  style={[styles.btnSignup, { backgroundColor: colors.cyan }]}
+                  style={[styles.btnSignup, { backgroundColor: colors.cyan, marginBottom: 20 }]}
                   onPress={() => this.props.navigation.goBack()}>
                   <Text style={styles.txtBtn}>Quay lại đăng nhập</Text>
                </TouchableOpacity>
