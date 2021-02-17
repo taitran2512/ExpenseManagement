@@ -12,6 +12,9 @@ const UserSchema = new Schema({
 		type: String,
 		require: true,
 	},
+	fullname: {
+		type: String,
+	},
 	dob: {
 		type: Date,
 	},
@@ -22,6 +25,10 @@ const UserSchema = new Schema({
 	},
 	phone: {
 		type: String,
+	},
+	createDate: {
+		type: Date,
+		default: Date.now,
 	},
 });
 

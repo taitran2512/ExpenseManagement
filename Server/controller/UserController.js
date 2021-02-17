@@ -22,6 +22,7 @@ router.route("/").get((req, res) => {
 router.route("/signup").post((req, res) => {
 	const username = req.body.username;
 	const password = req.body.password;
+	const fullname = req.body.fullname;
 	const dob = req.body.dob;
 	const email = req.body.email;
 	const phone = req.body.phone;
@@ -33,6 +34,7 @@ router.route("/signup").post((req, res) => {
 			const newUser = new User({
 				username: username.toLowerCase(),
 				password: hashPassword,
+				fullname,
 				dob,
 				email: email.toLowerCase(),
 				phone,
