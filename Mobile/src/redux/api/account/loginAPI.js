@@ -12,11 +12,11 @@ export function loginAPI(username, password) {
       body: raw,
       redirect: 'follow',
    };
-
-   return fetch(url, requestOptions)
+   const response = fetch(url, requestOptions)
       .then((response) => response.json())
       .then((result) => result)
       .catch((error) => {
          return { error: error };
       });
+   return response;
 }

@@ -4,8 +4,8 @@ import { loginAPI } from '../../api/account/loginAPI';
 
 function* loginSaga(action) {
    try {
-      const { usename, password } = action.data;
-      const response = yield loginAPI(usename, password);
+      const { username, password } = action.data;
+      const response = yield loginAPI(username, password);
       if (response === undefined) {
          yield put({ type: LOGIN_ACTION_ERROR, error: 'Server không phản hồi' });
       } else {
@@ -13,7 +13,7 @@ function* loginSaga(action) {
       }
    } catch (error) {
       const err = 'Không kết nối được với máy chủ';
-      yield put({ type: LOGIN_ACTION_ERROR, error: error });
+      yield put({ type: LOGIN_ACTION_ERROR, error: err });
    }
 }
 

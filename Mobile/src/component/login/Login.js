@@ -102,8 +102,8 @@ export default class Login extends Component {
    };
    //press login
    onPressLogin = () => {
-      this.props.navigation.replace('Home');
-      // this.props.loginAction(this.state.username, this.state.password);
+      // this.props.navigation.replace('Home');
+      this.props.loginAction(this.state.username, this.state.password);
    };
    render() {
       return (

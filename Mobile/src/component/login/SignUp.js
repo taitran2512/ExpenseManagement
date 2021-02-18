@@ -31,6 +31,9 @@ export default class SignUp extends Component {
    onChangeUsername = (text) => {
       this.setState({ username: text });
    };
+   onChangeFullName = (text) => {
+      this.setState({ fullname: text });
+   };
    onChangeEmail = (text) => {
       this.setState({ email: text });
    };
@@ -50,6 +53,9 @@ export default class SignUp extends Component {
    onClearUsername = () => {
       this.setState({ username: '' });
    };
+   onClearFullName = () => {
+      this.setState({ fullname: '' });
+   };
    onClearEmail = () => {
       this.setState({ email: '' });
    };
@@ -65,21 +71,21 @@ export default class SignUp extends Component {
    render() {
       return (
          <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : null}>
+            <StatusBarView />
+            <Image source={Images.signup_logo} style={styles.logo} />
             <ScrollView
                showsVerticalScrollIndicator={false}
                style={styles.container}
                contentContainerStyle={{ flexGrow: 1 }}
                keyboardShouldPersistTaps="handled">
-               <StatusBarView />
-               <Image source={Images.signup_logo} style={styles.logo} />
                <Text style={styles.txtSignup}>Đăng ký tài khoản</Text>
 
                <TextInputAnimated
-                  label="Tên đăng nhập"
+                  label="Họ và tên"
                   style={styles.input}
-                  value={this.state.username}
-                  onChangeText={this.onChangeUsername}
-                  onPressClear={this.onClearUsername}
+                  value={this.state.fullname}
+                  onChangeText={this.onChangeFullName}
+                  onPressClear={this.onClearFullName}
                />
                <TextInputAnimated
                   label="Email"
@@ -105,7 +111,13 @@ export default class SignUp extends Component {
                   onChangeText={this.onChangePhone}
                   onPressClear={this.onClearPhone}
                />
-
+               <TextInputAnimated
+                  label="Tên đăng nhập"
+                  style={styles.input}
+                  value={this.state.username}
+                  onChangeText={this.onChangeUsername}
+                  onPressClear={this.onClearUsername}
+               />
                <TextInputAnimated
                   isPassword
                   style={styles.input}

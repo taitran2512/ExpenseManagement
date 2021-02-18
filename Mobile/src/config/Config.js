@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:4000/api';
+const API_URL = 'http://192.168.1.2:4000/api';
 
 const userData = {
    _id: '',
