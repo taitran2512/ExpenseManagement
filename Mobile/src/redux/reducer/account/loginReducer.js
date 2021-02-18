@@ -12,7 +12,13 @@ const loginReducer = (state = initialState, action) => {
    // console.log(action);
    switch (action.type) {
       case LOGIN_ACTION:
-         return Object.assign(state, { loading: true });
+         return {
+            status: null,
+            data: null,
+            loading: true,
+            message: null,
+            error: null,
+         };
       case LOGIN_ACTION_SUCCESS:
          if (action.response.data !== null && action.response.data !== undefined) {
             userData._id = action.response.data._id;
@@ -23,13 +29,21 @@ const loginReducer = (state = initialState, action) => {
             userData.phone = action.response.data.phone;
             userData.createDate = action.response.data.createDate;
          }
-         return Object.assign(state, {
+         return {
             status: action.response.status,
             data: action.response.data,
             message: action.response.message,
-         });
+            loading: false,
+            error: null,
+         };
       case LOGIN_ACTION_ERROR:
-         return Object.assign(state, { error: action.error });
+         return {
+            status: null,
+            data: null,
+            loading: false,
+            message: null,
+            error: action.error,
+         };
       default:
          return state;
    }

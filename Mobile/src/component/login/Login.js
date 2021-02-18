@@ -15,15 +15,15 @@ import { colors, screenWidth } from '../../res/style/theme';
 import StatusBarView from '../custom/StatusBarView';
 import TextInputAnimated from '../custom/TextInputAnimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import LoadingView from '../custom/LoadingView';
 const logoSize = screenWidth * 0.5;
 const duration = 350;
 export default class Login extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         username: 'admin1',
-         password: '123456',
+         username: '',
+         password: '',
          saveLogin: false,
       };
       this.zoomLogo = new Animated.Value(logoSize);
@@ -117,6 +117,19 @@ export default class Login extends Component {
          this.props.loginAction(this.state.username, this.state.password);
       }
    };
+
+   componentDidUpdate(prevProps) {
+      if (this.props.status !== null && this.props.status !== prevProps.status) {
+         if (this.props.status === 'success') {
+            this.props.navigation.replace('Home');
+         } else {
+            Alert.alert('Thông báo', this.props.message);
+         }
+      }
+      if (this.props.error !== null && this.props.error !== prevProps.error) {
+         Alert.alert('Thông báo', this.props.error);
+      }
+   }
    render() {
       return (
          <ScrollView
@@ -124,6 +137,7 @@ export default class Login extends Component {
             contentContainerStyle={styles.container}
             keyboardShouldPersistTaps="handled">
             <StatusBarView />
+            <LoadingView visible={this.props.loading} />
             {/* /////////logo////////// */}
             <Animated.Image
                source={Images.wallet}

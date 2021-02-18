@@ -30,7 +30,6 @@ export default class SignUp extends Component {
       };
    }
    componentDidUpdate(prevProps) {
-      console.log(this.props);
       if (this.props.status !== null && this.props.status !== prevProps.status) {
          if (this.props.status === 'success') {
             Alert.alert('Thông báo', this.props.message);
