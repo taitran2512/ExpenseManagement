@@ -8,8 +8,9 @@ const sagaMiddleware = createSagaMiddleware();
 export let store = createStore(allReducers, applyMiddleware(sagaMiddleware));
 
 import AppContainer from './container/App';
+import withCodePush from './config/code-push';
 
-export default class Root extends React.Component {
+class Root extends React.Component {
    render() {
       return (
          <Provider store={store}>
@@ -20,3 +21,4 @@ export default class Root extends React.Component {
 }
 
 sagaMiddleware.run(rootSaga);
+export default withCodePush(Root);
