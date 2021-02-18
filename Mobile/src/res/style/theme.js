@@ -48,5 +48,13 @@ const colors = {
 ///////////////////////////////////////////////
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
-
-export { colors, screenWidth, screenHeight };
+const fonts = {
+   bold: 'SanFranciscoText-Bold',
+   heavy: 'SanFranciscoText-Heavy',
+   light: 'SanFranciscoText-Light',
+   medium: 'SanFranciscoText-Medium',
+   regular: 'SanFranciscoText-Regular',
+   semibold: 'SanFranciscoText-Semibold',
+   thin: 'SanFranciscoText-Thin',
+};
+export { colors, screenWidth, screenHeight, fonts };

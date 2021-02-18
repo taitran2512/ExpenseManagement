@@ -11,7 +11,7 @@ import {
    Alert,
 } from 'react-native';
 import Images from '../../res/image';
-import { colors, screenWidth } from '../../res/style/theme';
+import { colors, fonts, screenWidth } from '../../res/style/theme';
 import LoadingView from '../custom/LoadingView';
 import StatusBarView from '../custom/StatusBarView';
 import TextInputAnimated from '../custom/TextInputAnimated';
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
    txtSignup: {
       marginTop: 8,
       fontSize: 24,
-      fontWeight: 'bold',
+      fontFamily: fonts.bold,
       color: colors.green1,
       textAlign: 'center',
    },
@@ -223,6 +223,6 @@ const styles = StyleSheet.create({
    txtBtn: {
       fontSize: 18,
       color: colors.white,
-      fontWeight: 'bold',
+      fontFamily: fonts.bold,
    },
 });

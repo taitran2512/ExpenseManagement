@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { formatMoney } from '../../res/function/Functions';
-import { colors, screenHeight } from '../../res/style/theme';
+import { colors, fonts, screenHeight } from '../../res/style/theme';
 import Header from '../custom/Header';
 import ItemCard from './ItemCard';
 import ActionButton from './ActionButton';
@@ -100,12 +100,12 @@ const styles = StyleSheet.create({
    },
    txtWallet: {
       color: colors.white,
-      fontWeight: 'bold',
+      fontFamily: fonts.semibold,
       fontSize: 35,
    },
    txtHistory: {
       fontSize: 20,
-      fontWeight: 'bold',
+      fontFamily: fonts.bold,
       paddingVertical: 10,
       paddingHorizontal: 16,
    },

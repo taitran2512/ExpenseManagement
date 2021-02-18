@@ -3,7 +3,7 @@ import { View, Text, ImageBackground, StyleSheet, TouchableOpacity } from 'react
 import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
 import { formatMoney } from '../../res/function/Functions';
 import Images from '../../res/image';
-import { colors, screenWidth } from '../../res/style/theme';
+import { colors, fonts, screenWidth } from '../../res/style/theme';
 import Modals from '../custom/Modals';
 import TextInputAnimated from '../custom/TextInputAnimated';
 
@@ -88,11 +88,13 @@ const styles = StyleSheet.create({
       color: colors.white,
       opacity: 0.7,
       width: '80%',
+      fontFamily: fonts.medium,
    },
    money: {
       fontSize: 24,
       color: colors.white,
       marginTop: 8,
+      fontFamily: fonts.semibold,
    },
    edit: {
       backgroundColor: colors.white,
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
       fontSize: 20,
       textAlign: 'center',
       color: colors.black,
-      fontWeight: 'bold',
+      fontFamily: fonts.bold,
    },
    input: {
       marginTop: 20,
@@ -123,7 +125,7 @@ const styles = StyleSheet.create({
    },
    txtBtn: {
       fontSize: 18,
-      fontWeight: 'bold',
+      fontFamily: fonts.bold,
       color: colors.white,
       textAlign: 'center',
    },

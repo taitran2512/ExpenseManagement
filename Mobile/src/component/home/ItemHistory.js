@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { formatMoney } from '../../res/function/Functions';
 import Images from '../../res/image';
-import { colors } from '../../res/style/theme';
+import { colors, fonts } from '../../res/style/theme';
 
 const ItemHistory = (props) => {
    return (
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
    },
    txt: {
       fontSize: 18,
+      fontFamily: fonts.medium,
    },
    date: {
       color: colors.gray,

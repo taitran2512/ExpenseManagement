@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../../res/image';
-import { colors, screenWidth } from '../../res/style/theme';
+import { colors, fonts, screenWidth } from '../../res/style/theme';
 import StatusBarView from '../custom/StatusBarView';
 import TextInputAnimated from '../custom/TextInputAnimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
    txtBtnLogin: {
       fontSize: 18,
       color: colors.white,
-      fontWeight: 'bold',
+      fontFamily: fonts.bold,
    },
    view: {
       flexDirection: 'row',
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
       fontSize: 16,
       textAlign: 'center',
       color: colors.white,
-      fontWeight: 'bold',
+      fontFamily: fonts.semibold,
    },
    save: {
       flexDirection: 'row',
@@ -250,5 +250,6 @@ const styles = StyleSheet.create({
       fontSize: 16,
       color: colors.blue,
       marginLeft: 8,
+      fontFamily: fonts.medium,
    },
 });

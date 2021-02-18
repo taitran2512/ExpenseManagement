@@ -71,6 +71,13 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>SanFranciscoText-Bold.otf</string>
+		<string>SanFranciscoText-Heavy.otf</string>
+		<string>SanFranciscoText-Light.otf</string>
+		<string>SanFranciscoText-Medium.otf</string>
+		<string>SanFranciscoText-Regular.otf</string>
+		<string>SanFranciscoText-Semibold.otf</string>
+		<string>SanFranciscoText-Thin.otf</string>
 	</array>
 </dict>
 </plist>

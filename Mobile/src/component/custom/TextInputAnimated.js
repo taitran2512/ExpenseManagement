@@ -13,7 +13,7 @@ import {
 import DatePicker from 'react-native-datepicker';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../../res/image/index';
-import { colors } from '../../res/style/theme';
+import { colors, fonts } from '../../res/style/theme';
 
 const BASE_SIZE = 16; //text size and padding size
 const VIEW_HEIGHT = BASE_SIZE * 3.5; //chiều cao của view tổng
@@ -67,6 +67,7 @@ export default class TextInputAnimated extends Component {
             outputRange: [BASE_SIZE, BASE_SIZE * 0.8125],
          }),
          // backgroundColor: '#00000036',
+         fontFamily: fonts.medium,
       };
 
       return (
@@ -285,5 +286,6 @@ const styles = StyleSheet.create({
       padding: 0,
       borderWidth: 0,
       // backgroundColor: '#00000036',
+      fontFamily: fonts.medium,
    },
 });
