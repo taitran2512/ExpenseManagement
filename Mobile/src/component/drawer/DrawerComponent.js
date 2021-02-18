@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
-import { colors } from '../../res/style/theme';
+import { userData } from '../../config/Config';
+import { colors, fonts } from '../../res/style/theme';
 import Header from '../custom/Header';
 
 const listMenu = [
@@ -9,6 +10,7 @@ const listMenu = [
    { title: 'Xuất file Excel', icon: 'file-excel', screen: '', color: colors.green1 },
    { title: 'Thông tin chi tiết', icon: 'info-circle', screen: '', color: colors.blue2 },
    { title: 'Hướng dẫn sử dụng', icon: 'chalkboard-teacher', screen: '', color: colors.yellow },
+   { title: 'Cài đặt', icon: 'cog', screen: '', color: colors.gray },
 ];
 
 export default class DrawerComponent extends Component {
@@ -27,7 +29,7 @@ export default class DrawerComponent extends Component {
    render() {
       return (
          <View style={{ flex: 1 }}>
-            <Header title="Xin chào TaiTran" />
+            <Header title={`Xin chào ${userData.fullname}`} />
             <FlatList
                data={listMenu}
                keyExtractor={(item, index) => String(index)}
@@ -58,5 +60,6 @@ const styles = StyleSheet.create({
    txtMenu: {
       fontSize: 16,
       marginLeft: 16,
+      fontFamily: fonts.medium,
    },
 });

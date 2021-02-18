@@ -26,9 +26,6 @@ export default class TextInputAnimated extends Component {
          labelHeight: 0,
       };
       this.textInput = React.createRef();
-   }
-
-   UNSAFE_componentWillMount() {
       this._animatedIsFocused = new Animated.Value(this.props.value === '' ? 0 : 1);
    }
 
@@ -48,6 +45,57 @@ export default class TextInputAnimated extends Component {
       }).start();
    }
    requireInput = () => <Text style={{ color: colors.red }}>*</Text>;
+   input = () => (
+      <TextInput
+         {...this.props}
+         onChange={(e) => {
+            e.nativeEvent.text.length === 100 &&
+               setTimeout(() => {
+                  Alert.alert('Thông báo', 'Không được nhập quá 100 kí tự');
+               }, 10);
+         }}
+         maxLength={100}
+         ref={this.textInput}
+         autoCorrect={false}
+         autoCompleteType="off"
+         editable={!this.props.disabled}
+         style={[styles.textInput, this.props.disabled && { color: colors.gray }]}
+         style={styles.textInput}
+         onFocus={this.handleFocus}
+         onBlur={this.handleBlur}
+         blurOnSubmit
+      />
+   );
+   inputPass = () => (
+      <TextInput
+         {...this.props}
+         maxLength={100}
+         onChange={(e) => {
+            e.nativeEvent.text.length === 100 &&
+               setTimeout(() => {
+                  Alert.alert('Thông báo', 'Không được nhập quá 100 kí tự');
+               }, 10);
+         }}
+         ref={this.textInput}
+         autoCorrect={false}
+         autoCompleteType="off"
+         style={[styles.textInput, this.state.isFocused && { width: '85%' }]}
+         onFocus={this.handleFocus}
+         secureTextEntry={this.state.hidePassword}
+         onBlur={this.handleBlur}
+         blurOnSubmit
+      />
+   );
+   iconClear = (right = BASE_SIZE / 2) => (
+      <TouchableOpacity
+         style={{
+            position: 'absolute',
+            right: right,
+         }}
+         onPress={() => this.props.onPressClear()}>
+         <Image resizeMode="contain" style={styles.icon32} source={Images.ic_cancel} />
+      </TouchableOpacity>
+   );
    render() {
       const { label, ...props } = this.props;
       const { isFocused, labelHeight } = this.state;
@@ -80,19 +128,8 @@ export default class TextInputAnimated extends Component {
             }}
             style={[
                styles.container,
-               isFocused && {
-                  borderColor: colors.lightblue1,
-                  elevation: 2,
-                  shadowColor: '#000',
-                  shadowOffset: {
-                     width: 0,
-                     height: 1,
-                  },
-                  shadowOpacity: 0.2,
-                  shadowRadius: 1.41,
-                  backgroundColor: colors.white,
-               },
-               this.props.disabled && { backgroundColor: colors.gray4 },
+               isFocused && styles.focus,
+               this.props.disabled && styles.disabled,
                this.props.style,
             ]}>
             {/* //////label floating///// */}
@@ -108,38 +145,10 @@ export default class TextInputAnimated extends Component {
             {this.props.isPassword ? (
                ///text input có icon ẩn hiện pass/////
                <>
-                  <TextInput
-                     {...props}
-                     maxLength={100}
-                     onChange={(e) => {
-                        e.nativeEvent.text.length === 100 &&
-                           setTimeout(() => {
-                              Alert.alert('Thông báo', 'Không được nhập quá 100 kí tự');
-                           }, 10);
-                     }}
-                     ref={this.textInput}
-                     autoCorrect={false}
-                     autoCompleteType="off"
-                     style={[styles.textInput, isFocused && { width: '85%' }]}
-                     onFocus={this.handleFocus}
-                     secureTextEntry={this.state.hidePassword}
-                     onBlur={this.handleBlur}
-                     blurOnSubmit
-                  />
+                  {this.inputPass()}
                   {this.props.value !== '' && isFocused === true ? (
                      <>
-                        <TouchableOpacity
-                           style={{
-                              position: 'absolute',
-                              right: BASE_SIZE + 24,
-                           }}
-                           onPress={() => this.props.onPressClear()}>
-                           <Image
-                              resizeMode="contain"
-                              style={{ width: 32, height: 32 }}
-                              source={Images.ic_cancel}
-                           />
-                        </TouchableOpacity>
+                        {this.iconClear(BASE_SIZE + 24)}
                         <View
                            style={{
                               width: 1,
@@ -222,39 +231,8 @@ export default class TextInputAnimated extends Component {
             ) : (
                //text input nhập chữ bình thường////////////
                <>
-                  <TextInput
-                     {...props}
-                     onChange={(e) => {
-                        e.nativeEvent.text.length === 100 &&
-                           setTimeout(() => {
-                              Alert.alert('Thông báo', 'Không được nhập quá 100 kí tự');
-                           }, 10);
-                     }}
-                     maxLength={100}
-                     ref={this.textInput}
-                     autoCorrect={false}
-                     autoCompleteType="off"
-                     editable={!this.props.disabled}
-                     style={[styles.textInput, this.props.disabled && { color: colors.gray }]}
-                     style={styles.textInput}
-                     onFocus={this.handleFocus}
-                     onBlur={this.handleBlur}
-                     blurOnSubmit
-                  />
-                  {this.props.value !== '' && isFocused === true ? (
-                     <TouchableOpacity
-                        style={{
-                           position: 'absolute',
-                           right: BASE_SIZE / 2,
-                        }}
-                        onPress={() => this.props.onPressClear()}>
-                        <Image
-                           resizeMode="contain"
-                           style={{ width: 32, height: 32 }}
-                           source={Images.ic_cancel}
-                        />
-                     </TouchableOpacity>
-                  ) : null}
+                  {this.input()}
+                  {this.props.value !== '' && isFocused === true ? <>{this.iconClear()}</> : null}
                </>
             )}
          </TouchableOpacity>
@@ -288,4 +266,18 @@ const styles = StyleSheet.create({
       // backgroundColor: '#00000036',
       fontFamily: fonts.medium,
    },
+   focus: {
+      borderColor: colors.lightblue1,
+      elevation: 2,
+      shadowColor: '#000',
+      shadowOffset: {
+         width: 0,
+         height: 1,
+      },
+      shadowOpacity: 0.2,
+      shadowRadius: 1.41,
+      backgroundColor: colors.white,
+   },
+   disabled: { backgroundColor: colors.gray4 },
+   icon32: { width: 32, height: 32 },
 });
