@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Keyboard, Animated, ScrollView, TouchableOpacity } from 'react-native';
+import {
+   View,
+   Text,
+   StyleSheet,
+   Keyboard,
+   Animated,
+   ScrollView,
+   TouchableOpacity,
+   Alert,
+} from 'react-native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../../res/image';
 import { colors, screenWidth } from '../../res/style/theme';
@@ -102,8 +111,11 @@ export default class Login extends Component {
    };
    //press login
    onPressLogin = () => {
-      // this.props.navigation.replace('Home');
-      this.props.loginAction(this.state.username, this.state.password);
+      if (this.state.username === '' || this.state.password === '') {
+         Alert.alert('Lưu ý', 'Bạn phải nhập đầy đủ thông tin đăng nhập');
+      } else {
+         this.props.loginAction(this.state.username, this.state.password);
+      }
    };
    render() {
       return (

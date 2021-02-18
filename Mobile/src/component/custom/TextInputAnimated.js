@@ -10,6 +10,7 @@ import {
    Alert,
    Text,
 } from 'react-native';
+import DatePicker from 'react-native-datepicker';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../../res/image/index';
 import { colors } from '../../res/style/theme';
@@ -180,6 +181,42 @@ export default class TextInputAnimated extends Component {
                   <View style={{ position: 'absolute', right: BASE_SIZE }}>
                      <FontAwesome5Icon name="angle-down" size={18} color={colors.gray} />
                   </View>
+               </>
+            ) : this.props.isDatePicker ? (
+               //textinput disable edit tích hợp vào picker
+               <>
+                  <TextInput
+                     {...props}
+                     maxLength={100}
+                     editable={false}
+                     ref={this.textInput}
+                     autoCorrect={false}
+                     autoCompleteType="off"
+                     style={[styles.textInput, { color: colors.black }]}
+                     onFocus={this.handleFocus}
+                     onBlur={this.handleBlur}
+                     blurOnSubmit
+                  />
+                  <View style={{ position: 'absolute', right: BASE_SIZE }}>
+                     <FontAwesome5Icon name="angle-down" size={18} color={colors.gray} />
+                  </View>
+                  <DatePicker
+                     style={{ width: '100%' }}
+                     mode="date"
+                     showIcon={false}
+                     hideText
+                     format="DD/MM/YYYY"
+                     confirmBtnText="Confirm"
+                     cancelBtnText="Cancel"
+                     customStyles={{
+                        dateInput: { borderWidth: 0 },
+                        // dateText: { fontSize: 0 },
+                        // ... You can check the source to find the other keys.
+                     }}
+                     onDateChange={(date) => {
+                        this.props.onDateChange(date);
+                     }}
+                  />
                </>
             ) : (
                //text input nhập chữ bình thường////////////

@@ -8,9 +8,11 @@ import {
    ScrollView,
    Platform,
    TouchableOpacity,
+   Alert,
 } from 'react-native';
 import Images from '../../res/image';
 import { colors, screenWidth } from '../../res/style/theme';
+import LoadingView from '../custom/LoadingView';
 import StatusBarView from '../custom/StatusBarView';
 import TextInputAnimated from '../custom/TextInputAnimated';
 
@@ -27,6 +29,19 @@ export default class SignUp extends Component {
          phone: '',
       };
    }
+   componentDidUpdate(prevProps) {
+      console.log(this.props);
+      if (this.props.status !== null && this.props.status !== prevProps.status) {
+         if (this.props.status === 'success') {
+            Alert.alert('Thông báo', this.props.message);
+         } else {
+            Alert.alert('Thông báo', this.props.message);
+         }
+      }
+      if (this.props.error !== null && this.props.error !== prevProps.error) {
+         Alert.alert('Thông báo', this.props.error);
+      }
+   }
    //input text
    onChangeUsername = (text) => {
       this.setState({ username: text });
@@ -37,8 +52,8 @@ export default class SignUp extends Component {
    onChangeEmail = (text) => {
       this.setState({ email: text });
    };
-   onChangeDOB = () => {
-      this.setState({ /* dob: selectedDate,*/ isShowDatePicker: false });
+   onChangeDOB = (date) => {
+      this.setState({ dob: date });
    };
    onChangePhone = (text) => {
       this.setState({ phone: text });
@@ -68,10 +83,41 @@ export default class SignUp extends Component {
    onClearConfirmPassword = () => {
       this.setState({ confirmPassword: '' });
    };
+   onPressSignUp = () => {
+      const { username, password, confirmPassword, fullname, dob, email, phone } = this.state;
+      if (
+         username === '' ||
+         password === '' ||
+         confirmPassword === '' ||
+         fullname === '' ||
+         dob === '' ||
+         email === '' ||
+         phone === ''
+      ) {
+         Alert.alert('Lưu ý', 'Bạn phải nhập đẩy đủ thông tin đăng kí');
+      } else {
+         if (password !== confirmPassword) {
+            Alert.alert('Lưu ý', 'Mật khẩu nhập lại không trùng khớp');
+         } else {
+            var date = new Date(dob.split('/').reverse().join('/')).toISOString();
+            this.props.signupAction({
+               username,
+               password,
+               confirmPassword,
+               fullname,
+               dob: date,
+               email,
+               phone,
+            });
+         }
+      }
+   };
+
    render() {
       return (
          <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : null}>
             <StatusBarView />
+            <LoadingView visible={this.props.loading} />
             <Image source={Images.signup_logo} style={styles.logo} />
             <ScrollView
                showsVerticalScrollIndicator={false}
@@ -96,11 +142,10 @@ export default class SignUp extends Component {
                />
                <TextInputAnimated
                   label="Ngày sinh"
-                  isPicker
-                  onPress={() => this.setState({ isShowDatePicker: true })}
+                  isDatePicker
                   style={styles.input}
                   value={String(this.state.dob)}
-                  onPressClear={this.onClearUsername}
+                  onDateChange={this.onChangeDOB}
                />
 
                <TextInputAnimated
@@ -134,7 +179,7 @@ export default class SignUp extends Component {
                   onChangeText={this.onChangeConfirmPassword}
                   onPressClear={this.onClearConfirmPassword}
                />
-               <TouchableOpacity style={styles.btnSignup}>
+               <TouchableOpacity style={styles.btnSignup} onPress={this.onPressSignUp}>
                   <Text style={styles.txtBtn}>Đăng ký</Text>
                </TouchableOpacity>
                <TouchableOpacity
