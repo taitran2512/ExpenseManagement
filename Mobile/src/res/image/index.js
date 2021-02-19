@@ -100,5 +100,10 @@ const Images = {
    ic_money: require('./img/icon/ic_money.png'),
    ic_money1: require('./img/icon/ic_money1.png'),
    ic_ticket: require('./img/icon/ic_ticket.png'),
+   ic_bus: require('./img/icon/ic_bus.png'),
+   ic_eye1: require('./img/icon/ic_eye1.png'),
+   ic_people: require('./img/icon/ic_people.png'),
+   ic_user_info: require('./img/icon/ic_user_info.png'),
+   ic_watch: require('./img/icon/ic_watch.png'),
 };
 export default Images;
