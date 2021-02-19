@@ -12,6 +12,8 @@ import { colors } from '../res/style/theme';
 import LoginContainer from './login/LoginContainer';
 import SignUpContainer from './login/SignUpContainer';
 import HomeContainer from './home/HomeContainer';
+import ExpenseContainer from './home/ExpenseContainer';
+import IncomeContainer from './home/IncomeContainer';
 import StatisticContainer from './statistic/StatisticContainer';
 import DrawerComponent from '../component/drawer/DrawerComponent';
 ////////////////////////////////////////////////////////////
@@ -67,6 +69,8 @@ const App = () => {
             <Stack.Screen name="Login" component={LoginContainer} />
             <Stack.Screen name="SignUp" component={SignUpContainer} />
             <Stack.Screen name="Home" component={Drawers} />
+            <Stack.Screen name="Expense" component={ExpenseContainer} />
+            <Stack.Screen name="Income" component={IncomeContainer} />
          </Stack.Navigator>
       </NavigationContainer>
    );

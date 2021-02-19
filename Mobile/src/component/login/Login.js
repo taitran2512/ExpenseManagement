@@ -120,18 +120,22 @@ export default class Login extends Component {
          this.props.loginAction(this.state.username, this.state.password);
       }
    };
-
+   ///////////////////////////////
    async componentDidUpdate(prevProps) {
       if (this.props.status !== null && this.props.status !== prevProps.status) {
          if (this.props.status === 'success') {
             this.saveLogin();
             this.props.navigation.replace('Home');
          } else {
-            Alert.alert('Thông báo', this.props.message);
+            setTimeout(() => {
+               Alert.alert('Thông báo', this.props.message);
+            }, 10);
          }
       }
       if (this.props.error !== null && this.props.error !== prevProps.error) {
-         Alert.alert('Thông báo', this.props.error);
+         setTimeout(() => {
+            Alert.alert('Thông báo', this.props.error);
+         }, 10);
       }
    }
    render() {

@@ -3,9 +3,9 @@ import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { formatMoney } from '../../res/function/Functions';
 import { colors, fonts, screenHeight } from '../../res/style/theme';
 import Header from '../custom/Header';
-import ItemCard from './ItemCard';
-import ActionButton from './ActionButton';
-import ItemHistory from './ItemHistory';
+import ItemCard from './custom/ItemCard';
+import ActionButton from './custom/ActionButton';
+import ItemHistory from './custom/ItemHistory';
 const data = [
    { title: 'Vietcombank', money: 123456 },
    { title: 'Tiền trong ví', money: 456789 },
@@ -53,10 +53,12 @@ export default class Home extends Component {
                <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: colors.blue }} />
                <View style={styles.footer}>
                   <View
-                     style={{
-                        borderBottomWidth: 2,
-                        borderBottomColor: colors.gray2,
-                     }}>
+                     style={
+                        {
+                           // borderBottomWidth: 2,
+                           // borderBottomColor: colors.gray2,
+                        }
+                     }>
                      <FlatList
                         contentContainerStyle={{ padding: 16 }}
                         data={data}
@@ -76,7 +78,10 @@ export default class Home extends Component {
                   />
                </View>
             </View>
-            <ActionButton />
+            <ActionButton
+               onPressExpense={() => this.props.navigation.navigate('Expense')}
+               onPressIncome={() => this.props.navigation.navigate('Income')}
+            />
          </View>
       );
    }

@@ -26,9 +26,11 @@ export default class TextInputAnimated extends Component {
          labelHeight: 0,
       };
       this.textInput = React.createRef();
-      this._animatedIsFocused = new Animated.Value(this.props.value === '' ? 0 : 1);
    }
 
+   UNSAFE_componentWillMount() {
+      this._animatedIsFocused = new Animated.Value(this.props.value === '' ? 0 : 1);
+   }
    handleFocus = () => {
       this.setState({ isFocused: true });
    };

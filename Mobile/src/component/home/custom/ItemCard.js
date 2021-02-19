@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 import { View, Text, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
-import { formatMoney } from '../../res/function/Functions';
-import Images from '../../res/image';
-import { colors, fonts, screenWidth } from '../../res/style/theme';
-import Modals from '../custom/Modals';
-import TextInputAnimated from '../custom/TextInputAnimated';
+import { formatMoney } from '../../../res/function/Functions';
+import Images from '../../../res/image';
+import { colors, fonts, screenWidth } from '../../../res/style/theme';
+import Modals from '../../custom/Modals';
+import TextInputAnimated from '../../custom/TextInputAnimated';
 
 const cardWidth = screenWidth * 0.6;
 
@@ -53,7 +53,7 @@ const ItemCard = (props) => {
                   {/* //cancel edit */}
                   <TouchableOpacity
                      onPress={onCancelEdit}
-                     style={[styles.btn, { backgroundColor: colors.red2 }]}>
+                     style={[styles.btn, { backgroundColor: colors.red1 }]}>
                      <Text style={styles.txtBtn}>Hủy</Text>
                   </TouchableOpacity>
                   {/* //ok edit */}

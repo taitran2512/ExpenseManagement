@@ -9,6 +9,7 @@ import {
    Platform,
    TouchableOpacity,
    Alert,
+   SafeAreaView,
 } from 'react-native';
 import Images from '../../res/image';
 import { colors, fonts, screenWidth } from '../../res/style/theme';
@@ -32,13 +33,24 @@ export default class SignUp extends Component {
    componentDidUpdate(prevProps) {
       if (this.props.status !== null && this.props.status !== prevProps.status) {
          if (this.props.status === 'success') {
-            Alert.alert('Thông báo', this.props.message);
+            setTimeout(() => {
+               Alert.alert(
+                  'Thông báo',
+                  this.props.message,
+                  [{ text: 'OK', onPress: () => this.props.navigation.goBack() }],
+                  { cancelable: false },
+               );
+            }, 10);
          } else {
-            Alert.alert('Thông báo', this.props.message);
+            setTimeout(() => {
+               Alert.alert('Thông báo', this.props.message);
+            }, 10);
          }
       }
       if (this.props.error !== null && this.props.error !== prevProps.error) {
-         Alert.alert('Thông báo', this.props.error);
+         setTimeout(() => {
+            Alert.alert('Thông báo', this.props.error);
+         }, 10);
       }
    }
    //input text
@@ -186,6 +198,7 @@ export default class SignUp extends Component {
                   onPress={() => this.props.navigation.goBack()}>
                   <Text style={styles.txtBtn}>Quay lại đăng nhập</Text>
                </TouchableOpacity>
+               <SafeAreaView />
             </ScrollView>
          </KeyboardAvoidingView>
       );

@@ -1,9 +1,9 @@
 import { FAB, Portal, Provider } from 'react-native-paper';
 import * as React from 'react';
-import { colors } from '../../res/style/theme';
+import { colors } from '../../../res/style/theme';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const AcitonButton = () => {
+const AcitonButton = (props) => {
    const [state, setState] = React.useState({ open: false });
 
    const onStateChange = ({ open }) => setState({ open });
@@ -21,17 +21,19 @@ const AcitonButton = () => {
             {
                icon: (props) => <MaterialIcons {...props} name="credit-card" />,
                label: 'Ví tiền',
-               onPress: () => console.log('Pressed star'),
-            },
-            {
-               icon: (props) => <MaterialIcons {...props} name="money-off" />,
-               label: 'Chi tiêu',
-               onPress: () => console.log('Pressed star'),
+               onPress: () => props.onPressAdd(),
+               small: false,
             },
             {
                icon: (props) => <MaterialIcons {...props} name="attach-money" />,
                label: 'Thu nhập',
-               onPress: () => console.log('Pressed notifications'),
+               onPress: () => props.onPressIncome(),
+               small: false,
+            },
+            {
+               icon: (props) => <MaterialIcons {...props} name="money-off" />,
+               label: 'Chi tiêu',
+               onPress: () => props.onPressExpense(),
                small: false,
             },
          ]}
@@ -45,3 +47,8 @@ const AcitonButton = () => {
    );
 };
 export default AcitonButton;
+AcitonButton.defaultProps = {
+   onPressAdd: () => {},
+   onPressExpense: () => {},
+   onPressIncome: () => {},
+};
