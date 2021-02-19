@@ -43,7 +43,7 @@ const withCodePush = (WrappedComponent) => {
       render() {
          return (
             <>
-               <LoadingView visible={this.state.loading} />
+               <LoadingView visible={this.state.loading} loadingText="Đang tải bản cập nhật" />
                <WrappedComponent />
             </>
          );

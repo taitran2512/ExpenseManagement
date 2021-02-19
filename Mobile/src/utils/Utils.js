@@ -7,7 +7,7 @@ const expenseType = [
    { code: 'fruit', title: 'Trái cây', icon: Images.ic_fruit },
    { code: 'market', title: 'Đi chợ', icon: Images.ic_market },
    { code: 'shopping', title: 'Shopping', icon: Images.ic_shopping },
-   { code: 'health', title: 'Sức khỏe', icon: Images.ic_shopping },
+   { code: 'health', title: 'Sức khỏe', icon: Images.ic_health },
    { code: 'travel', title: 'Du lịch', icon: Images.ic_travel },
    { code: 'beer', title: 'Rượu bia', icon: Images.ic_food2 },
    { code: 'gift', title: 'Quà', icon: Images.ic_gift },

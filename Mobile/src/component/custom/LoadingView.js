@@ -12,6 +12,9 @@ const LoadingView = (props) => {
                alignItems: 'center',
             }}>
             <ActivityIndicator size="large" color={colors.blue} />
+            <Text style={{ fontSize: 16, color: 'white', marginTop: 8, fontWeight: 'bold' }}>
+               {props.loadingText}
+            </Text>
          </View>
       </Modal>
    );

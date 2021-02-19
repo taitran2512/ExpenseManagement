@@ -28,7 +28,7 @@ const ItemCard = (props) => {
          <Text style={styles.money}>{formatMoney(props.money)}</Text>
          <TouchableOpacity
             onPress={() => modalRef.current.open()}
-            style={{ position: 'absolute', right: 16, bottom: 16 }}>
+            style={{ position: 'absolute', right: 8, bottom: 8, padding: 8 }}>
             <FontAwesome5 name="edit" color={colors.white} size={20} />
          </TouchableOpacity>
          <Modals ref={modalRef}>

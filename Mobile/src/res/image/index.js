@@ -104,5 +104,6 @@ const Images = {
    ic_people: require('./img/icon/ic_people.png'),
    ic_user_info: require('./img/icon/ic_user_info.png'),
    ic_watch: require('./img/icon/ic_watch.png'),
+   ic_noimg: require('./img/icon/ic_noimg.png'),
 };
 export default Images;

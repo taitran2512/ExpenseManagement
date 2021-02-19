@@ -13,22 +13,24 @@ const data = [
 ];
 
 const history = [
-   { type: '', money: 300000 },
-   { type: '', money: 300000 },
-   { type: '', money: 300000 },
-   { type: '', money: 300000 },
-   { type: '', money: 300000 },
-   { type: '', money: 300000 },
-   { type: '', money: 300000 },
-   { type: '', money: 300000 },
-   { type: '', money: 300000 },
-   { type: '', money: 300000 },
-   { type: '', money: 300000 },
-   { type: '', money: 300000 },
-   { type: '', money: 300000 },
-   { type: '', money: 300000 },
-   { type: '', money: 300000 },
-   { type: '', money: 300000 },
+   { code: 'clothes', money: 300000 },
+   { code: 'fruit', money: 78423 },
+   { code: 'phoneFix', money: 123456 },
+   { code: 'bus', money: 300000 },
+   { code: 'buyVehicle', money: 300000 },
+   { code: 'shopping', money: 7894123 },
+   { code: 'health', money: 789.789 },
+   { code: 'travel', money: 123456 },
+   { code: 'beer', money: 300000 },
+   { code: 'book', money: 300000 },
+   { code: 'snacks', money: 45612345 },
+   { code: 'phoneBuy', money: 300000 },
+   { code: 'phoneFee', money: 2321456 },
+   { code: 'sale', money: 3000500 },
+   { code: 'lease', money: 3006000 },
+   { code: 'bingo', money: 3000600 },
+   { code: 'return', money: 3007000 },
+   { code: 'otherIncome', money: 3000010 },
 ];
 
 export default class Home extends Component {
@@ -37,15 +39,15 @@ export default class Home extends Component {
       this.state = {};
    }
    renderItemCard = ({ item, index }) => <ItemCard index={index} title={item.title} money={item.money} />;
-   renderHistory = ({ item, index }) => <ItemHistory index={index} type={item.type} money={item.money} />;
+   renderHistory = ({ item, index }) => <ItemHistory index={index} code={item.code} money={item.money} />;
    render() {
       return (
          <View style={styles.container}>
             <Header isShowMenu onPressMenu={() => this.props.navigation.openDrawer()} title="Trang chủ" />
             {/* ////////////////////////////////////// */}
             <View style={styles.header}>
-               <Text style={[styles.txtWallet, { fontSize: 30 }]}>Tiền của bạn:</Text>
-               <Text style={styles.txtWallet}>{formatMoney(1000000000)}</Text>
+               <Text style={[styles.txtWallet, { fontSize: 30 }]}>Tổng số tiền</Text>
+               <Text style={styles.txtWallet}>{formatMoney(1000000000)} đ</Text>
             </View>
 
             {/* ////////////footer///////////////// */}
