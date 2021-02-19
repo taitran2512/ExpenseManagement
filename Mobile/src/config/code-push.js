@@ -29,7 +29,7 @@ const withCodePush = (WrappedComponent) => {
                   this.setState({ loading: false });
                   setTimeout(() => {
                      Alert.alert('Thông báo', 'Cập nhật ứng dụng thành công');
-                  });
+                  }, 10);
                } else {
                   // console.log('code-push status: ', status);
                }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Agenda } from 'react-native-calendars';
 import { colors } from '../../res/style/theme';
 import Header from '../custom/Header';
 
@@ -8,7 +9,9 @@ export default class Statistic extends Component {
       return (
          <View style={styles.container}>
             <Header isShowMenu onPressMenu={() => this.props.navigation.openDrawer()} title="Thống kê" />
-            <ScrollView></ScrollView>
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+               <Agenda />
+            </ScrollView>
          </View>
       );
    }

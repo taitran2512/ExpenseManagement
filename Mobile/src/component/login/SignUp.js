@@ -200,6 +200,8 @@ const styles = StyleSheet.create({
       width: screenWidth,
       height: screenWidth * 0.7,
       // resizeMode: 'contain',
+      borderBottomLeftRadius: 16,
+      borderBottomRightRadius: 16,
    },
    txtSignup: {
       marginTop: 8,

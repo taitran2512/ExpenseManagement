@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
-import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
+import { View, Text, StyleSheet, FlatList, Pressable, Image } from 'react-native';
 import { userData } from '../../config/Config';
+import Images from '../../res/image';
 import { colors, fonts } from '../../res/style/theme';
 import Header from '../custom/Header';
 
 const listMenu = [
-   { title: 'Đổi mật khẩu', icon: 'user-lock', screen: '', color: colors.cyan2 },
-   { title: 'Xuất file Excel', icon: 'file-excel', screen: '', color: colors.green1 },
-   { title: 'Thông tin chi tiết', icon: 'info-circle', screen: '', color: colors.blue2 },
-   { title: 'Hướng dẫn sử dụng', icon: 'chalkboard-teacher', screen: '', color: colors.yellow },
-   { title: 'Cài đặt', icon: 'cog', screen: '', color: colors.gray },
+   { title: 'Đổi mật khẩu', icon: Images.ic_lock, screen: '', color: colors.cyan2 },
+   { title: 'Xuất file Excel', icon: Images.ic_excel, screen: '', color: colors.green1 },
+   { title: 'Thông tin chi tiết', icon: Images.ic_info, screen: '', color: colors.blue2 },
+   { title: 'Hướng dẫn sử dụng', icon: Images.ic_guide, screen: '', color: colors.yellow },
+   { title: 'Cài đặt', icon: Images.ic_setting, screen: '', color: colors.gray },
 ];
 
 export default class DrawerComponent extends Component {
@@ -21,7 +21,7 @@ export default class DrawerComponent extends Component {
    renderMenu = ({ item, index }) => (
       <Pressable android_ripple={{ color: colors.black_transparent }}>
          <View style={styles.itemMenu}>
-            <FontAwesome5 name={item.icon} size={25} color={item.color} />
+            <Image style={styles.icon} source={item.icon} />
             <Text style={styles.txtMenu}>{item.title}</Text>
          </View>
       </Pressable>
@@ -39,7 +39,7 @@ export default class DrawerComponent extends Component {
                      android_ripple={{ color: colors.black_transparent }}
                      style={styles.itemMenu}
                      onPress={() => this.props.navigation.replace('Login')}>
-                     <FontAwesome5 name="sign-out-alt" size={25} color={colors.red1} />
+                     <Image style={styles.icon} source={Images.ic_exit} />
                      <Text style={styles.txtMenu}>Đăng xuất</Text>
                   </Pressable>
                }
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
    itemMenu: {
       flexDirection: 'row',
       alignItems: 'center',
-      paddingVertical: 16,
+      paddingVertical: 8,
       borderColor: colors.gray2,
       borderBottomWidth: 1,
       paddingHorizontal: 16,
@@ -61,5 +61,10 @@ const styles = StyleSheet.create({
       fontSize: 16,
       marginLeft: 16,
       fontFamily: fonts.medium,
+   },
+   icon: {
+      width: 50,
+      height: 50,
+      resizeMode: 'contain',
    },
 });

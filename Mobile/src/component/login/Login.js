@@ -90,17 +90,7 @@ export default class Login extends Component {
    //remember login
    onPressSaveLogin = () => {
       this.setState({ saveLogin: !this.state.saveLogin }, async () => {
-         if (this.state.saveLogin) {
-            try {
-               const jsonValue = JSON.stringify({
-                  username: this.state.username,
-                  password: this.state.password,
-               });
-               await AsyncStorage.setItem('@saveLogin', jsonValue);
-            } catch (e) {
-               // saving error
-            }
-         } else {
+         if (!this.state.saveLogin) {
             try {
                await AsyncStorage.removeItem('@saveLogin');
             } catch (e) {
@@ -108,6 +98,19 @@ export default class Login extends Component {
             }
          }
       });
+   };
+   saveLogin = async () => {
+      if (this.state.saveLogin) {
+         try {
+            const jsonValue = JSON.stringify({
+               username: this.state.username,
+               password: this.state.password,
+            });
+            await AsyncStorage.setItem('@saveLogin', jsonValue);
+         } catch (e) {
+            // saving error
+         }
+      }
    };
    //press login
    onPressLogin = () => {
@@ -118,9 +121,10 @@ export default class Login extends Component {
       }
    };
 
-   componentDidUpdate(prevProps) {
+   async componentDidUpdate(prevProps) {
       if (this.props.status !== null && this.props.status !== prevProps.status) {
          if (this.props.status === 'success') {
+            this.saveLogin();
             this.props.navigation.replace('Home');
          } else {
             Alert.alert('Thông báo', this.props.message);
