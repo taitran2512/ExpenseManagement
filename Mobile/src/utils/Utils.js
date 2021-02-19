@@ -12,7 +12,7 @@ const expenseType = [
    { code: 'gift', title: 'Quà', icon: Images.ic_gift },
    { code: 'book', title: 'Sách vở', icon: Images.ic_book },
    { code: 'phoneBuy', title: 'Mua điện thoại', icon: Images.ic_phone1 },
-   { code: 'phoneFee', title: 'Tiền điện thoại', icon: Images.ic_phone1 },
+   { code: 'phoneFee', title: 'Tiền điện thoại', icon: Images.ic_phone },
    { code: 'phoneFix', title: 'Sửa điện thoại', icon: Images.ic_phone_broken },
    { code: 'buyVehicle', title: 'Mua xe', icon: Images.ic_car },
    { code: 'fixVehicle', title: 'Sửa xe', icon: Images.ic_car1 },

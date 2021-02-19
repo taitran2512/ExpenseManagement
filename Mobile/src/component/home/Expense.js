@@ -31,7 +31,7 @@ export default class Expense extends Component {
             <Text style={styles.txtOption}>{item.title}</Text>
          </View>
          {this.state.selectedOption === item ? (
-            <Image style={{ width: 50, height: 50, resizeMode: 'contain' }} source={Images.ic_check} />
+            <Image style={{ width: 45, height: 45, resizeMode: 'contain' }} source={Images.ic_check} />
          ) : null}
       </Pressable>
    );
@@ -64,12 +64,13 @@ const styles = StyleSheet.create({
       alignItems: 'center',
    },
    icon: {
-      width: 80,
-      height: 80,
+      width: 70,
+      height: 70,
       resizeMode: 'contain',
    },
    txtOption: {
       fontFamily: fonts.medium,
       fontSize: 16,
+      marginLeft: 16,
    },
 });
