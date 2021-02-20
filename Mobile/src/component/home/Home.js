@@ -33,7 +33,9 @@ const history = [
 export default class Home extends Component {
    constructor(props) {
       super(props);
-      this.state = {};
+      this.state = {
+         totalMoney: 0,
+      };
       this.walletModal = React.createRef();
    }
 
@@ -46,13 +48,23 @@ export default class Home extends Component {
          index={index}
          cardName={item.walletName}
          money={item.walletMoney}
-         onSubmit={this.onEditWallet}
+         onSubmit={(cardName, money) => this.onEditWallet(item._id, cardName, money)}
+         onDelete={() => this.onDeleteWallet(item._id)}
       />
    );
    renderHistory = ({ item, index }) => <ItemHistory index={index} code={item.code} money={item.money} />;
 
-   onEditWallet = (cardName, money) => {
-      alert(cardName + money);
+   onEditWallet = (_id, cardName, money) => {
+      this.props.updateWalletAction(_id, cardName, money);
+   };
+   onDeleteWallet = (id) => {
+      Alert.alert('Cảnh báo', 'Bạn có muốn xóa ví này không', [
+         {
+            text: 'Không',
+            style: 'cancel',
+         },
+         { text: 'Có', onPress: () => this.props.deleteWalletAction(id) },
+      ]);
    };
    onCreateWallet = (cardName, money) => {
       this.props.createWalletAction(cardName, money);
@@ -65,8 +77,22 @@ export default class Home extends Component {
       ) {
          if (this.props.createWallet.status) {
             this.walletModal.current.close();
+            this.props.getWalletAction();
             setTimeout(() => {
                Alert.alert('Thông báo', this.props.createWallet.message);
+            }, 10);
+         }
+      }
+   };
+   deleteWallet = (prevProps) => {
+      if (
+         this.props.deleteWallet.status !== null &&
+         this.props.deleteWallet.status !== prevProps.deleteWallet.status
+      ) {
+         if (this.props.deleteWallet.status) {
+            this.props.getWalletAction();
+            setTimeout(() => {
+               Alert.alert('Thông báo', this.props.deleteWallet.message);
             }, 10);
          }
       }
@@ -78,6 +104,25 @@ export default class Home extends Component {
          this.props.getWallet.status !== prevProps.getWallet.status
       ) {
          if (this.props.getWallet.status) {
+            let totalMoney = 0;
+            for (let wallet of this.props.getWallet.data) {
+               totalMoney += wallet.walletMoney;
+            }
+            this.setState({ totalMoney });
+         }
+      }
+   };
+   //update ví  tiền
+   updateWallet = (prevProps) => {
+      if (
+         this.props.updateWallet.status !== null &&
+         this.props.updateWallet.status !== prevProps.updateWallet.status
+      ) {
+         if (this.props.updateWallet.status) {
+            this.props.getWalletAction();
+            setTimeout(() => {
+               Alert.alert('Thông báo', this.props.updateWallet.message);
+            }, 10);
          }
       }
    };
@@ -85,6 +130,8 @@ export default class Home extends Component {
    componentDidUpdate(prevProps) {
       this.createWallet(prevProps);
       this.getWallet(prevProps);
+      this.deleteWallet(prevProps);
+      this.updateWallet(prevProps);
    }
    ///////////////////////////
    render() {
@@ -92,11 +139,17 @@ export default class Home extends Component {
       return (
          <View style={styles.container}>
             <Header isShowMenu onPressMenu={() => this.props.navigation.openDrawer()} title="Trang chủ" />
-            <LoadingView visible={this.props.createWallet.loading || this.props.getWallet.loading} />
+            <LoadingView
+               visible={
+                  this.props.createWallet.loading ||
+                  this.props.getWallet.loading ||
+                  this.props.deleteWallet.loading
+               }
+            />
             {/* ////////////////////////////////////// */}
             <View style={styles.header}>
                <Text style={[styles.txtWallet, { fontSize: 30 }]}>Tổng số tiền</Text>
-               <Text style={styles.txtWallet}>{formatMoney(1000000000)} đ</Text>
+               <Text style={styles.txtWallet}>{formatMoney(this.state.totalMoney)} đ</Text>
             </View>
 
             {/* ////////////footer///////////////// */}

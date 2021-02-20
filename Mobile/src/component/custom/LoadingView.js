@@ -13,7 +13,7 @@ const LoadingView = (props) => {
             }}>
             <ActivityIndicator size="large" color={colors.blue} />
             <Text style={{ fontSize: 16, color: 'white', marginTop: 8, fontWeight: 'bold' }}>
-               {props.loadingText}
+               {props.loadingText || 'Loading...'}
             </Text>
          </View>
       </Modal>
