@@ -4,77 +4,48 @@ import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
 import { formatMoney } from '../../../res/function/Functions';
 import Images from '../../../res/image';
 import { colors, fonts, screenWidth } from '../../../res/style/theme';
-import Modals from '../../custom/Modals';
-import TextInputAnimated from '../../custom/TextInputAnimated';
+import WalletModal from './WalletModal';
 
 const cardWidth = screenWidth * 0.6;
 
 const ItemCard = (props) => {
-   const modalRef = useRef();
-   const [cardName, setCardName] = useState(props.title);
-   const [money, setMoney] = useState(String(props.money));
-   const onCancelEdit = () => {
-      setCardName(props.title);
-      setMoney(String(props.money));
-      modalRef.current.close();
-   };
+   const walletModal = useRef();
+
    return (
       <ImageBackground
          source={Images.card}
          style={[styles.container, props.index > 0 ? { marginLeft: 16 } : null]}>
          <Text numberOfLines={2} style={styles.title}>
-            {props.title}
+            {props.cardName}
          </Text>
          <Text style={styles.money}>{formatMoney(props.money)}</Text>
-         <TouchableOpacity
-            onPress={() => modalRef.current.open()}
-            style={{ position: 'absolute', right: 8, bottom: 8, padding: 8 }}>
-            <FontAwesome5 name="edit" color={colors.white} size={20} />
-         </TouchableOpacity>
-         <Modals ref={modalRef}>
-            <View style={styles.edit}>
-               <Text style={styles.titleEdit}>Thay đổi thông tin ví tiền</Text>
-               <TextInputAnimated
-                  style={styles.input}
-                  label="Tên ví"
-                  value={cardName}
-                  onChangeText={(text) => setCardName(text)}
-                  onPressClear={() => setCardName('')}
-               />
-               <TextInputAnimated
-                  keyboardType="number-pad"
-                  style={styles.input}
-                  label="Số tiền"
-                  value={money}
-                  onChangeText={(text) => setMoney(text)}
-                  onPressClear={() => setMoney('')}
-               />
-               <View style={styles.viewBtn}>
-                  {/* //cancel edit */}
-                  <TouchableOpacity
-                     onPress={onCancelEdit}
-                     style={[styles.btn, { backgroundColor: colors.red1 }]}>
-                     <Text style={styles.txtBtn}>Hủy</Text>
-                  </TouchableOpacity>
-                  {/* //ok edit */}
-                  <TouchableOpacity
-                     style={styles.btn}
-                     onPress={() => {
-                        props.onEdit(cardName, money);
-                        modalRef.current.close();
-                     }}>
-                     <Text style={styles.txtBtn}>Sửa</Text>
-                  </TouchableOpacity>
-               </View>
-            </View>
-         </Modals>
+         {/* ///////action icon///////////////////////// */}
+         <View style={styles.action}>
+            <TouchableOpacity onPress={() => walletModal.current.open()} style={{ padding: 8 }}>
+               <FontAwesome5 name="edit" color={colors.white} size={20} />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => props.onDelete()} style={{ padding: 8 }}>
+               <FontAwesome5 name="trash-alt" color={colors.white} size={20} />
+            </TouchableOpacity>
+         </View>
+
+         {/* ///////////////// */}
+         <WalletModal
+            ref={walletModal}
+            modalTitle="Chỉnh sửa thông tin ví tiền"
+            textSubmit="Sửa"
+            money={props.money}
+            cardName={props.cardName}
+            {...props}
+         />
       </ImageBackground>
    );
 };
 
 export default ItemCard;
 ItemCard.defaultProps = {
-   onEdit: () => {},
+   onDelete: () => {},
 };
 
 const styles = StyleSheet.create({
@@ -128,5 +99,11 @@ const styles = StyleSheet.create({
       fontFamily: fonts.bold,
       color: colors.white,
       textAlign: 'center',
+   },
+   action: {
+      flexDirection: 'row',
+      position: 'absolute',
+      bottom: 8,
+      right: 8,
    },
 });

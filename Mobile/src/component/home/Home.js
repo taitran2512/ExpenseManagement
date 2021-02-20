@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
 import { formatMoney } from '../../res/function/Functions';
 import { colors, fonts, screenHeight } from '../../res/style/theme';
 import Header from '../custom/Header';
 import ItemCard from './custom/ItemCard';
 import ActionButton from './custom/ActionButton';
 import ItemHistory from './custom/ItemHistory';
+import WalletModal from './custom/WalletModal';
+import LoadingView from '../custom/LoadingView';
 const data = [
-   { title: 'Vietcombank', money: 123456 },
-   { title: 'Tiền trong ví', money: 456789 },
-   { title: 'Tiền trong tủ', money: 1000000000 },
+   { cardName: 'Vietcombank', money: 123456 },
+   { cardName: 'Tiền trong ví', money: 456789 },
+   { cardName: 'Tiền trong tủ', money: 1000000000 },
 ];
 
 const history = [
@@ -37,13 +39,49 @@ export default class Home extends Component {
    constructor(props) {
       super(props);
       this.state = {};
-   }
-   renderItemCard = ({ item, index }) => <ItemCard index={index} title={item.title} money={item.money} />;
+      this.walletModal = React.createRef();
+	}
+	
+	componentDidMount() {
+		
+	}
+
+   renderItemCard = ({ item, index }) => (
+      <ItemCard index={index} cardName={item.cardName} money={item.money} onSubmit={this.onEditWallet} />
+   );
    renderHistory = ({ item, index }) => <ItemHistory index={index} code={item.code} money={item.money} />;
+
+   onEditWallet = (cardName, money) => {
+      alert(cardName + money);
+   };
+   onCreateWallet = (cardName, money) => {
+      this.props.createWalletAction(cardName, money);
+   };
+   //tạo mới ví tiền
+   createWallet = (prevProps) => {
+      if (
+         this.props.statusCreateWallet !== null &&
+         this.props.statusCreateWallet !== prevProps.statusCreateWallet
+      ) {
+         if (this.props.statusCreateWallet) {
+            this.walletModal.current.close();
+            setTimeout(() => {
+               Alert.alert('Thông báo', this.props.messageCreateWallet);
+            }, 10);
+         }
+      }
+   };
+   /////////
+   componentDidUpdate(prevProps) {
+      this.createWallet(prevProps);
+   }
+   ///////////////////////////
    render() {
+      // console.log(this.props);
       return (
          <View style={styles.container}>
             <Header isShowMenu onPressMenu={() => this.props.navigation.openDrawer()} title="Trang chủ" />
+            <LoadingView visible={this.props.loadingCreateWallet} />
             {/* ////////////////////////////////////// */}
             <View style={styles.header}>
                <Text style={[styles.txtWallet, { fontSize: 30 }]}>Tổng số tiền</Text>
@@ -80,7 +118,15 @@ export default class Home extends Component {
                   />
                </View>
             </View>
+            <WalletModal
+               ref={this.walletModal}
+               modalTitle="Thêm ví tiền"
+               textSubmit="Thêm"
+               onSubmit={this.onCreateWallet}
+               cardName=""
+            />
             <ActionButton
+               onPressAddWallet={() => this.walletModal.current.open()}
                onPressExpense={() => this.props.navigation.navigate('Expense')}
                onPressIncome={() => this.props.navigation.navigate('Income')}
             />

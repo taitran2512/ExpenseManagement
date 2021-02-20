@@ -21,7 +21,7 @@ const AcitonButton = (props) => {
             {
                icon: (props) => <MaterialIcons {...props} name="credit-card" />,
                label: 'Ví tiền',
-               onPress: () => props.onPressAdd(),
+               onPress: () => props.onPressAddWallet(),
                small: false,
             },
             {
@@ -48,7 +48,7 @@ const AcitonButton = (props) => {
 };
 export default AcitonButton;
 AcitonButton.defaultProps = {
-   onPressAdd: () => {},
+   onPressAddWallet: () => {},
    onPressExpense: () => {},
    onPressIncome: () => {},
 };

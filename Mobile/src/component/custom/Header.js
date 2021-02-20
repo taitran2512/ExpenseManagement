@@ -18,7 +18,7 @@ const Header = (props) => {
          android_ripple={{ color: colors.black_transparent, borderless: true }}
          style={styles.iconBack}
          onPress={() => props.onPressMenu()}>
-         <Icon name="align-justify" size={20} color={colors.white} />
+         <Icon name="bars" size={20} color={colors.white} />
       </Pressable>
    );
    //////////////////////////////////
