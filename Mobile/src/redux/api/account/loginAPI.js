@@ -16,6 +16,7 @@ export function loginAPI(username, password) {
       .then((response) => response.json())
       .then((result) => result)
       .catch((error) => {
+         console.log('err login', error);
          return { error: error };
       });
    return response;

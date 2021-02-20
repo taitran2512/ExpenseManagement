@@ -24,6 +24,7 @@ export function signupAPI(input) {
       .then((response) => response.json())
       .then((result) => result)
       .catch((error) => {
+         console.log('err sigup', error);
          return { error: error };
       });
    // console.log(response);
