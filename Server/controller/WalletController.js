@@ -15,9 +15,11 @@ function ResultModel(status, message, data = null, error = null) {
 }
 //get all wallet
 router.route("/").get((req, res) => {
-	Wallet.find()
-		.then((wallet) => res.json(wallet))
-		.catch((err) => res.status(400).json("Error:", +err));
+	verifyToken(req, res, (decoded) => {
+		Wallet.find()
+			.then((wallet) => res.json(wallet))
+			.catch((err) => res.status(400).json("Error:", +err));
+	});
 });
 
 //tạo mới ví tiền
