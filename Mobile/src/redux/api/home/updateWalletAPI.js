@@ -3,6 +3,7 @@ export function updateWalletAPI(_id, walletName, walletMoney) {
    const url = API_URL + '/wallet/updateWallet';
    var myHeaders = new Headers();
    myHeaders.append('Content-Type', 'application/json');
+   myHeaders.append('Authorization', 'Bearer ' + userData.token);
 
    var raw = JSON.stringify({
       _id,

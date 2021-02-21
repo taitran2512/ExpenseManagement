@@ -8,6 +8,7 @@ const userData = {
    email: '',
    phone: '',
    createDate: '',
+   token: '',
 };
 
 export { API_URL, userData };

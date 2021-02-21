@@ -28,6 +28,7 @@ const loginReducer = (state = initialState, action) => {
             userData.email = action.response.data.email;
             userData.phone = action.response.data.phone;
             userData.createDate = action.response.data.createDate;
+            userData.token = action.response.token;
          }
          return {
             status: action.response.status,

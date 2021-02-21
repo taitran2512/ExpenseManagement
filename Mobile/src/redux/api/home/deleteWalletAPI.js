@@ -1,9 +1,14 @@
-import { API_URL } from '../../../config/Config';
+import { API_URL, userData } from '../../../config/Config';
 
 export function deleteWalletAPI(id) {
+   var myHeaders = new Headers();
+   myHeaders.append('Content-Type', 'application/json');
+   myHeaders.append('Authorization', 'Bearer ' + userData.token);
+
    const url = API_URL + '/wallet/deleteWallet/' + id;
    var requestOptions = {
       method: 'GET',
+      headers: myHeaders,
       redirect: 'follow',
    };
 

@@ -75,7 +75,7 @@ export default class Home extends Component {
          this.props.createWallet.status !== null &&
          this.props.createWallet.status !== prevProps.createWallet.status
       ) {
-         if (this.props.createWallet.status) {
+         if (this.props.createWallet.status === 'success') {
             this.walletModal.current.close();
             this.props.getWalletAction();
             setTimeout(() => {
@@ -89,7 +89,7 @@ export default class Home extends Component {
          this.props.deleteWallet.status !== null &&
          this.props.deleteWallet.status !== prevProps.deleteWallet.status
       ) {
-         if (this.props.deleteWallet.status) {
+         if (this.props.deleteWallet.status === 'success') {
             this.props.getWalletAction();
             setTimeout(() => {
                Alert.alert('Thông báo', this.props.deleteWallet.message);
@@ -103,7 +103,7 @@ export default class Home extends Component {
          this.props.getWallet.status !== null &&
          this.props.getWallet.status !== prevProps.getWallet.status
       ) {
-         if (this.props.getWallet.status) {
+         if (this.props.getWallet.status === 'success') {
             let totalMoney = 0;
             for (let wallet of this.props.getWallet.data) {
                totalMoney += wallet.walletMoney;
@@ -118,7 +118,7 @@ export default class Home extends Component {
          this.props.updateWallet.status !== null &&
          this.props.updateWallet.status !== prevProps.updateWallet.status
       ) {
-         if (this.props.updateWallet.status) {
+         if (this.props.updateWallet.status === 'success') {
             this.props.getWalletAction();
             setTimeout(() => {
                Alert.alert('Thông báo', this.props.updateWallet.message);
