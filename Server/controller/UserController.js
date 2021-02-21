@@ -3,10 +3,12 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../model/User.model");
-function ResultModel(status, message, data = null) {
+const { secretKey } = require("../config");
+function ResultModel(status, message, token = null, data = null) {
 	return {
 		status: status,
 		message: message,
+		token: token,
 		data: data,
 	};
 }
@@ -76,7 +78,9 @@ router.route("/login").post((req, res) => {
 					if (result) {
 						var dataUser = user.toObject();
 						delete dataUser.password;
-						res.json(ResultModel("success", "Đăng nhập thành công", dataUser));
+						const userAuthors = { username: user.username, email: user.email, password: user.password };
+						const token = jwt.sign(userAuthors, secretKey, { expiresIn: "1d" });
+						res.json(ResultModel("success", "Đăng nhập thành công", token, dataUser));
 					} else {
 						res.json(ResultModel("error", "Tài khoản hoặc mật khẩu không chính xác"));
 					}
