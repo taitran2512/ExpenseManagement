@@ -3,11 +3,12 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const Wallet = require("../model/Wallet.model");
 
-function ResultModel(status, message, data = null) {
+function ResultModel(status, message, data = null, error = null) {
 	return {
 		status: status,
 		message: message,
 		data: data,
+		error: error,
 	};
 }
 //get all wallet
@@ -33,7 +34,13 @@ router.route("/create").post((req, res) => {
 router.route("/getWallet/:userId").get((req, res) => {
 	const userId = req.params.userId;
 	Wallet.find({ userId })
-		.then((wallet) => res.json(ResultModel("success", "Lấy ví tiền thành công", wallet)))
+		.then((wallet) => {
+			if (wallet.length > 0) {
+				res.json(ResultModel("success", "Lấy ví tiền thành công", wallet));
+			} else {
+				res.json(ResultModel("error", "Bạn không có ví tiền, vui lòng tạo mới"));
+			}
+		})
 		.catch((err) => res.status(400).json({ error: err }));
 });
 
@@ -48,15 +55,27 @@ router.route("/updateWallet").post((req, res) => {
 			runValidators: true, // validate before update
 		}
 	)
-		.then((wallet) => res.json(ResultModel("success", "Cập nhật ví tiền thành công", wallet)))
-		.catch((err) => res.status(400).json({ error: err }));
+		.then((wallet) => {
+			if (wallet) {
+				res.json(ResultModel("success", "Cập nhật ví tiền thành công", wallet));
+			} else {
+				res.json(ResultModel("error", "Cập nhật ví tiền thất bại", wallet));
+			}
+		})
+		.catch((err) => res.status(400).json(ResultModel("error", "Cập nhật ví tiền thất bại", null, err)));
 });
 
 //xóa ví tiền
 router.route("/deleteWallet/:_id").get((req, res) => {
 	const _id = req.params._id;
 	Wallet.findOneAndRemove({ _id })
-		.then((wallet) => res.json(ResultModel("success", "Xóa ví tiền thành công", wallet)))
+		.then((wallet) => {
+			if (wallet) {
+				res.json(ResultModel("success", "Xóa ví tiền thành công", wallet));
+			} else {
+				res.json(ResultModel("error", "Xóa ví tiền thất bại", wallet));
+			}
+		})
 		.catch((err) => res.status(400).json({ error: err }));
 });
 

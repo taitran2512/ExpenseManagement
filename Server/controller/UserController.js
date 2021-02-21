@@ -52,7 +52,7 @@ router.route("/signup").post((req, res) => {
 								delete dataUser.password;
 								return res.json(ResultModel("success", "Đăng kí thành công", dataUser));
 							})
-							.catch((err) => res.status(400).json("Error:", err));
+							.catch((err) => res.status(400).json({ error: err }));
 					}
 				})
 				.catch((err) => res.status(400).json("Error", err));
@@ -85,6 +85,6 @@ router.route("/login").post((req, res) => {
 				res.json(ResultModel("error", "Tài khoản hoặc mật khẩu không chính xác"));
 			}
 		})
-		.catch((err) => res.status(400).json("Error:", err));
+		.catch((err) => res.status(400).json({ error: err }));
 });
 module.exports = router;
