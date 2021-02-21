@@ -83,7 +83,7 @@ router.route("/login").post((req, res) => {
 							email: user.email,
 						};
 						const token = generateToken(userAuthors);
-						res.json(ResultModel("success", "Đăng nhập thành công", `Bearer ${token}`, dataUser));
+						res.json(ResultModel("success", "Đăng nhập thành công", token, dataUser));
 					} else {
 						res.json(ResultModel("error", "Tài khoản hoặc mật khẩu không chính xác"));
 					}
