@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
 import { formatMoney } from '../../res/function/Functions';
-import { colors, fonts, screenHeight } from '../../res/style/theme';
+import { colors, fonts, screenHeight, screenWidth } from '../../res/style/theme';
 import Header from '../custom/Header';
 import ItemCard from './custom/ItemCard';
 import ActionButton from './custom/ActionButton';
 import ItemHistory from './custom/ItemHistory';
 import WalletModal from './custom/WalletModal';
 import LoadingView from '../custom/LoadingView';
-
 const history = [
    { code: 'clothes', money: 300000 },
    { code: 'fruit', money: 78423 },
@@ -69,6 +68,13 @@ export default class Home extends Component {
    onCreateWallet = (cardName, money) => {
       this.props.createWalletAction(cardName, money);
    };
+   emtyCardView = () => (
+      <View style={{ width: screenWidth - 32 }}>
+         <Text style={[styles.txtHistory, { textAlign: 'center' }]}>
+            Bạn chưa có ví tiền, {'\n'}vui lòng thêm mới
+         </Text>
+      </View>
+   );
    //tạo mới ví tiền
    createWallet = (prevProps) => {
       if (
@@ -151,7 +157,6 @@ export default class Home extends Component {
                <Text style={[styles.txtWallet, { fontSize: 30 }]}>Tổng số tiền</Text>
                <Text style={styles.txtWallet}>{formatMoney(this.state.totalMoney)} đ</Text>
             </View>
-
             {/* ////////////footer///////////////// */}
             <View style={{ flex: 1 }}>
                <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: colors.blue }} />
@@ -164,12 +169,13 @@ export default class Home extends Component {
                         }
                      }>
                      <FlatList
-                        contentContainerStyle={{ padding: 16 }}
+                        contentContainerStyle={{ padding: 16, flexGrow: 1 }}
                         data={this.props.getWallet.data}
                         keyExtractor={(item, index) => String(index)}
                         showsHorizontalScrollIndicator={false}
                         horizontal
                         renderItem={this.renderItemCard}
+                        ListEmptyComponent={this.emtyCardView()}
                      />
                   </View>
                   <Text style={styles.txtHistory}>Lịch sử</Text>

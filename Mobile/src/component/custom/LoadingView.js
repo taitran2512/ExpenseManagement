@@ -7,7 +7,7 @@ const LoadingView = (props) => {
          <View
             style={{
                flex: 1,
-               backgroundColor: 'rgba(0, 0, 0, 0.2)',
+               backgroundColor: colors.black_transparent,
                justifyContent: 'center',
                alignItems: 'center',
             }}>
