@@ -6,14 +6,18 @@ import Images from '../../../res/image';
 import { colors, fonts, screenWidth } from '../../../res/style/theme';
 import Header from '../../custom/Header';
 
-const data = [
-   { label: 'Họ và tên', value: userData.fullname },
-   { label: 'Tên đăng nhập', value: userData.username },
-   { label: 'Email', value: userData.email },
-   { label: 'Số điện thoại', value: userData.phone },
-   { label: 'Ngày tạo tài khoản', value: convertDate(userData.createDate) },
-];
 export default class UserInfo extends Component {
+   constructor(props) {
+      super(props);
+      this.state = {};
+      this.data = [
+         { label: 'Họ và tên', value: userData.fullname },
+         { label: 'Tên đăng nhập', value: userData.username },
+         { label: 'Email', value: userData.email },
+         { label: 'Số điện thoại', value: userData.phone },
+         { label: 'Ngày tạo tài khoản', value: convertDate(userData.createDate) },
+      ];
+   }
    renderItem = ({ item, index }) => (
       <View style={styles.item}>
          <Text style={styles.text}>{item.label}</Text>
@@ -26,7 +30,7 @@ export default class UserInfo extends Component {
             <Header isShowBack onPressBack={() => this.props.navigation.goBack()} title="Thông tin cá nhân" />
             <Image source={Images.ic_user} style={styles.img} />
             <FlatList
-               data={data}
+               data={this.data}
                keyExtractor={(item, index) => String(index)}
                showsVerticalScrollIndicator={false}
                renderItem={this.renderItem}

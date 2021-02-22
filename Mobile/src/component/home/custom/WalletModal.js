@@ -9,15 +9,17 @@ const WalletModal = forwardRef((props, ref) => {
    const [cardName, setCardName] = useState(props.cardName);
    const [money, setMoney] = useState(String(props.money));
 
-   const onCancelEdit = () => {
+   const onCancel = () => {
+      onClose();
+   };
+   const onClose = () => {
       setCardName(props.cardName);
       setMoney(String(props.money));
       modalRef.current.close();
    };
-
    useImperativeHandle(ref, () => ({
       open: () => modalRef.current.open(),
-      close: () => modalRef.current.close(),
+      close: () => onClose(),
    }));
    const onSubmit = () => {
       if (cardName === '' || money === '') {
@@ -52,9 +54,7 @@ const WalletModal = forwardRef((props, ref) => {
                   <Text style={styles.txtBtn}>{props.textSubmit}</Text>
                </TouchableOpacity>
                {/* //cancel */}
-               <TouchableOpacity
-                  onPress={onCancelEdit}
-                  style={[styles.btn, { backgroundColor: colors.red1 }]}>
+               <TouchableOpacity onPress={onCancel} style={[styles.btn, { backgroundColor: colors.red1 }]}>
                   <Text style={styles.txtBtn}>Hủy</Text>
                </TouchableOpacity>
             </View>
