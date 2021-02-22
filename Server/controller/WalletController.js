@@ -17,6 +17,7 @@ function ResultModel(status, message, data = null, error = null) {
 router.route("/").get((req, res) => {
 	verifyToken(req, res, (decoded) => {
 		Wallet.find()
+			.sort({ _id: -1 })
 			.then((wallet) => res.json(wallet))
 			.catch((err) => res.status(400).json("Error:", +err));
 	});
@@ -42,6 +43,7 @@ router.route("/getWallet/:userId").get((req, res) => {
 	const userId = req.params.userId;
 	verifyToken(req, res, (decoded) => {
 		Wallet.find({ userId })
+			.sort({ _id: -1 })
 			.then((wallet) => {
 				if (wallet.length > 0) {
 					res.json(ResultModel("success", "Lấy ví tiền thành công", wallet));

@@ -15,6 +15,7 @@ function ResultModel(status, message, token = null, data = null) {
 //get all user
 router.route("/").get((req, res) => {
 	User.find()
+		.sort({ _id: -1 })
 		.then((user) => res.json(user))
 		.catch((err) => res.status(400).json("Error:", +err));
 });
