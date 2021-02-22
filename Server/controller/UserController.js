@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../model/User.model");
 const { generateToken } = require("../helpers/jwt.helper");
 const { sendMail } = require("../helpers/mailer.hepler");
-
+const { generateOTP, verifyOTP } = require("../helpers/otp.helper");
 function ResultModel(status, message, token = null, data = null) {
 	return {
 		status: status,
@@ -102,15 +102,15 @@ router.route("/login").post((req, res) => {
 router.route("/forget").post((req, res) => {
 	const { email } = req.body;
 	const subject = "Khôi phục mật khẩu";
-	const body = "Hello";
 	const success = "success";
-	const message = "Gửi mail thành công";
-	// res.json({ success, message });
-	User.exists({ email: email })
-		.then((existMail) => {
-			if (existMail) {
+	const message = "Mã OTP đã được gửi đến email của bạn";
+	User.findOne({ email: email })
+		.then((user) => {
+			if (user) {
+				const otp = generateOTP(String(user._id));
+				const body = "Mã otp: " + otp;
 				sendMail(email, subject, body)
-					.then(() => res.json({ success, message }))
+					.then(() => res.json({ success, message, _id: user._id }))
 					.catch((err) => res.status(400).json({ error: err }));
 			} else {
 				res.json({ success: "error", message: "Email không tồn tại trong hệ thống" });
@@ -119,4 +119,14 @@ router.route("/forget").post((req, res) => {
 		.catch((err) => res.status(400).json({ error: err }));
 });
 
+//xác thực otp
+router.route("/verifyOTP").post((req, res) => {
+	const { _id, otp } = req.body;
+	const result = verifyOTP(otp, _id);
+	if (result) {
+		res.json({ success: "success", message: "Xác nhận mã OTP thành công, bạn vui lòng thay đổi lại mật khẩu" });
+	} else {
+		res.json({ success: "error", message: "Xác thực thất bại" });
+	}
+});
 module.exports = router;

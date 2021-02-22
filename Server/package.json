@@ -18,7 +18,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.16",
     "nodemailer": "^6.4.18",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "otplib": "^12.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
