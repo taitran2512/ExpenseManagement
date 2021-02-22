@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const User = require("../model/User.model");
 const { generateToken } = require("../helpers/jwt.helper");
+const { sendMail } = require("../helpers/mailer.hepler");
+
 function ResultModel(status, message, token = null, data = null) {
 	return {
 		status: status,
@@ -95,4 +97,26 @@ router.route("/login").post((req, res) => {
 		})
 		.catch((err) => res.status(400).json({ error: err }));
 });
+
+//send mail quên mật khẩu
+router.route("/forget").post((req, res) => {
+	const { email } = req.body;
+	const subject = "Khôi phục mật khẩu";
+	const body = "Hello";
+	const success = "success";
+	const message = "Gửi mail thành công";
+	// res.json({ success, message });
+	User.exists({ email: email })
+		.then((existMail) => {
+			if (existMail) {
+				sendMail(email, subject, body)
+					.then(() => res.json({ success, message }))
+					.catch((err) => res.status(400).json({ error: err }));
+			} else {
+				res.json({ success: "error", message: "Email không tồn tại trong hệ thống" });
+			}
+		})
+		.catch((err) => res.status(400).json({ error: err }));
+});
+
 module.exports = router;
