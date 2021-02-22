@@ -129,4 +129,40 @@ router.route("/verifyOTP").post((req, res) => {
 		res.json({ success: "error", message: "Xác thực thất bại" });
 	}
 });
+
+//đổi mật khẩu
+router.route("/changePassword").post((req, res) => {
+	const { _id, oldPassword, newPassword } = req.body;
+	////////////////search existing user///////////////////
+	User.findOne({ _id: _id })
+		.then((user) => {
+			if (user) {
+				bcrypt.compare(oldPassword, user.password, (err, result) => {
+					if (result) {
+						///////////hash new pass///////////////////
+						bcrypt.hash(newPassword, 10, (err, newPasswordHash) => {
+							if (!err) {
+								//////////////update new password to database////////////////
+								User.findOneAndUpdate({ _id }, { password: newPasswordHash })
+									.then(() =>
+										res.json({
+											success: "success",
+											message: "Thay đổi mật khẩu thành công",
+										})
+									)
+									.catch((err) => res.status(400).json({ error: err }));
+							}
+						});
+					} else {
+						////////////////wrong old password//////////////////////////
+						res.json({
+							success: "error",
+							message: "Mật khẩu cũ không chính xác",
+						});
+					}
+				});
+			}
+		})
+		.catch((err) => res.status(400).json({ error: err }));
+});
 module.exports = router;
