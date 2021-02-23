@@ -5,6 +5,10 @@ import createWalletReducer from './home/createWalletReducer';
 import getWalletReducer from './home/getWalletReducer';
 import deleteWalletReducer from './home/deleteWalletReducer';
 import updateWalletReducer from './home/updateWalletReducer';
+import sendOTPReducer from './account/forget/sendOTPReducer'
+import verifyOTPReducer from './account/forget/verifyOTPReducer';
+import createNewPassReducer from './account/forget/createNewPassReducer';
+
 const allReducers = combineReducers({
    loginReducer,
    signupReducer,
@@ -12,6 +16,9 @@ const allReducers = combineReducers({
    getWalletReducer,
    deleteWalletReducer,
    updateWalletReducer,
+   sendOTPReducer,
+   verifyOTPReducer,
+   createNewPassReducer,
 });
 
 export default allReducers;

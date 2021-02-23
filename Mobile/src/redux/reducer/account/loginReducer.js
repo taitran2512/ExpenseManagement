@@ -9,7 +9,6 @@ var initialState = {
    error: null,
 };
 const loginReducer = (state = initialState, action) => {
-   // console.log(action);
    switch (action.type) {
       case LOGIN_ACTION:
          return {

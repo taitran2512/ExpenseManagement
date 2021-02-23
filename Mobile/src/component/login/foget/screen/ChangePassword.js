@@ -11,8 +11,15 @@ export default class ChangePassword extends React.PureComponent {
          newPassword: '',
          confirmPassword: '',
       };
+      this.getNewPassword = this.getNewPassword.bind(this);
+      this.getConfirmPassword = this.getConfirmPassword.bind(this);
    }
-
+   getNewPassword() {
+      return this.state.newPassword;
+   }
+   getConfirmPassword() {
+      return this.state.confirmPassword;
+   }
    render() {
       return (
          <View style={styles.container}>

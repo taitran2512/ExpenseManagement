@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import { colors, fonts } from '../../res/style/theme';
 

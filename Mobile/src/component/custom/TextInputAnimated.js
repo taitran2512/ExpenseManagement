@@ -50,13 +50,6 @@ export default class TextInputAnimated extends Component {
    input = () => (
       <TextInput
          {...this.props}
-         onChange={(e) => {
-            e.nativeEvent.text.length === 100 &&
-               setTimeout(() => {
-                  Alert.alert('Thông báo', 'Không được nhập quá 100 kí tự');
-               }, 10);
-         }}
-         maxLength={100}
          ref={this.textInput}
          autoCorrect={false}
          autoCompleteType="off"

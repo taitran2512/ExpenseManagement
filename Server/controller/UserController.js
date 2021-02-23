@@ -102,7 +102,7 @@ router.route('/login').post((req, res) => {
 router.route('/forget').post((req, res) => {
    const { email } = req.body;
    const subject = 'Khôi phục mật khẩu';
-   const success = 'success';
+   const status = 'success';
    const message = 'Mã OTP đã được gửi đến email của bạn';
    User.findOne({ email: email })
       .then((user) => {
@@ -110,10 +110,10 @@ router.route('/forget').post((req, res) => {
             const otp = generateOTP(String(user._id));
             const body = 'Mã otp: ' + otp;
             sendMail(email, subject, body)
-               .then(() => res.json({ success, message, _id: user._id }))
+               .then(() => res.json({ status, message, _id: user._id }))
                .catch((err) => res.status(400).json({ error: err }));
          } else {
-            res.json({ success: 'error', message: 'Email không tồn tại trong hệ thống' });
+            res.json({ status: 'error', message: 'Email không tồn tại trong hệ thống' });
          }
       })
       .catch((err) => res.status(400).json({ error: err }));
@@ -125,11 +125,11 @@ router.route('/verifyOTP').post((req, res) => {
    const result = verifyOTP(otp, _id);
    if (result) {
       res.json({
-         success: 'success',
+         status: 'success',
          message: 'Xác nhận mã OTP thành công, bạn vui lòng thay đổi lại mật khẩu',
       });
    } else {
-      res.json({ success: 'error', message: 'Xác thực thất bại' });
+      res.json({ status: 'error', message: 'Xác thực thất bại' });
    }
 });
 
@@ -143,8 +143,8 @@ router.route('/createNewPassword').post((req, res) => {
          User.findOneAndUpdate({ _id }, { password: newPasswordHash })
             .then(() =>
                res.json({
-                  success: 'success',
-                  message: 'Thay đổi mật khẩu thành công',
+                  status: 'success',
+                  message: 'Thay đổi mật khẩu thành công, vui lòng đăng nhập lại',
                }),
             )
             .catch((err) => res.status(400).json({ error: err }));
@@ -168,7 +168,7 @@ router.route('/changePassword').post((req, res) => {
                            User.findOneAndUpdate({ _id }, { password: newPasswordHash })
                               .then(() =>
                                  res.json({
-                                    success: 'success',
+                                    status: 'success',
                                     message: 'Thay đổi mật khẩu thành công',
                                  }),
                               )
@@ -178,7 +178,7 @@ router.route('/changePassword').post((req, res) => {
                   } else {
                      ////////////////wrong old password//////////////////////////
                      res.json({
-                        success: 'error',
+                        status: 'error',
                         message: 'Mật khẩu cũ không chính xác',
                      });
                   }
