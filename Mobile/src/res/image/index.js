@@ -105,5 +105,10 @@ const Images = {
    ic_user_info: require('./img/icon/ic_user_info.png'),
    ic_watch: require('./img/icon/ic_watch.png'),
    ic_noimg: require('./img/icon/ic_noimg.png'),
+   ic_mail1: require('./img/icon/ic_mail1.png'),
+   ic_lock1: require('./img/icon/ic_lock1.png'),
+   ic_pin: require('./img/icon/ic_pin.png'),
+   ic_error: require('./img/icon/ic_error.png'),
+   ic_success: require('./img/icon/ic_success.png'),
 };
 export default Images;

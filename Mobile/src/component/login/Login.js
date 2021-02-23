@@ -183,7 +183,9 @@ export default class Login extends Component {
 
             {/* ////////////////////// */}
             <View style={styles.view}>
-               <TouchableOpacity style={styles.subView}>
+               <TouchableOpacity
+                  style={styles.subView}
+                  onPress={() => this.props.navigation.navigate('Forget')}>
                   <Text style={styles.txtsignup}>Quên mật khẩu</Text>
                </TouchableOpacity>
                <TouchableOpacity

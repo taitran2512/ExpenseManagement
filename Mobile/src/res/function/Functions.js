@@ -15,4 +15,8 @@ const emtyValue = (value) => {
       return false;
    }
 };
-export { formatMoney, convertDate, emtyValue };
+const validEmail = (email = '') => {
+   const valid = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+   return valid.test(email);
+};
+export { formatMoney, convertDate, emtyValue, validEmail };
