@@ -54,7 +54,7 @@ router.route('/signup').post((req, res) => {
                      .then(() => {
                         const dataUser = newUser.toObject();
                         delete dataUser.password;
-                        return res.json(ResultModel('success', 'Đăng kí thành công', dataUser));
+                        return res.json(ResultModel('success', 'Đăng kí thành công', null , dataUser));
                      })
                      .catch((err) => res.status(400).json({ error: err }));
                }
