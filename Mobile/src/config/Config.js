@@ -1,4 +1,4 @@
-const API_URL = 'http://192.168.1.5:4000/api';
+const API_URL = 'http://10.86.153.113:4000/api';
 
 const userData = {
    _id: '',
