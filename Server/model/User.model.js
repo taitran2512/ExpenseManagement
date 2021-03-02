@@ -11,12 +11,15 @@ const UserSchema = new Schema({
 	password: {
 		type: String,
 		require: true,
+		trim: true,
 	},
 	fullname: {
 		type: String,
+		trim: true,
 	},
 	dob: {
 		type: Date,
+		trim: true,
 	},
 	email: {
 		type: String,
@@ -25,6 +28,7 @@ const UserSchema = new Schema({
 	},
 	phone: {
 		type: String,
+		trim: true,
 	},
 	createDate: {
 		type: Date,

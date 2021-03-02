@@ -14,6 +14,9 @@ app.use("/api/user", UserController);
 //wallet
 const WalletController = require("./controller/WalletController");
 app.use("/api/wallet", WalletController);
+//history
+const HistoryController = require("./controller/HistoryController");
+app.use("/api/history", HistoryController);
 
 app.listen(PORT, function () {
 	console.log("Server is running on Port:", PORT);
