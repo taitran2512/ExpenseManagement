@@ -25,26 +25,32 @@ router.route("/create").post((req, res) => {
 	const newHistory = new History({ userId, walletId, code, type, money, note });
 	//type = expense || income
 	verifyToken(req, res, (decoded) => {
-		//type = expense sẽ trừ tiền trong ví
-		if (type === "expense") {
-			Wallet.findById(walletId)
-				.then(async (wallet) => {
-					const moneyAfterUpdate = wallet.walletMoney - money;
-					if (moneyAfterUpdate < 0) {
+		Wallet.findById(walletId)
+			.then(async (wallet) => {
+				//type = expense sẽ trừ tiền trong ví
+				if (type === "expense") {
+					const moneyAfterExpense = wallet.walletMoney - money;
+					if (moneyAfterExpense < 0) {
 						res.json(ResultModel("error", "Số tiền sử dụng không được nhiều hơn trong ví"));
 					} else {
-						Wallet.findByIdAndUpdate(walletId, { walletMoney: moneyAfterUpdate }, (waa) => {});
+						Wallet.findByIdAndUpdate(walletId, { walletMoney: moneyAfterExpense }, (find) => {});
 						newHistory
 							.save()
 							.then(() => res.json(ResultModel("success", "Thêm mới thành công", newHistory)))
 							.catch((err) => res.status(400).json({ error: err }));
 					}
-				})
-				.catch((err) => res.status(400).json({ error: err }));
-		}
-		//type = income sẽ cộng tiền trong ví
-		else {
-		}
+				}
+				//type = income sẽ cộng tiền trong ví
+				else {
+					const moneyAfterIncome = wallet.walletMoney + money;
+					Wallet.findByIdAndUpdate(walletId, { walletMoney: moneyAfterIncome }, (find) => {});
+					newHistory
+						.save()
+						.then(() => res.json(ResultModel("success", "Thêm mới thành công", newHistory)))
+						.catch((err) => res.status(400).json({ error: err }));
+				}
+			})
+			.catch((err) => res.status(400).json({ error: err }));
 	});
 });
 
@@ -60,4 +66,31 @@ router.route("/getHistory/:userId").get((req, res) => {
 			.catch((err) => res.status(400).json({ error: err }));
 	});
 });
+
+//lấy lịch sự expense theo userid
+router.route("/getHistoryExpense/:userId").get((req, res) => {
+	const userId = req.params.userId;
+	verifyToken(req, res, (decoded) => {
+		History.find({ userId, type: "expense" })
+			.sort({ _id: -1 })
+			.then((history) => {
+				res.json(ResultModel("success", "Lấy thông tin lịch sử chi tiêu thành công", history));
+			})
+			.catch((err) => res.status(400).json({ error: err }));
+	});
+});
+
+//lấy lịch sự income theo userid
+router.route("/getHistoryIncome/:userId").get((req, res) => {
+	const userId = req.params.userId;
+	verifyToken(req, res, (decoded) => {
+		History.find({ userId, type: "income" })
+			.sort({ _id: -1 })
+			.then((history) => {
+				res.json(ResultModel("success", "Lấy thông tin lịch sử thu nhập thành công", history));
+			})
+			.catch((err) => res.status(400).json({ error: err }));
+	});
+});
+
 module.exports = router;
