@@ -17,6 +17,9 @@ const ItemHistory = (props) => {
             <View style={styles.title}>
                <Text style={styles.date}>{props.date}</Text>
                <Text style={styles.txt}>{getType()?.title}</Text>
+               <Text numberOfLines={1} style={[styles.date, { width: '60%' }]}>
+                  {props.note}
+               </Text>
             </View>
          </View>
          <Text style={styles.txt}>
@@ -42,6 +45,7 @@ const styles = StyleSheet.create({
    type: {
       flexDirection: 'row',
       alignItems: 'center',
+      flex: 1,
    },
    icon: {
       width: 65,

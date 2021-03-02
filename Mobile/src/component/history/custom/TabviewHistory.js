@@ -12,22 +12,31 @@ export default function TabViewExample(props) {
    const [routes] = React.useState([
       { key: 'first', title: 'Chi tiêu' },
       { key: 'second', title: 'Thu nhập' },
-   ]);
+	]);
+	
+   const emtyView = (message) => (
+      <View style={styles.emtyView}>
+         <Text style={styles.txtEmty}>{message}</Text>
+      </View>
+	);
+	
    const loadingItem = () => {
       let listItem = [];
       for (var i = 0; i < 20; i++) {
          listItem.push(
-            <View style={{ height: 40, marginHorizontal: 16, marginTop: 16, borderRadius: 12 }} />,
+            <View key={i} style={{ height: 40, marginHorizontal: 16, marginTop: 16, borderRadius: 12 }} />,
          );
       }
       return <Skeleton>{listItem}</Skeleton>;
-   };
+	};
+	
    const Route1 = () => (
       <FlatList
+         contentContainerStyle={{ flexGrow: 1 }}
          data={props.expense.data}
          showsVerticalScrollIndicator={false}
          keyExtractor={(item, index) => String(index)}
-         ListEmptyComponent={props.expense.loading ? loadingItem() : null}
+         ListEmptyComponent={props.expense.loading ? loadingItem() : emtyView('Không có chi tiêu')}
          renderItem={({ item, index }) => (
             <ItemHistory
                index={index}
@@ -41,10 +50,11 @@ export default function TabViewExample(props) {
    );
    const Route2 = () => (
       <FlatList
+         contentContainerStyle={{ flexGrow: 1 }}
          data={props.income.data}
          showsVerticalScrollIndicator={false}
          keyExtractor={(item, index) => String(index)}
-         ListEmptyComponent={props.income.loading ? loadingItem() : null}
+         ListEmptyComponent={props.income.loading ? loadingItem() : emtyView('Không có thu nhập')}
          renderItem={({ item, index }) => (
             <ItemHistory
                index={index}
@@ -97,5 +107,18 @@ export default function TabViewExample(props) {
 const styles = StyleSheet.create({
    scene: {
       flex: 1,
+   },
+   emtyView: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+   },
+   txtEmty: {
+      fontSize: 18,
+      fontFamily: fonts.medium,
+      fontStyle: 'italic',
+      textAlign: 'center',
+      width: '85%',
+      color: colors.gray,
    },
 });

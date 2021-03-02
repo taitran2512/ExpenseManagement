@@ -40,7 +40,6 @@ const expenseType = [
    { code: 'tv', title: 'Tiền truyền hình', icon: Images.ic_tv },
    { code: 'house', title: 'Tiền nhà', icon: Images.ic_home },
    { code: 'party', title: 'Đám tiệc', icon: Images.ic_home },
-   { code: 'house', title: 'Tiền nhà', icon: Images.ic_home },
    { code: 'otherExpense', title: 'Khác', icon: Images.ic_other },
 ];
 

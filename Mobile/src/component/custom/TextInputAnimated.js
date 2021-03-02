@@ -10,10 +10,11 @@ import {
    Alert,
    Text,
 } from 'react-native';
-import DatePicker from 'react-native-datepicker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../../res/image/index';
 import { colors, fonts } from '../../res/style/theme';
+import { convertDate } from '../../res/function/Functions';
 
 const BASE_SIZE = 16; //text size and padding size
 const VIEW_HEIGHT = BASE_SIZE * 3.5; //chiều cao của view tổng
@@ -24,6 +25,8 @@ export default class TextInputAnimated extends Component {
          isFocused: false,
          hidePassword: true,
          labelHeight: 0,
+         showDatePicker: false,
+         date: new Date(),
       };
       this.textInput = React.createRef();
    }
@@ -120,6 +123,7 @@ export default class TextInputAnimated extends Component {
             onPress={() => {
                this.props.isPicker ? null : this.textInput.current.focus();
                this.props.onPress();
+               this.props.isDatePicker && this.setState({ showDatePicker: true });
             }}
             style={[
                styles.container,
@@ -201,27 +205,26 @@ export default class TextInputAnimated extends Component {
                      onFocus={this.handleFocus}
                      onBlur={this.handleBlur}
                      blurOnSubmit
+                     value={convertDate(this.props.value)}
                   />
                   <View style={{ position: 'absolute', right: BASE_SIZE }}>
                      <FontAwesome5Icon name="angle-down" size={18} color={colors.gray} />
                   </View>
-                  <DatePicker
-                     style={{ width: '100%' }}
-                     mode="date"
-                     showIcon={false}
-                     hideText
-                     format="DD/MM/YYYY"
-                     confirmBtnText="Confirm"
-                     cancelBtnText="Cancel"
-                     customStyles={{
-                        dateInput: { borderWidth: 0 },
-                        // dateText: { fontSize: 0 },
-                        // ... You can check the source to find the other keys.
-                     }}
-                     onDateChange={(date) => {
-                        this.props.onDateChange(date);
-                     }}
-                  />
+                  {this.state.showDatePicker && (
+                     <DateTimePicker
+                        {...this.props}
+                        mode={props.mode || 'date'}
+                        value={this.state.value || new Date()}
+                        is24Hour
+                        onChange={(event, selectedDate) => {
+                           console.log(selectedDate);
+                           this.setState(
+                              { showDatePicker: false, date: selectedDate?.toISOString() ?? '' },
+                              () => this.props.onChange(this.state.date),
+                           );
+                        }}
+                     />
+                  )}
                </>
             ) : (
                //text input nhập chữ bình thường////////////

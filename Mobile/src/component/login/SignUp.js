@@ -110,13 +110,12 @@ export default class SignUp extends Component {
          if (password !== confirmPassword) {
             Alert.alert('Lưu ý', 'Mật khẩu nhập lại không trùng khớp');
          } else {
-            var date = new Date(dob.split('/').reverse().join('/')).toISOString();
             this.props.signupAction({
                username,
                password,
                confirmPassword,
                fullname,
-               dob: date,
+               dob: dob,
                email,
                phone,
             });
@@ -156,7 +155,7 @@ export default class SignUp extends Component {
                   isDatePicker
                   style={styles.input}
                   value={String(this.state.dob)}
-                  onDateChange={this.onChangeDOB}
+                  onChange={this.onChangeDOB}
                />
 
                <TextInputAnimated

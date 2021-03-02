@@ -39,6 +39,7 @@ export default class Home extends Component {
          money={item.money}
          date={convertDate(item.date)}
          type={item.type}
+         note={item.note}
       />
    );
 
