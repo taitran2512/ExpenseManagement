@@ -1,5 +1,10 @@
 import { userData } from '../../../config/Config';
-import { LOGIN_ACTION, LOGIN_ACTION_SUCCESS, LOGIN_ACTION_ERROR } from '../../action/account/loginAction';
+import {
+   LOGIN_ACTION,
+   LOGIN_ACTION_SUCCESS,
+   LOGIN_ACTION_ERROR,
+   LOGOUT_ACTION,
+} from '../../action/account/loginAction';
 
 var initialState = {
    status: null,
@@ -10,6 +15,16 @@ var initialState = {
 };
 const loginReducer = (state = initialState, action) => {
    switch (action.type) {
+      case LOGOUT_ACTION:
+         userData._id = '';
+         userData.username = '';
+         userData.fullname = '';
+         userData.dob = '';
+         userData.email = '';
+         userData.phone = '';
+         userData.createDate = '';
+         userData.token = '';
+         return state;
       case LOGIN_ACTION:
          return {
             status: null,

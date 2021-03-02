@@ -47,7 +47,10 @@ export default class DrawerComponent extends Component {
                   <Pressable
                      android_ripple={{ color: colors.black_transparent }}
                      style={styles.itemMenu}
-                     onPress={() => this.props.navigation.replace('Login')}>
+                     onPress={() => {
+                        this.props.navigation.replace('Login');
+                        this.props.logoutAction();
+                     }}>
                      <Image style={styles.icon} source={Images.ic_exit} />
                      <Text style={styles.txtMenu}>Đăng xuất</Text>
                   </Pressable>

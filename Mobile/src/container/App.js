@@ -16,7 +16,7 @@ import HomeContainer from './home/HomeContainer';
 import ExpenseContainer from './home/ExpenseContainer';
 import IncomeContainer from './home/IncomeContainer';
 import StatisticContainer from './statistic/StatisticContainer';
-import DrawerComponent from '../component/drawer/DrawerComponent';
+import DrawerContainer from './drawer/DrawerContainer';
 import UserInfo from '../component/drawer/screen/UserInfo';
 ////////////////////////////////////////////////////////////
 //bottom-tab
@@ -53,7 +53,7 @@ const bottomTab = () => {
 const Drawer = createDrawerNavigator();
 const Drawers = () => {
    return (
-      <Drawer.Navigator drawerContent={(props) => <DrawerComponent {...props} />}>
+      <Drawer.Navigator drawerContent={(props) => <DrawerContainer {...props} />}>
          <Drawer.Screen name="Drawer" component={bottomTab} />
       </Drawer.Navigator>
    );
