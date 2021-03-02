@@ -15,11 +15,13 @@ const ItemHistory = (props) => {
          <View style={styles.type}>
             <Image source={getType()?.icon ?? Images.ic_noimg} style={styles.icon} />
             <View style={styles.title}>
-               <Text style={styles.date}>22/02/2021</Text>
+               <Text style={styles.date}>{props.date}</Text>
                <Text style={styles.txt}>{getType()?.title}</Text>
             </View>
          </View>
-         <Text style={styles.txt}>{formatMoney(props.money)}</Text>
+         <Text style={styles.txt}>
+            {props.type === 'expense' ? '-' : '+'} {formatMoney(props.money)}
+         </Text>
       </View>
    );
 };

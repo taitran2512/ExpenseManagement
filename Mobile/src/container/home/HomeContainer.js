@@ -5,6 +5,7 @@ import { createWalletAction } from '../../redux/action/home/createWalletAction';
 import { getWalletAction } from '../../redux/action/home/getWalletAction';
 import { deleteWalletAction } from '../../redux/action/home/deleteWalletAction';
 import { updateWalletAction } from '../../redux/action/home/updateWalletAction';
+import { getHistoryAction } from '../../redux/action/history/getHistoryAction';
 export class HomeContainer extends Component {
    render() {
       return <Home {...this.props} />;
@@ -44,6 +45,13 @@ const mapStateToProps = (state) => {
          message: state.updateWalletReducer.message,
          error: state.updateWalletReducer.error,
       },
+      history: {
+         status: state.getHistoryReducer.status,
+         data: state.getHistoryReducer.data,
+         loading: state.getHistoryReducer.loading,
+         message: state.getHistoryReducer.message,
+         error: state.getHistoryReducer.error,
+      },
    };
 };
 
@@ -54,6 +62,7 @@ const mapDispatchToProps = (dispatch) => {
       deleteWalletAction: (id) => dispatch(deleteWalletAction(id)),
       updateWalletAction: (_id, walletName, walletMoney) =>
          dispatch(updateWalletAction(_id, walletName, walletMoney)),
+      getHistoryAction: () => dispatch(getHistoryAction()),
    };
 };
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
-import { formatMoney } from '../../res/function/Functions';
+import { convertDate, formatMoney } from '../../res/function/Functions';
 import { colors, fonts, screenHeight, screenWidth } from '../../res/style/theme';
 import Header from '../custom/Header';
 import ItemCard from './custom/ItemCard';
@@ -40,6 +40,7 @@ export default class Home extends Component {
 
    componentDidMount() {
       this.props.getWalletAction();
+      this.props.getHistoryAction();
    }
 
    renderItemCard = ({ item, index }) => (
@@ -51,7 +52,15 @@ export default class Home extends Component {
          onDelete={() => this.onDeleteWallet(item._id)}
       />
    );
-   renderHistory = ({ item, index }) => <ItemHistory index={index} code={item.code} money={item.money} />;
+   renderHistory = ({ item, index }) => (
+      <ItemHistory
+         index={index}
+         code={item.code}
+         money={item.money}
+         date={convertDate(item.date)}
+         type={item.type}
+      />
+   );
 
    onEditWallet = (_id, cardName, money) => {
       this.props.updateWalletAction(_id, cardName, money);
@@ -149,7 +158,8 @@ export default class Home extends Component {
                visible={
                   this.props.createWallet.loading ||
                   this.props.getWallet.loading ||
-                  this.props.deleteWallet.loading
+                  this.props.deleteWallet.loading ||
+                  this.props.history.loading
                }
             />
             {/* ////////////////////////////////////// */}
@@ -181,7 +191,7 @@ export default class Home extends Component {
                   <Text style={styles.txtHistory}>Lịch sử</Text>
                   <FlatList
                      contentContainerStyle={{ paddingBottom: 70 }}
-                     data={history}
+                     data={this.props.history.data}
                      keyExtractor={(item, index) => String(index)}
                      renderItem={this.renderHistory}
                      showsVerticalScrollIndicator={false}

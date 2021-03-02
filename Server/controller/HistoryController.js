@@ -54,7 +54,7 @@ router.route("/create").post((req, res) => {
 	});
 });
 
-//lấy lịch sử xài tiền theo user id
+//lấy lịch sử theo user id
 router.route("/getHistory/:userId").get((req, res) => {
 	const userId = req.params.userId;
 	verifyToken(req, res, (decoded) => {

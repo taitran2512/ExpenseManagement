@@ -5,9 +5,10 @@ import createWalletReducer from './home/createWalletReducer';
 import getWalletReducer from './home/getWalletReducer';
 import deleteWalletReducer from './home/deleteWalletReducer';
 import updateWalletReducer from './home/updateWalletReducer';
-import sendOTPReducer from './account/forget/sendOTPReducer'
+import sendOTPReducer from './account/forget/sendOTPReducer';
 import verifyOTPReducer from './account/forget/verifyOTPReducer';
 import createNewPassReducer from './account/forget/createNewPassReducer';
+import getHistoryReducer from './history/getHistoryReducer';
 
 const allReducers = combineReducers({
    loginReducer,
@@ -19,6 +20,7 @@ const allReducers = combineReducers({
    sendOTPReducer,
    verifyOTPReducer,
    createNewPassReducer,
+   getHistoryReducer,
 });
 
 export default allReducers;

@@ -4,6 +4,7 @@ import { watchSendOTPSaga } from './account/forget/sendOTPSaga';
 import { watchVerifyOTPSaga } from './account/forget/verifyOTPSaga';
 import { watchLoginSaga } from './account/loginSaga';
 import { watchSignupSaga } from './account/signupSaga';
+import { watchGetHistorySaga } from './history/getHistorySaga';
 import { watchCreateWalletSaga } from './home/createWalletSaga';
 import { watchDeleteWalletSaga } from './home/deleteWalletSaga';
 import { watchGetWalletSaga } from './home/getWalletSaga';
@@ -20,5 +21,6 @@ export default function* rootSaga() {
       watchSendOTPSaga(),
       watchVerifyOTPSaga(),
       watchCreateNewPassSaga(),
+      watchGetHistorySaga(),
    ]);
 }
