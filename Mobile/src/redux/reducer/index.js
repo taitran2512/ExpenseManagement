@@ -9,7 +9,8 @@ import sendOTPReducer from './account/forget/sendOTPReducer';
 import verifyOTPReducer from './account/forget/verifyOTPReducer';
 import createNewPassReducer from './account/forget/createNewPassReducer';
 import getHistoryReducer from './history/getHistoryReducer';
-
+import getExpenseReducer from './history/getExpenseReducer';
+import getIncomeReducer from './history/getIncomeReducer';
 const allReducers = combineReducers({
    loginReducer,
    signupReducer,
@@ -21,6 +22,8 @@ const allReducers = combineReducers({
    verifyOTPReducer,
    createNewPassReducer,
    getHistoryReducer,
+   getExpenseReducer,
+   getIncomeReducer,
 });
 
 export default allReducers;

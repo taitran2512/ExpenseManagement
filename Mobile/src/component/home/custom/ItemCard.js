@@ -55,16 +55,16 @@ const styles = StyleSheet.create({
       padding: 16,
    },
    title: {
-      fontSize: 14,
+      fontSize: 16,
       color: colors.white,
-      opacity: 0.7,
+      opacity: 0.8,
       width: '80%',
       fontFamily: fonts.medium,
    },
    money: {
       fontSize: 24,
       color: colors.white,
-      marginTop: 8,
+      marginTop: 12,
       fontFamily: fonts.semibold,
    },
    edit: {

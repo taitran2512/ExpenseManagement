@@ -18,6 +18,7 @@ import IncomeContainer from './home/IncomeContainer';
 import StatisticContainer from './statistic/StatisticContainer';
 import DrawerContainer from './drawer/DrawerContainer';
 import UserInfo from '../component/drawer/screen/UserInfo';
+import DetailHistoryContainer from './history/DetailHistoryContainer';
 ////////////////////////////////////////////////////////////
 //bottom-tab
 const Tab = createMaterialBottomTabNavigator();
@@ -29,13 +30,14 @@ const bottomTab = () => {
          inactiveColor={colors.black1}
          shifting={true}
          barStyle={{ backgroundColor: colors.red1, height: 48, justifyContent: 'center' }}
+         iconStyle={{ width: 48, height: 48 }}
          backBehavior="initialRoute">
          <Tab.Screen
             name="Home"
             component={HomeContainer}
             options={{
                tabBarLabel: 'Trang chủ',
-               tabBarIcon: ({ color }) => <Icon name="home" color={color} size={26} />,
+               tabBarIcon: ({ color }) => <Icon name="home" color={color} size={24} />,
             }}
          />
          <Tab.Screen
@@ -43,7 +45,15 @@ const bottomTab = () => {
             component={StatisticContainer}
             options={{
                tabBarLabel: 'Thống kê',
-               tabBarIcon: ({ color }) => <Icon name="chart-bar" color={color} size={26} />,
+               tabBarIcon: ({ color }) => <Icon name="chart-bar" color={color} size={24} />,
+            }}
+         />
+         <Tab.Screen
+            name="Statistics"
+            component={StatisticContainer}
+            options={{
+               tabBarLabel: 'Thống kê',
+               tabBarIcon: ({ color }) => <Icon name="chart-bar" color={color} size={24} />,
             }}
          />
       </Tab.Navigator>
@@ -75,6 +85,7 @@ const App = () => {
             <Stack.Screen name="Expense" component={ExpenseContainer} />
             <Stack.Screen name="Income" component={IncomeContainer} />
             <Stack.Screen name="UserInfo" component={UserInfo} />
+            <Stack.Screen name="DetailHistory" component={DetailHistoryContainer} />
          </Stack.Navigator>
       </NavigationContainer>
    );

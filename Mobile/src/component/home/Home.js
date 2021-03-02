@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Alert, TouchableOpacity } from 'react-native';
 import { convertDate, formatMoney } from '../../res/function/Functions';
 import { colors, fonts, screenHeight, screenWidth } from '../../res/style/theme';
 import Header from '../custom/Header';
@@ -8,26 +8,6 @@ import ActionButton from './custom/ActionButton';
 import ItemHistory from './custom/ItemHistory';
 import WalletModal from './custom/WalletModal';
 import LoadingView from '../custom/LoadingView';
-const history = [
-   { code: 'clothes', money: 300000 },
-   { code: 'fruit', money: 78423 },
-   { code: 'phoneFix', money: 123456 },
-   { code: 'bus', money: 300000 },
-   { code: 'buyVehicle', money: 300000 },
-   { code: 'shopping', money: 7894123 },
-   { code: 'health', money: 789.789 },
-   { code: 'travel', money: 123456 },
-   { code: 'beer', money: 300000 },
-   { code: 'book', money: 300000 },
-   { code: 'snacks', money: 45612345 },
-   { code: 'phoneBuy', money: 300000 },
-   { code: 'phoneFee', money: 2321456 },
-   { code: 'sale', money: 3000500 },
-   { code: 'lease', money: 3006000 },
-   { code: 'bingo', money: 3000600 },
-   { code: 'return', money: 3007000 },
-   { code: 'otherIncome', money: 3000010 },
-];
 
 export default class Home extends Component {
    constructor(props) {
@@ -188,7 +168,14 @@ export default class Home extends Component {
                         ListEmptyComponent={this.emtyCardView()}
                      />
                   </View>
-                  <Text style={styles.txtHistory}>Lịch sử</Text>
+                  {/* ////////////history///////////////// */}
+                  <View style={styles.viewHistory}>
+                     <Text style={styles.txtHistory}>Lịch sử</Text>
+                     <TouchableOpacity onPress={() => this.props.navigation.navigate('DetailHistory')}>
+                        <Text style={styles.txtDetail}>Xem chi tiết</Text>
+                     </TouchableOpacity>
+                  </View>
+                  {/* ////////////history list ///////////////// */}
                   <FlatList
                      contentContainerStyle={{ paddingBottom: 70 }}
                      data={this.props.history.data}
@@ -239,7 +226,17 @@ const styles = StyleSheet.create({
    txtHistory: {
       fontSize: 20,
       fontFamily: fonts.bold,
+   },
+   txtDetail: {
+      fontSize: 16,
+      fontFamily: fonts.bold,
+      color: colors.green,
+   },
+   viewHistory: {
       paddingVertical: 10,
       paddingHorizontal: 16,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
    },
 });
