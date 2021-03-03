@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Alert, TouchableOpacity } from 'react-native';
-import { convertDate, formatMoney } from '../../res/function/Functions';
+import { convertDate, emtyValue, formatMoney } from '../../res/function/Functions';
 import { colors, fonts, screenHeight, screenWidth } from '../../res/style/theme';
 import Header from '../custom/Header';
 import ItemCard from './custom/ItemCard';
@@ -56,7 +56,9 @@ export default class Home extends Component {
    loadingHistory = () => {
       let list = [];
       for (var i = 0; i < 10; i++) {
-         list.push(<View style={{ marginHorizontal: 16, marginTop: 16, height: 44, borderRadius: 10 }} />);
+         list.push(
+            <View key={i} style={{ marginHorizontal: 16, marginTop: 16, height: 44, borderRadius: 10 }} />,
+         );
       }
       return <Skeleton>{list}</Skeleton>;
    };
@@ -84,7 +86,7 @@ export default class Home extends Component {
    );
    //
    useMoney = (screen) => {
-      if (this.props.getWallet.data.length > 0) {
+      if (!emtyValue(this.props.getWallet.data)) {
          this.props.navigation.navigate(screen);
       } else {
          Alert.alert('Lưu ý', 'Hãy tạo mới ví tiền trước');
@@ -129,7 +131,9 @@ export default class Home extends Component {
             for (let wallet of this.props.getWallet.data) {
                totalMoney += wallet.walletMoney;
             }
-            this.setState({ totalMoney });
+            this.setState({ totalMoney: totalMoney });
+         } else {
+            this.setState({ totalMoney: 0 });
          }
       }
    };
