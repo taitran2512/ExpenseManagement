@@ -57,7 +57,7 @@ export default class TextInputAnimated extends Component {
          autoCorrect={false}
          autoCompleteType="off"
          editable={!this.props.disabled}
-         style={[styles.textInput, this.props.disabled && { color: colors.gray }]}
+         style={[styles.textInput, this.props.inputStyle, this.props.disabled && { color: colors.gray }]}
          style={styles.textInput}
          onFocus={this.handleFocus}
          onBlur={this.handleBlur}
@@ -205,7 +205,7 @@ export default class TextInputAnimated extends Component {
                      onFocus={this.handleFocus}
                      onBlur={this.handleBlur}
                      blurOnSubmit
-                     value={convertDate(this.props.value)}
+                     value={props.mode === 'time' ? this.props.value : convertDate(this.props.value)}
                   />
                   <View style={{ position: 'absolute', right: BASE_SIZE }}>
                      <FontAwesome5Icon name="angle-down" size={18} color={colors.gray} />
@@ -214,10 +214,9 @@ export default class TextInputAnimated extends Component {
                      <DateTimePicker
                         {...this.props}
                         mode={props.mode || 'date'}
-                        value={this.state.value || new Date()}
+                        value={new Date()}
                         is24Hour
                         onChange={(event, selectedDate) => {
-                           console.log(selectedDate);
                            this.setState(
                               { showDatePicker: false, date: selectedDate?.toISOString() ?? '' },
                               () => this.props.onChange(this.state.date),

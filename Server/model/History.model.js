@@ -29,6 +29,9 @@ const HistorySchema = new Schema({
 		type: Date,
 		default: Date.now,
 	},
+	time: {
+		type: String,
+	},
 });
 
 const HistoryModel = mongoose.model("histories", HistorySchema);

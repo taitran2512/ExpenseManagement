@@ -11,6 +11,7 @@ import createNewPassReducer from './account/forget/createNewPassReducer';
 import getHistoryReducer from './history/getHistoryReducer';
 import getExpenseReducer from './history/getExpenseReducer';
 import getIncomeReducer from './history/getIncomeReducer';
+import postHistoryReducer from './history/postHistoryReducer';
 const allReducers = combineReducers({
    loginReducer,
    signupReducer,
@@ -24,6 +25,7 @@ const allReducers = combineReducers({
    getHistoryReducer,
    getExpenseReducer,
    getIncomeReducer,
+   postHistoryReducer,
 });
 
 export default allReducers;

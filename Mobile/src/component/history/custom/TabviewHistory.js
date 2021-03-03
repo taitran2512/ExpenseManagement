@@ -12,14 +12,14 @@ export default function TabViewExample(props) {
    const [routes] = React.useState([
       { key: 'first', title: 'Chi tiêu' },
       { key: 'second', title: 'Thu nhập' },
-	]);
-	
+   ]);
+
    const emtyView = (message) => (
       <View style={styles.emtyView}>
          <Text style={styles.txtEmty}>{message}</Text>
       </View>
-	);
-	
+   );
+
    const loadingItem = () => {
       let listItem = [];
       for (var i = 0; i < 20; i++) {
@@ -28,8 +28,8 @@ export default function TabViewExample(props) {
          );
       }
       return <Skeleton>{listItem}</Skeleton>;
-	};
-	
+   };
+
    const Route1 = () => (
       <FlatList
          contentContainerStyle={{ flexGrow: 1 }}
@@ -44,6 +44,7 @@ export default function TabViewExample(props) {
                money={item.money}
                date={convertDate(item.date)}
                type={item.type}
+               time={item.time}
             />
          )}
       />
@@ -62,6 +63,7 @@ export default function TabViewExample(props) {
                money={item.money}
                date={convertDate(item.date)}
                type={item.type}
+               time={item.time}
             />
          )}
       />

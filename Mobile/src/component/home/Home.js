@@ -38,6 +38,7 @@ export default class Home extends Component {
          code={item.code}
          money={item.money}
          date={convertDate(item.date)}
+         time={item.time}
          type={item.type}
          note={item.note}
       />
@@ -65,6 +66,14 @@ export default class Home extends Component {
          </Text>
       </View>
    );
+   //
+   useMoney = (screen) => {
+      if (this.props.getWallet.data.length > 0) {
+         this.props.navigation.navigate(screen);
+      } else {
+         Alert.alert('Lưu ý', 'Hãy tạo mới ví tiền trước');
+      }
+   };
    //tạo mới ví tiền
    createWallet = (prevProps) => {
       if (
@@ -195,8 +204,8 @@ export default class Home extends Component {
             />
             <ActionButton
                onPressAddWallet={() => this.walletModal.current.open()}
-               onPressExpense={() => this.props.navigation.navigate('Expense')}
-               onPressIncome={() => this.props.navigation.navigate('Income')}
+               onPressExpense={() => this.useMoney('Expense')}
+               onPressIncome={() => this.useMoney('Income')}
             />
          </View>
       );

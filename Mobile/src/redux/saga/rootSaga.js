@@ -7,6 +7,7 @@ import { watchSignupSaga } from './account/signupSaga';
 import { watchGetHistoryExpenseSaga } from './history/getHistoryExpenseSaga';
 import { watchGetHistoryIncomeSaga } from './history/getHistoryIncomeSaga';
 import { watchGetHistorySaga } from './history/getHistorySaga';
+import { watchPostHistorySaga } from './history/postHistorySaga';
 import { watchCreateWalletSaga } from './home/createWalletSaga';
 import { watchDeleteWalletSaga } from './home/deleteWalletSaga';
 import { watchGetWalletSaga } from './home/getWalletSaga';
@@ -26,5 +27,6 @@ export default function* rootSaga() {
       watchGetHistorySaga(),
       watchGetHistoryExpenseSaga(),
       watchGetHistoryIncomeSaga(),
+      watchPostHistorySaga(),
    ]);
 }

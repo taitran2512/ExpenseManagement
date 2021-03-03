@@ -21,8 +21,8 @@ router.route("/").get((req, res) => {
 
 //thêm mới chi tiêu / thu nhập
 router.route("/create").post((req, res) => {
-	const { userId, walletId, code, type, money, note } = req.body;
-	const newHistory = new History({ userId, walletId, code, type, money, note });
+	const { userId, walletId, code, type, money, note, date, time } = req.body;
+	const newHistory = new History({ userId, walletId, code, type, money, note, date, time });
 	//type = expense || income
 	verifyToken(req, res, (decoded) => {
 		Wallet.findById(walletId)

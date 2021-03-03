@@ -15,7 +15,10 @@ const ItemHistory = (props) => {
          <View style={styles.type}>
             <Image source={getType()?.icon ?? Images.ic_noimg} style={styles.icon} />
             <View style={styles.title}>
-               <Text style={styles.date}>{props.date}</Text>
+               <Text style={styles.date}>
+                  {`${props.date}`}
+                  {props.time ? ` - ${props.time}` : null}
+               </Text>
                <Text style={styles.txt}>{getType()?.title}</Text>
                <Text numberOfLines={1} style={[styles.date, { width: '60%' }]}>
                   {props.note}
