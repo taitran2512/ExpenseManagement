@@ -8,7 +8,7 @@ import ActionButton from './custom/ActionButton';
 import ItemHistory from './custom/ItemHistory';
 import WalletModal from './custom/WalletModal';
 import LoadingView from '../custom/LoadingView';
-
+import Skeleton from '../custom/Skeleton';
 export default class Home extends Component {
    constructor(props) {
       super(props);
@@ -19,8 +19,13 @@ export default class Home extends Component {
    }
 
    componentDidMount() {
-      this.props.getWalletAction();
-      this.props.getHistoryAction();
+      this.props.navigation.addListener('focus', () => {
+         this.props.getWalletAction();
+         this.props.getHistoryAction();
+      });
+   }
+   componentWillUnmount() {
+      this.props.navigation.removeListener('focus');
    }
 
    renderItemCard = ({ item, index }) => (
@@ -31,6 +36,11 @@ export default class Home extends Component {
          onSubmit={(cardName, money) => this.onEditWallet(item._id, cardName, money)}
          onDelete={() => this.onDeleteWallet(item._id)}
       />
+   );
+   loadingCard = () => (
+      <Skeleton>
+         <View style={{ width: screenWidth * 0.6, height: screenWidth * 0.6 * 0.585, borderRadius: 16 }} />
+      </Skeleton>
    );
    renderHistory = ({ item, index }) => (
       <ItemHistory
@@ -43,7 +53,13 @@ export default class Home extends Component {
          note={item.note}
       />
    );
-
+   loadingHistory = () => {
+      let list = [];
+      for (var i = 0; i < 10; i++) {
+         list.push(<View style={{ marginHorizontal: 16, marginTop: 16, height: 44, borderRadius: 10 }} />);
+      }
+      return <Skeleton>{list}</Skeleton>;
+   };
    onEditWallet = (_id, cardName, money) => {
       this.props.updateWalletAction(_id, cardName, money);
    };
@@ -144,14 +160,14 @@ export default class Home extends Component {
       return (
          <View style={styles.container}>
             <Header isShowMenu onPressMenu={() => this.props.navigation.openDrawer()} title="Trang chủ" />
-            <LoadingView
+            {/* <LoadingView
                visible={
                   this.props.createWallet.loading ||
                   this.props.getWallet.loading ||
                   this.props.deleteWallet.loading ||
                   this.props.history.loading
                }
-            />
+            /> */}
             {/* ////////////////////////////////////// */}
             <View style={styles.header}>
                <Text style={[styles.txtWallet, { fontSize: 30 }]}>Tổng số tiền</Text>
@@ -175,7 +191,9 @@ export default class Home extends Component {
                         showsHorizontalScrollIndicator={false}
                         horizontal
                         renderItem={this.renderItemCard}
-                        ListEmptyComponent={this.emtyCardView()}
+                        ListEmptyComponent={
+                           this.props.getWallet.loading ? this.loadingCard() : this.emtyCardView()
+                        }
                      />
                   </View>
                   {/* ////////////history///////////////// */}
@@ -192,6 +210,7 @@ export default class Home extends Component {
                      keyExtractor={(item, index) => String(index)}
                      renderItem={this.renderHistory}
                      showsVerticalScrollIndicator={false}
+                     ListEmptyComponent={this.props.history.loading ? this.loadingHistory() : null}
                   />
                </View>
             </View>

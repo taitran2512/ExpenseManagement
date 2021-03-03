@@ -23,12 +23,12 @@ export default class Expense extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         money: '100000000',
+         money: '',
          date: new Date().toISOString(),
          time: `${new Date().getHours() < 10 ? '0' + new Date().getHours() : new Date().getHours()}:${
             new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()
          }`,
-         note: 'Vợ lấy',
+         note: '',
          wallet: '',
          selectedOption: '',
       };
