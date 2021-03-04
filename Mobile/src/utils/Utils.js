@@ -1,7 +1,7 @@
 import Images from '../res/image';
 
 const expenseType = [
-   { code: 'eating', title: 'Ăn sáng/ trưa/ chiều', icon: Images.ic_food },
+   { code: 'eating', title: 'Ăn uống', icon: Images.ic_food },
    { code: 'snacks', title: 'Ăn vặt', icon: Images.ic_food1 },
    { code: 'clothes', title: 'Quần áo', icon: Images.ic_clothes },
    { code: 'fruit', title: 'Trái cây', icon: Images.ic_fruit },

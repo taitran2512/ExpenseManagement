@@ -19,6 +19,7 @@ import StatisticContainer from './statistic/StatisticContainer';
 import DrawerContainer from './drawer/DrawerContainer';
 import UserInfo from '../component/drawer/screen/UserInfo';
 import DetailHistoryContainer from './history/DetailHistoryContainer';
+import HistoryContainer from './history/HistoryContainer';
 ////////////////////////////////////////////////////////////
 //bottom-tab
 const Tab = createMaterialBottomTabNavigator();
@@ -41,11 +42,11 @@ const bottomTab = () => {
             }}
          />
          <Tab.Screen
-            name="Statistic"
-            component={StatisticContainer}
+            name="History"
+            component={HistoryContainer}
             options={{
-               tabBarLabel: 'Thống kê',
-               tabBarIcon: ({ color }) => <Icon name="chart-bar" color={color} size={24} />,
+               tabBarLabel: 'Lịch sử',
+               tabBarIcon: ({ color }) => <Icon name="history" color={color} size={24} />,
             }}
          />
          <Tab.Screen

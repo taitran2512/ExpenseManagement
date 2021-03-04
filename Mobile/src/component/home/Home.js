@@ -204,7 +204,7 @@ export default class Home extends Component {
                   </View>
                   {/* ////////////history///////////////// */}
                   <View style={styles.viewHistory}>
-                     <Text style={styles.txtHistory}>Lịch sử</Text>
+                     <Text style={styles.txtHistory}>Gần đây</Text>
                      <TouchableOpacity onPress={() => this.props.navigation.navigate('DetailHistory')}>
                         <Text style={styles.txtDetail}>Xem chi tiết</Text>
                      </TouchableOpacity>

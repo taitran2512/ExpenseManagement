@@ -9,9 +9,6 @@ export default class Statistic extends Component {
       return (
          <View style={styles.container}>
             <Header isShowMenu onPressMenu={() => this.props.navigation.openDrawer()} title="Thống kê" />
-            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-               <Agenda />
-            </ScrollView>
          </View>
       );
    }
