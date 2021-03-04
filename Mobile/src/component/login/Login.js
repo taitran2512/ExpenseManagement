@@ -16,7 +16,7 @@ import StatusBarView from '../custom/StatusBarView';
 import TextInputAnimated from '../custom/TextInputAnimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingView from '../custom/LoadingView';
-const logoSize = screenWidth * 0.5;
+const logoSize = screenWidth * 0.7;
 const duration = 350;
 export default class Login extends Component {
    constructor(props) {
@@ -26,7 +26,7 @@ export default class Login extends Component {
          password: '',
          saveLogin: false,
       };
-      this.zoomLogo = new Animated.Value(logoSize);
+      this.zoomLogo = new Animated.Value(0);
       this.keyboardDidShow = this.keyboardDidShow.bind(this);
       this.keyboardDidHide = this.keyboardDidHide.bind(this);
    }
@@ -58,7 +58,7 @@ export default class Login extends Component {
    //thu nho logo
    zoomOutLogo = () => {
       Animated.timing(this.zoomLogo, {
-         toValue: logoSize / 2,
+         toValue: 1,
          duration: duration,
          useNativeDriver: false,
       }).start();
@@ -67,7 +67,7 @@ export default class Login extends Component {
    //phong to logo
    zoomInLogo = () => {
       Animated.timing(this.zoomLogo, {
-         toValue: logoSize,
+         toValue: 0,
          duration: duration,
          useNativeDriver: false,
       }).start();
@@ -139,6 +139,14 @@ export default class Login extends Component {
       }
    }
    render() {
+      const logoWidth = this.zoomLogo.interpolate({
+         inputRange: [0, 1],
+         outputRange: [logoSize, logoSize / 2],
+      });
+      const logoHeight = this.zoomLogo.interpolate({
+         inputRange: [0, 1],
+         outputRange: [logoSize * 0.65, (logoSize * 0.65) / 2],
+      });
       return (
          <ScrollView
             showsVerticalScrollIndicator={false}
@@ -149,7 +157,7 @@ export default class Login extends Component {
             {/* /////////logo////////// */}
             <Animated.Image
                source={Images.wallet}
-               style={[styles.logo, { height: this.zoomLogo, width: this.zoomLogo }]}
+               style={[styles.logo, { height: logoHeight, width: logoWidth }]}
             />
             {/* /////////////////////////// */}
             <Text style={styles.login}>Expense Management</Text>
