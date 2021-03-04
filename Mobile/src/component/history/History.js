@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { Alert, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import { convertDate } from '../../res/function/Functions';
-import { colors } from '../../res/style/theme';
 import Header from '../custom/Header';
-import LoadingView from '../custom/LoadingView';
 import ItemHistory from '../home/custom/ItemHistory';
 export default class History extends Component {
    constructor(props) {
