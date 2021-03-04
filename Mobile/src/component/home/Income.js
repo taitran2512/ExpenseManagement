@@ -118,7 +118,15 @@ export default class Expense extends Component {
                Alert.alert(
                   'Thông báo',
                   this.props.message,
-                  [{ text: 'OK', onPress: () => this.props.navigation.goBack() }],
+                  [
+                     {
+                        text: 'OK',
+                        onPress: () => {
+                           this.props.navigation.goBack();
+                           this.props.route.params.getData();
+                        },
+                     },
+                  ],
                   { cancelable: false },
                );
             }, 10);

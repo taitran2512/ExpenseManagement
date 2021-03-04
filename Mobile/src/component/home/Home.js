@@ -19,15 +19,24 @@ export default class Home extends Component {
    }
 
    componentDidMount() {
-      this.props.navigation.addListener('focus', () => {
-         this.props.getWalletAction();
-         this.props.getHistoryAction();
-      });
+      // this.props.navigation.addListener('focus', () => {
+      // this.props.getWalletAction();
+      // this.props.getHistoryAction();
+      // });
+      this.getData();
    }
-   componentWillUnmount() {
-      this.props.navigation.removeListener('focus');
-   }
-
+   getData = () => {
+      this.props.getWalletAction();
+      this.props.getHistoryAction();
+   };
+   //
+   useMoney = (screen) => {
+      if (!emtyValue(this.props.getWallet.data)) {
+         this.props.navigation.navigate(screen, { getData: this.getData });
+      } else {
+         Alert.alert('Lưu ý', 'Hãy tạo mới ví tiền trước');
+      }
+   };
    renderItemCard = ({ item, index }) => (
       <ItemCard
          index={index}
@@ -84,14 +93,7 @@ export default class Home extends Component {
          </Text>
       </View>
    );
-   //
-   useMoney = (screen) => {
-      if (!emtyValue(this.props.getWallet.data)) {
-         this.props.navigation.navigate(screen);
-      } else {
-         Alert.alert('Lưu ý', 'Hãy tạo mới ví tiền trước');
-      }
-   };
+
    //tạo mới ví tiền
    createWallet = (prevProps) => {
       if (
