@@ -8,7 +8,7 @@ export default class SendEmail extends React.PureComponent {
    constructor(props) {
       super(props);
       this.state = {
-         email: 'trantantai25121998@gmail.com',
+         email: '',
       };
       this.getEmail = this.getEmail.bind(this);
    }

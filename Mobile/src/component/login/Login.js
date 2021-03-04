@@ -180,9 +180,13 @@ export default class Login extends Component {
             <TouchableOpacity style={styles.btnLogin} onPress={this.onPressLogin}>
                <Text style={styles.txtBtnLogin}>Đăng nhập</Text>
             </TouchableOpacity>
-
+            <TouchableOpacity
+               style={[styles.btnLogin, { backgroundColor: colors.green1 }]}
+               onPress={() => this.props.navigation.navigate('SignUp')}>
+               <Text style={styles.txtBtnLogin}>Đăng ký</Text>
+            </TouchableOpacity>
             {/* ////////////////////// */}
-            <View style={styles.view}>
+            {/* <View style={styles.view}>
                <TouchableOpacity
                   style={styles.subView}
                   onPress={() => this.props.navigation.navigate('Forget')}>
@@ -193,7 +197,7 @@ export default class Login extends Component {
                   onPress={() => this.props.navigation.navigate('SignUp')}>
                   <Text style={styles.txtsignup}>Đăng ký</Text>
                </TouchableOpacity>
-            </View>
+            </View> */}
          </ScrollView>
       );
    }

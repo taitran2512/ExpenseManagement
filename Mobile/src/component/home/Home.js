@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Alert, TouchableOpacity, BackHandler } from 'react-native';
 import { convertDate, emtyValue, formatMoney } from '../../res/function/Functions';
 import { colors, fonts, screenHeight, screenWidth } from '../../res/style/theme';
 import Header from '../custom/Header';
@@ -16,15 +16,32 @@ export default class Home extends Component {
          totalMoney: 0,
       };
       this.walletModal = React.createRef();
+      this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+   }
+   handleBackButtonClick() {
+      if (!this.props.navigation.isFocused()) {
+         this.props.navigation.goBack(null);
+      } else {
+         Alert.alert('Thông báo', 'Bạn có muốn thoát khỏi ứng dụng?', [
+            {
+               text: 'Cacel',
+               style: 'cancel',
+            },
+            { text: 'ok', onPress: () => BackHandler.exitApp() },
+         ]);
+      }
+      return true;
+   }
+   componentDidMount() {
+      this.getData();
+
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
    }
 
-   componentDidMount() {
-      // this.props.navigation.addListener('focus', () => {
-      // this.props.getWalletAction();
-      // this.props.getHistoryAction();
-      // });
-      this.getData();
+   componentWillUnmount() {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
    }
+
    getData = () => {
       this.props.getWalletAction();
       this.props.getHistoryAction();
@@ -48,7 +65,7 @@ export default class Home extends Component {
    );
    loadingCard = () => (
       <Skeleton>
-         <View style={{ width: screenWidth * 0.6, height: screenWidth * 0.6 * 0.585, borderRadius: 16 }} />
+         <View style={{ width: screenWidth * 0.6, height: screenWidth * 0.6 * 0.585, borderRadius: 30 }} />
       </Skeleton>
    );
    renderHistory = ({ item, index }) => (
