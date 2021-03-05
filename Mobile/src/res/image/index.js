@@ -110,5 +110,6 @@ const Images = {
    ic_pin: require('./img/icon/ic_pin.png'),
    ic_error: require('./img/icon/ic_error.png'),
    ic_success: require('./img/icon/ic_success.png'),
+   ic_changepassword: require('./img/icon/changepassword.png'),
 };
 export default Images;

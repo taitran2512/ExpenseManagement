@@ -20,6 +20,7 @@ import DrawerContainer from './drawer/DrawerContainer';
 import UserInfo from '../component/drawer/screen/UserInfo';
 import DetailHistoryContainer from './history/DetailHistoryContainer';
 import HistoryContainer from './history/HistoryContainer';
+import ChangePasswordContainer from './drawer/screen/ChangePasswordContainer';
 ////////////////////////////////////////////////////////////
 //bottom-tab
 const Tab = createMaterialBottomTabNavigator();
@@ -86,6 +87,7 @@ const App = () => {
             <Stack.Screen name="Expense" component={ExpenseContainer} />
             <Stack.Screen name="Income" component={IncomeContainer} />
             <Stack.Screen name="UserInfo" component={UserInfo} />
+            <Stack.Screen name="ChangePassword" component={ChangePasswordContainer} />
             <Stack.Screen name="DetailHistory" component={DetailHistoryContainer} />
          </Stack.Navigator>
       </NavigationContainer>
