@@ -191,13 +191,13 @@ export default class Home extends Component {
                }
             /> */}
             {/* ////////////////////////////////////// */}
-            <View style={styles.header}>
+            <View style={[styles.header, { backgroundColor: colors.app }]}>
                <Text style={[styles.txtWallet, { fontSize: 30 }]}>Tổng số tiền</Text>
                <Text style={styles.txtWallet}>{formatMoney(this.state.totalMoney)} đ</Text>
             </View>
             {/* ////////////footer///////////////// */}
             <View style={{ flex: 1 }}>
-               <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: colors.blue }} />
+               <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: colors.app }} />
                <View style={styles.footer}>
                   <View
                      style={
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
    },
    header: {
       height: screenHeight * 0.15,
-      backgroundColor: colors.blue,
+      backgroundColor: colors.app,
       borderBottomRightRadius: 75,
       alignItems: 'center',
       justifyContent: 'center',

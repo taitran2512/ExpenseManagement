@@ -25,7 +25,7 @@ const Header = (props) => {
    return (
       <View>
          <StatusBarView />
-         <View style={styles.container}>
+         <View style={[styles.container, { backgroundColor: colors.app }]}>
             {props.isShowMenu ? iconMenu() : null}
             {props.isShowBack ? iconBack() : null}
             <Text style={styles.title}>{props.title}</Text>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: colors.blue,
+
       // borderColor: colors.gray,
       // borderBottomWidth: 1,
    },

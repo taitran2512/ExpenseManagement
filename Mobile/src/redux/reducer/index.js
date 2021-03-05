@@ -12,6 +12,7 @@ import getHistoryReducer from './history/getHistoryReducer';
 import getExpenseReducer from './history/getExpenseReducer';
 import getIncomeReducer from './history/getIncomeReducer';
 import postHistoryReducer from './history/postHistoryReducer';
+import setColorReducer from './drawer/setColorReducer';
 const allReducers = combineReducers({
    loginReducer,
    signupReducer,
@@ -26,6 +27,7 @@ const allReducers = combineReducers({
    getExpenseReducer,
    getIncomeReducer,
    postHistoryReducer,
+   setColorReducer,
 });
 
 export default allReducers;

@@ -181,11 +181,13 @@ export default class Login extends Component {
                <FontAwesome5Icon
                   name={this.state.saveLogin ? 'check-circle' : 'circle'}
                   size={16}
-                  color={colors.blue}
+                  color={colors.app}
                />
-               <Text style={styles.txtSave}>Ghi nhớ đăng nhập</Text>
+               <Text style={[styles.txtSave, { color: colors.app }]}>Ghi nhớ đăng nhập</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btnLogin} onPress={this.onPressLogin}>
+            <TouchableOpacity
+               style={[styles.btnLogin, { backgroundColor: colors.app }]}
+               onPress={this.onPressLogin}>
                <Text style={styles.txtBtnLogin}>Đăng nhập</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -231,7 +233,7 @@ const styles = StyleSheet.create({
    },
    btnLogin: {
       height: 44,
-      backgroundColor: colors.blue,
+      backgroundColor: colors.app,
       justifyContent: 'center',
       alignItems: 'center',
       marginHorizontal: 16,
@@ -270,7 +272,7 @@ const styles = StyleSheet.create({
    },
    txtSave: {
       fontSize: 16,
-      color: colors.blue,
+      color: colors.app,
       marginLeft: 8,
       fontFamily: fonts.medium,
    },

@@ -76,7 +76,7 @@ export default function TabViewExample(props) {
    const renderTabBar = (props) => (
       <TabBar
          {...props}
-         indicatorStyle={{ backgroundColor: colors.blue }}
+         indicatorStyle={{ backgroundColor: colors.app }}
          style={{ backgroundColor: colors.white }}
          renderLabel={({ route, focused, color }) => (
             <Text

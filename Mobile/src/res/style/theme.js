@@ -1,6 +1,7 @@
 import { Dimensions } from 'react-native';
 
 const colors = {
+   app: '#4D89FF',
    white: '#FFFFFF',
    white1: '#D9D9D9',
    white2: '#F5F5F5',
@@ -14,7 +15,7 @@ const colors = {
    green2: '#8CE1A7',
    green2: '#EBFAEF',
    yellow: '#FFEC3D',
-   yellow1: '#FFF566',
+   yellow1: '#FADB14',
    yellow2: '#FFFB8F',
    purple: '#722ED1',
    purple1: '#9254DE',

@@ -9,10 +9,10 @@ import Header from '../custom/Header';
 const listMenu = [
    { title: 'Thông tin cá nhân', icon: Images.ic_user_info, screen: 'UserInfo' },
    { title: 'Đổi mật khẩu', icon: Images.ic_lock, screen: '' },
-   { title: 'Xuất file Excel', icon: Images.ic_excel, screen: '' },
+   // { title: 'Xuất file Excel', icon: Images.ic_excel, screen: '' },
    { title: 'Thông tin chi tiết', icon: Images.ic_info, screen: '' },
    { title: 'Hướng dẫn sử dụng', icon: Images.ic_guide, screen: '' },
-   { title: 'Cài đặt', icon: Images.ic_setting, screen: '' },
+   { title: 'Cài đặt', icon: Images.ic_setting, screen: 'Setting' },
 ];
 
 export default class DrawerComponent extends Component {
@@ -27,7 +27,11 @@ export default class DrawerComponent extends Component {
             if (item.screen === '') {
                Alert.alert('Thông báo', 'Chức năng đang được cập nhật');
             } else {
-               this.props.navigation.navigate(item.screen);
+               if (item.screen === 'Setting') {
+                  this.props.navigation.replace(item.screen);
+               } else {
+                  this.props.navigation.navigate(item.screen);
+               }
             }
          }}>
          <View style={styles.itemMenu}>

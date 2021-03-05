@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
    },
    btnSignup: {
       height: 44,
-      backgroundColor: colors.blue,
+      backgroundColor: colors.app,
       justifyContent: 'center',
       alignItems: 'center',
       marginHorizontal: 16,

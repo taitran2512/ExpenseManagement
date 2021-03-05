@@ -14,7 +14,7 @@ const ButtonSubmit = (props) => {
             style={[
                styles.btn,
                {
-                  backgroundColor: props.disabled ? colors.gray2 : colors.blue,
+                  backgroundColor: props.disabled ? colors.gray2 : colors.app,
                },
                props.style,
             ]}>
