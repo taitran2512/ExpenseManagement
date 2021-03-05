@@ -23,6 +23,7 @@ import DetailHistoryContainer from './history/DetailHistoryContainer';
 import HistoryContainer from './history/HistoryContainer';
 import SettingContainer from './drawer/SettingContainer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { setColorAcion } from '../redux/action/drawer/setColorAcion';
 ////////////////////////////////////////////////////////////
 //bottom-tab
 const Tab = createMaterialBottomTabNavigator();
@@ -97,6 +98,7 @@ const App = (props) => {
          if (value !== null && value !== undefined && value !== '') {
             // value previously stored
             colors.app = value;
+            props.setColorAcion(value);
          }
       } catch (e) {
          // error reading value
@@ -129,5 +131,9 @@ const mapStateToProps = (state) => {
       color: state.setColorReducer.color,
    };
 };
-
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = (dispatch) => {
+   return {
+      setColorAcion: (color) => dispatch(setColorAcion(color)),
+   };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

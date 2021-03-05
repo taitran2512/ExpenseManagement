@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, Alert, TouchableOpacity, BackHandler } from 'react-native';
+import {
+   View,
+   Text,
+   StyleSheet,
+   FlatList,
+   Alert,
+   TouchableOpacity,
+   BackHandler,
+   ActivityIndicator,
+} from 'react-native';
 import { convertDate, emtyValue, formatMoney } from '../../res/function/Functions';
 import { colors, fonts, screenHeight, screenWidth } from '../../res/style/theme';
 import Header from '../custom/Header';
@@ -193,7 +202,11 @@ export default class Home extends Component {
             {/* ////////////////////////////////////// */}
             <View style={[styles.header, { backgroundColor: colors.app }]}>
                <Text style={[styles.txtWallet, { fontSize: 30 }]}>Tổng số tiền</Text>
-               <Text style={styles.txtWallet}>{formatMoney(this.state.totalMoney)} đ</Text>
+               {this.props.getWallet.loading ? (
+                  <ActivityIndicator color="white" size="small" />
+               ) : (
+                  <Text style={styles.txtWallet}>{formatMoney(this.state.totalMoney)} đ</Text>
+               )}
             </View>
             {/* ////////////footer///////////////// */}
             <View style={{ flex: 1 }}>

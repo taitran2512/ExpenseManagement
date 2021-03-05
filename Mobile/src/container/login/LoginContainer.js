@@ -15,6 +15,7 @@ const mapStateToProps = (state) => {
       loading: state.loginReducer.loading,
       message: state.loginReducer.message,
       error: state.loginReducer.error,
+      appColor: state.setColorReducer.color,
    };
 };
 
