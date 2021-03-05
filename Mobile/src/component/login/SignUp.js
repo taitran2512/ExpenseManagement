@@ -128,12 +128,13 @@ export default class SignUp extends Component {
          <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : null}>
             <StatusBarView />
             <LoadingView visible={this.props.loading} />
-            <Image source={Images.signup_logo} style={styles.logo} />
             <ScrollView
                showsVerticalScrollIndicator={false}
                style={styles.container}
                contentContainerStyle={{ flexGrow: 1 }}
                keyboardShouldPersistTaps="handled">
+               <Image source={Images.signup_logo} style={styles.logo} />
+
                <Text style={styles.txtSignup}>Đăng ký tài khoản</Text>
 
                <TextInputAnimated
@@ -227,7 +228,7 @@ const styles = StyleSheet.create({
    },
    btnSignup: {
       height: 44,
-      backgroundColor: colors.blue,
+      backgroundColor: colors.app,
       justifyContent: 'center',
       alignItems: 'center',
       marginHorizontal: 16,

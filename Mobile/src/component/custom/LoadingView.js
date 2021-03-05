@@ -11,7 +11,7 @@ const LoadingView = (props) => {
                justifyContent: 'center',
                alignItems: 'center',
             }}>
-            <ActivityIndicator size="large" color={colors.blue} />
+            <ActivityIndicator size="large" color={colors.app} />
             <Text style={{ fontSize: 16, color: 'white', marginTop: 8, fontWeight: 'bold' }}>
                {props.loadingText || 'Loading...'}
             </Text>

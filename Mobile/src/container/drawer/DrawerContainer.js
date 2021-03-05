@@ -9,7 +9,9 @@ export class DrawerContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-   return {};
+   return {
+      color: state.setColorReducer.color,
+   };
 };
 
 const mapDispatchToProps = (dispatch) => {

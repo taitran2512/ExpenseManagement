@@ -7,6 +7,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { colors } from '../res/style/theme';
+import { connect } from 'react-redux';
 
 ////////////////////////////////////////////////////////////
 import LoginContainer from './login/LoginContainer';
@@ -21,6 +22,9 @@ import UserInfo from '../component/drawer/screen/UserInfo';
 import DetailHistoryContainer from './history/DetailHistoryContainer';
 import HistoryContainer from './history/HistoryContainer';
 import ChangePasswordContainer from './drawer/screen/ChangePasswordContainer';
+import SettingContainer from './drawer/SettingContainer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { setColorAcion } from '../redux/action/drawer/setColorAcion';
 ////////////////////////////////////////////////////////////
 //bottom-tab
 const Tab = createMaterialBottomTabNavigator();
@@ -31,7 +35,7 @@ const bottomTab = () => {
          activeColor={colors.white}
          inactiveColor={colors.black1}
          shifting={true}
-         barStyle={{ backgroundColor: colors.red1, height: 48, justifyContent: 'center' }}
+         barStyle={{ backgroundColor: colors.app, height: 48, justifyContent: 'center' }}
          iconStyle={{ width: 48, height: 48 }}
          backBehavior="initialRoute">
          <Tab.Screen
@@ -72,7 +76,35 @@ const Drawers = () => {
 };
 //stack navigation
 const Stack = createStackNavigator();
-const App = () => {
+const App = (props) => {
+   React.useLayoutEffect(() => {
+      if (props.color !== colors.app) {
+         colors.app = props.color;
+         storeColor();
+      }
+   }, [props.color]);
+   async function storeColor() {
+      try {
+         await AsyncStorage.setItem('@appColor', props.color);
+      } catch (e) {
+         // saving error
+      }
+   }
+   React.useEffect(() => {
+      getColor();
+   }, []);
+   async function getColor() {
+      try {
+         const value = await AsyncStorage.getItem('@appColor');
+         if (value !== null && value !== undefined && value !== '') {
+            // value previously stored
+            colors.app = value;
+            props.setColorAcion(value);
+         }
+      } catch (e) {
+         // error reading value
+      }
+   }
    return (
       <NavigationContainer>
          <Stack.Navigator
@@ -89,8 +121,21 @@ const App = () => {
             <Stack.Screen name="UserInfo" component={UserInfo} />
             <Stack.Screen name="ChangePassword" component={ChangePasswordContainer} />
             <Stack.Screen name="DetailHistory" component={DetailHistoryContainer} />
+            <Stack.Screen name="Setting" component={SettingContainer} />
          </Stack.Navigator>
       </NavigationContainer>
    );
 };
-export default App;
+// export default App;
+
+const mapStateToProps = (state) => {
+   return {
+      color: state.setColorReducer.color,
+   };
+};
+const mapDispatchToProps = (dispatch) => {
+   return {
+      setColorAcion: (color) => dispatch(setColorAcion(color)),
+   };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

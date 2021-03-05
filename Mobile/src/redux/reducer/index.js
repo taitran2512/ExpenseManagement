@@ -13,6 +13,7 @@ import getExpenseReducer from './history/getExpenseReducer';
 import getIncomeReducer from './history/getIncomeReducer';
 import postHistoryReducer from './history/postHistoryReducer';
 import changePasswordReducer from './account/forget/changePasswordReducer';
+import setColorReducer from './drawer/setColorReducer';
 const allReducers = combineReducers({
    loginReducer,
    signupReducer,
@@ -28,6 +29,7 @@ const allReducers = combineReducers({
    getIncomeReducer,
    postHistoryReducer,
    changePasswordReducer,
+   setColorReducer,
 });
 
 export default allReducers;

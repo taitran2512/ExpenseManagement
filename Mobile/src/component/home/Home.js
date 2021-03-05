@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, Alert, TouchableOpacity, BackHandler } from 'react-native';
+import {
+   View,
+   Text,
+   StyleSheet,
+   FlatList,
+   Alert,
+   TouchableOpacity,
+   BackHandler,
+   ActivityIndicator,
+} from 'react-native';
 import { convertDate, emtyValue, formatMoney } from '../../res/function/Functions';
 import { colors, fonts, screenHeight, screenWidth } from '../../res/style/theme';
 import Header from '../custom/Header';
@@ -24,7 +33,7 @@ export default class Home extends Component {
       } else {
          Alert.alert('Thông báo', 'Bạn có muốn thoát khỏi ứng dụng?', [
             {
-               text: 'Cacel',
+               text: 'cancel',
                style: 'cancel',
             },
             { text: 'ok', onPress: () => BackHandler.exitApp() },
@@ -118,7 +127,6 @@ export default class Home extends Component {
          this.props.createWallet.status !== prevProps.createWallet.status
       ) {
          if (this.props.createWallet.status === 'success') {
-            this.walletModal.current.close();
             this.props.getWalletAction();
             setTimeout(() => {
                Alert.alert('Thông báo', this.props.createWallet.message);
@@ -192,13 +200,17 @@ export default class Home extends Component {
                }
             /> */}
             {/* ////////////////////////////////////// */}
-            <View style={styles.header}>
+            <View style={[styles.header, { backgroundColor: colors.app }]}>
                <Text style={[styles.txtWallet, { fontSize: 30 }]}>Tổng số tiền</Text>
-               <Text style={styles.txtWallet}>{formatMoney(this.state.totalMoney)} đ</Text>
+               {this.props.getWallet.loading ? (
+                  <ActivityIndicator color="white" size="small" />
+               ) : (
+                  <Text style={styles.txtWallet}>{formatMoney(this.state.totalMoney)} đ</Text>
+               )}
             </View>
             {/* ////////////footer///////////////// */}
             <View style={{ flex: 1 }}>
-               <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: colors.blue }} />
+               <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: colors.app }} />
                <View style={styles.footer}>
                   <View
                      style={
@@ -260,7 +272,7 @@ const styles = StyleSheet.create({
    },
    header: {
       height: screenHeight * 0.15,
-      backgroundColor: colors.blue,
+      backgroundColor: colors.app,
       borderBottomRightRadius: 75,
       alignItems: 'center',
       justifyContent: 'center',

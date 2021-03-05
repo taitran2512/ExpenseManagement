@@ -6,8 +6,8 @@ import { colors } from '../../res/style/theme';
 const StatusBarView = () => {
    return (
       <View>
-         <SafeAreaView style={{ backgroundColor: colors.blue }} />
-         <View style={{ height: StatusBar.currentHeight, backgroundColor: colors.blue }} />
+         <SafeAreaView style={{ backgroundColor: colors.app }} />
+         <View style={{ height: StatusBar.currentHeight, backgroundColor: colors.app }} />
          <StatusBar
             barStyle="light-content"
             backgroundColor={'transparent'}

@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Pressable, Image, Alert } from 'react-native';
 import { userData } from '../../config/Config';
@@ -9,9 +10,11 @@ const listMenu = [
    { title: 'Thông tin cá nhân', icon: Images.ic_user_info, screen: 'UserInfo' },
    { title: 'Đổi mật khẩu', icon: Images.ic_lock, screen: 'ChangePassword' },
    { title: 'Xuất file Excel', icon: Images.ic_excel, screen: '' },
+   // { title: 'Đổi mật khẩu', icon: Images.ic_lock, screen: '' },
+   // { title: 'Xuất file Excel', icon: Images.ic_excel, screen: '' },
    { title: 'Thông tin chi tiết', icon: Images.ic_info, screen: '' },
    { title: 'Hướng dẫn sử dụng', icon: Images.ic_guide, screen: '' },
-   { title: 'Cài đặt', icon: Images.ic_setting, screen: '' },
+   { title: 'Cài đặt', icon: Images.ic_setting, screen: 'Setting' },
 ];
 
 export default class DrawerComponent extends Component {
@@ -52,7 +55,16 @@ export default class DrawerComponent extends Component {
                            { text: 'Cancel', style: 'cancel' },
                            {
                               text: 'ok',
-                              onPress: () => {
+                              onPress: async () => {
+                                 try {
+                                    const jsonValue = JSON.stringify({
+                                       username: userData.username,
+                                       password: '',
+                                    });
+                                    await AsyncStorage.setItem('@saveLogin', jsonValue);
+                                 } catch (e) {
+                                    // saving error
+                                 }
                                  this.props.navigation.replace('Login');
                                  this.props.logoutAction();
                               },

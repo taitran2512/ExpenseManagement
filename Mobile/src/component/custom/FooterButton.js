@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
       width: btnWidth,
    },
    btnNext: {
-      backgroundColor: colors.blue,
+      backgroundColor: colors.app,
       borderRadius: 8,
       height: 44,
       alignItems: 'center',

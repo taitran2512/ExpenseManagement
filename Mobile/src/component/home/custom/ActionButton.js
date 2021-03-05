@@ -15,7 +15,7 @@ const AcitonButton = (props) => {
          open={open}
          icon={open ? 'close' : 'plus'}
          // theme={{ colors: { backdrop: 'transparent' } }}
-         fabStyle={{ backgroundColor: colors.blue }}
+         fabStyle={{ backgroundColor: colors.app }}
          color={colors.white}
          actions={[
             {
