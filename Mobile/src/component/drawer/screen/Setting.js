@@ -37,9 +37,9 @@ export default class Setting extends Component {
    render() {
       return (
          <View style={styles.container}>
-            <Header isShowBack onPressBack={() => this.props.navigation.replace('Home')} title="Cài đặt" />
+            <Header isShowBack onPressBack={() => this.props.navigation.goBack()} title="Cài đặt" />
             <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-               <Item title="Màu sắc ứng dụng" onPress={() => this.BottomSheetColor.current.open()} />
+               <Item title="Màu sắc" onPress={() => this.BottomSheetColor.current.open()} />
                <BottomSheet ref={this.BottomSheetColor} title="Chọn màu">
                   <FlatList
                      data={dataColor}

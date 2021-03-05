@@ -27,11 +27,7 @@ export default class DrawerComponent extends Component {
             if (item.screen === '') {
                Alert.alert('Thông báo', 'Chức năng đang được cập nhật');
             } else {
-               if (item.screen === 'Setting') {
-                  this.props.navigation.replace(item.screen);
-               } else {
-                  this.props.navigation.navigate(item.screen);
-               }
+               this.props.navigation.navigate(item.screen);
             }
          }}>
          <View style={styles.itemMenu}>
