@@ -6,6 +6,7 @@ import {
    KeyboardAvoidingView,
    Platform,
    Pressable,
+   ScrollView,
    StyleSheet,
    Text,
    View,
@@ -142,7 +143,10 @@ export default class Expense extends Component {
          <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : null}>
             <Header title="Thu nhập" isShowBack onPressBack={() => this.props.navigation.goBack()} />
             <LoadingView visible={this.props.loading} />
-            <View style={styles.container}>
+            <ScrollView
+               style={styles.container}
+               showsVerticalScrollIndicator={false}
+               keyboardShouldPersistTaps="handled">
                <TextInputAnimated
                   label="Số tiền"
                   style={styles.mg}
@@ -210,7 +214,7 @@ export default class Expense extends Component {
                   onPressClear={this.onClearnote}
                   onChangeText={this.onChangenote}
                />
-            </View>
+            </ScrollView>
             <ButtonSubmit
                title="Xác nhận"
                disabled={

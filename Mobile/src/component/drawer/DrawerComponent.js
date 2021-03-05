@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Pressable, Image, Alert } from 'react-native';
 import { userData } from '../../config/Config';
@@ -52,7 +53,16 @@ export default class DrawerComponent extends Component {
                            { text: 'Cancel', style: 'cancel' },
                            {
                               text: 'ok',
-                              onPress: () => {
+                              onPress: async () => {
+                                 try {
+                                    const jsonValue = JSON.stringify({
+                                       username: userData.username,
+                                       password: '',
+                                    });
+                                    await AsyncStorage.setItem('@saveLogin', jsonValue);
+                                 } catch (e) {
+                                    // saving error
+                                 }
                                  this.props.navigation.replace('Login');
                                  this.props.logoutAction();
                               },
