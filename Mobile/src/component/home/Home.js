@@ -24,7 +24,7 @@ export default class Home extends Component {
       } else {
          Alert.alert('Thông báo', 'Bạn có muốn thoát khỏi ứng dụng?', [
             {
-               text: 'Cacel',
+               text: 'cancel',
                style: 'cancel',
             },
             { text: 'ok', onPress: () => BackHandler.exitApp() },
@@ -118,7 +118,6 @@ export default class Home extends Component {
          this.props.createWallet.status !== prevProps.createWallet.status
       ) {
          if (this.props.createWallet.status === 'success') {
-            this.walletModal.current.close();
             this.props.getWalletAction();
             setTimeout(() => {
                Alert.alert('Thông báo', this.props.createWallet.message);

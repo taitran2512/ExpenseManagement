@@ -26,7 +26,7 @@ const WalletModal = forwardRef((props, ref) => {
          Alert.alert('Lưu ý', 'Bạn phải nhập đầy đủ thông tin ví tiền');
       } else {
          props.onSubmit(cardName, parseInt(money));
-         // modalRef.current.close();
+         modalRef.current.close();
       }
    };
    return (
