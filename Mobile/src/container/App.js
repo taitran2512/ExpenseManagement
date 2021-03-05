@@ -25,6 +25,7 @@ import ChangePasswordContainer from './drawer/screen/ChangePasswordContainer';
 import SettingContainer from './drawer/SettingContainer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setColorAcion } from '../redux/action/drawer/setColorAcion';
+import InfoApp from '../component/drawer/screen/InfoApp';
 ////////////////////////////////////////////////////////////
 //bottom-tab
 const Tab = createMaterialBottomTabNavigator();
@@ -122,6 +123,7 @@ const App = (props) => {
             <Stack.Screen name="ChangePassword" component={ChangePasswordContainer} />
             <Stack.Screen name="DetailHistory" component={DetailHistoryContainer} />
             <Stack.Screen name="Setting" component={SettingContainer} />
+            <Stack.Screen name="InfoApp" component={InfoApp} />
          </Stack.Navigator>
       </NavigationContainer>
    );
