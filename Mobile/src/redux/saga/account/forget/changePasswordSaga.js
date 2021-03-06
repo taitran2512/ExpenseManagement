@@ -10,10 +10,8 @@ function* changePasswordSaga(action) {
    try {
       const { _id, oldPassword, newPassword } = action.data;
       const response = yield changePasswordApi(_id, oldPassword, newPassword);
-      console.log(response, 'response');
       if (response === undefined) {
          yield put({ type: CHANGE_PASSWORD_ERROR, error: 'Server không phản hồi' });
-         console.log('Server không phản hồi');
       } else {
          yield put({ type: CHANGE_PASSWORD_SUCCESS, response: response });
       }

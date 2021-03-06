@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { colors, fonts } from '../../../res/style/theme';
+import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { colors, fonts, screenWidth } from '../../../res/style/theme';
 import Header from '../../custom/Header';
 import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
 import BottomSheet from '../../custom/BottomSheet';
+import Images from '../../../res/image';
 
 const dataColor = [
    { title: 'Xanh dương', color: colors.blue },
@@ -39,6 +40,8 @@ export default class Setting extends Component {
          <View style={styles.container}>
             <Header isShowBack onPressBack={() => this.props.navigation.goBack()} title="Cài đặt" />
             <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+               <Image style={styles.img} source={Images.ic_setting} />
+
                <Item title="Màu sắc" onPress={() => this.BottomSheetColor.current.open()} />
                <BottomSheet ref={this.BottomSheetColor} title="Chọn màu">
                   <FlatList
@@ -76,5 +79,10 @@ const styles = StyleSheet.create({
       fontFamily: fonts.medium,
       fontSize: 18,
       color: colors.black,
+   },
+   img: {
+      width: screenWidth * 0.5,
+      height: screenWidth * 0.5,
+      alignSelf: 'center',
    },
 });

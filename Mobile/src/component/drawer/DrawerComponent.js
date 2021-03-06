@@ -10,8 +10,6 @@ const listMenu = [
    { title: 'Thông tin cá nhân', icon: Images.ic_user_info, screen: 'UserInfo' },
    { title: 'Đổi mật khẩu', icon: Images.ic_lock, screen: 'ChangePassword' },
    { title: 'Xuất file Excel', icon: Images.ic_excel, screen: '' },
-   // { title: 'Đổi mật khẩu', icon: Images.ic_lock, screen: '' },
-   // { title: 'Xuất file Excel', icon: Images.ic_excel, screen: '' },
    { title: 'Hướng dẫn sử dụng', icon: Images.ic_guide, screen: '' },
    { title: 'Cài đặt', icon: Images.ic_setting, screen: 'Setting' },
    { title: 'Thông tin ứng dụng', icon: Images.ic_info, screen: 'InfoApp' },
