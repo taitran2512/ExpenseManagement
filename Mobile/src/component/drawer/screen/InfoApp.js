@@ -68,13 +68,14 @@ const styles = StyleSheet.create({
    txtVersion: {
       textAlign: 'center',
       padding: 10,
+      fontSize: 16,
    },
    containerList: {
       backgroundColor: colors.white,
       marginTop: 10,
    },
    item: {
-      padding: 15,
+      padding: 16,
       borderBottomColor: colors.gray2,
       borderBottomWidth: 1,
       flexDirection: 'row',
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
    },
    txtTitle: {
       fontFamily: fonts.medium,
-      fontSize: 12,
+      fontSize: 16,
       color: colors.black,
    },
    itemWeb: {
