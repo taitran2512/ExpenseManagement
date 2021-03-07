@@ -9,11 +9,13 @@ import Images from '../../../res/image';
 const dataColor = [
    { title: 'Xanh dương', color: colors.blue },
    { title: 'Xanh lá', color: colors.green },
+   { title: 'Xanh rêu', color: colors.lime },
    { title: 'Xanh ngọc', color: colors.cyan },
    { title: 'Đỏ', color: colors.red1 },
    { title: 'Vàng', color: colors.yellow1 },
    { title: 'Tím', color: colors.purple1 },
    { title: 'Cam', color: colors.orange },
+   { title: 'Hồng', color: colors.pink2 },
 ];
 
 export default class Setting extends Component {

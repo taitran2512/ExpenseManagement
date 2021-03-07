@@ -18,8 +18,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
    return {
-      changePasswordAction: (_id, username, password) =>
-         dispatch(changePasswordAction(_id, username, password)),
+      changePasswordAction: (oldPassword, newPassword) =>
+         dispatch(changePasswordAction(oldPassword, newPassword)),
    };
 };
 

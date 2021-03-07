@@ -8,8 +8,8 @@ import { changePasswordApi } from '../../../api/account/forget/changePasswordAPI
 
 function* changePasswordSaga(action) {
    try {
-      const { _id, oldPassword, newPassword } = action.data;
-      const response = yield changePasswordApi(_id, oldPassword, newPassword);
+      const { oldPassword, newPassword } = action.data;
+      const response = yield changePasswordApi(oldPassword, newPassword);
       if (response === undefined) {
          yield put({ type: CHANGE_PASSWORD_ERROR, error: 'Server không phản hồi' });
       } else {

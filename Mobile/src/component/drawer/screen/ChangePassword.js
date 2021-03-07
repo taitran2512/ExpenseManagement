@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import { FlatList, Image, StyleSheet, Text, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import {
+   KeyboardAvoidingView,
+   Image,
+   StyleSheet,
+   Text,
+   View,
+   TouchableOpacity,
+   ScrollView,
+   Alert,
+   Platform,
+} from 'react-native';
 import Header from '../../custom/Header';
 import Images from '../../../res/image';
 import { colors, fonts, screenWidth } from '../../../res/style/theme';
 import TextInputAnimated from '../../custom/TextInputAnimated';
-import { userData } from '../../../config/Config';
 import LoadingView from '../../custom/LoadingView';
 export default class ChangePassword extends Component {
    constructor(props) {
@@ -13,7 +22,6 @@ export default class ChangePassword extends Component {
          oldPassword: '',
          newPassword: '',
          confirmPassword: '',
-         _id: userData._id,
       };
    }
 
@@ -24,12 +32,14 @@ export default class ChangePassword extends Component {
    componentDidUpdate(prevProps) {
       if (prevProps.status !== this.props.status && this.props.status !== null) {
          if (this.props.status === 'success') {
-            Alert.alert(
-               'Cập nhật mật khẩu thành công',
-               '',
-               [{ text: 'OK', onPress: () => this.props.navigation.replace('Home') }],
-               { cancelable: false },
-            );
+            setTimeout(() => {
+               Alert.alert(
+                  'Thông báo',
+                  this.props.message,
+                  [{ text: 'OK', onPress: () => this.props.navigation.goBack() }],
+                  { cancelable: false },
+               );
+            }, 10);
          } else {
             setTimeout(() => {
                Alert.alert('Thông báo', this.props.message);
@@ -39,7 +49,11 @@ export default class ChangePassword extends Component {
    }
 
    onPressApply = () => {
-      this.props.changePasswordAction(this.state._id, this.state.oldPassword, this.state.newPassword);
+      if (this.state.oldPassword == '' || this.state.oldPassword === '' || this.state.newPassword === '') {
+         Alert.alert('Lưu ý', 'Bạn phải nhập đầy đủ thông tin');
+      } else {
+         this.props.changePasswordAction(this.state.oldPassword, this.state.newPassword);
+      }
    };
 
    // OnChangeText
@@ -67,41 +81,45 @@ export default class ChangePassword extends Component {
    render() {
       const { oldPassword, newPassword, confirmPassword } = this.state;
       return (
-         <ScrollView style={styles.container} keyboardShouldPersistTaps="handled">
-            <LoadingView visible={this.props.loading} />
+         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : null}>
             <Header isShowBack onPressBack={() => this.props.navigation.goBack()} title="Đổi mật khẩu" />
-            <Image style={styles.img} source={Images.ic_changepassword} />
+            <LoadingView visible={this.props.loading} />
+            <ScrollView
+               style={styles.container}
+               keyboardShouldPersistTaps="handled"
+               showsVerticalScrollIndicator={false}>
+               <Image style={styles.img} source={Images.ic_changepassword} />
+               <TextInputAnimated
+                  label="Mật khẩu cũ"
+                  style={styles.input}
+                  isPassword
+                  value={oldPassword}
+                  onChangeText={this.onChangeOldPassword}
+                  onPressClear={this.onClearOldPassword}
+               />
 
-            <TextInputAnimated
-               label="Mật khẩu củ"
-               style={styles.input}
-               isPassword
-               value={oldPassword}
-               onChangeText={this.onChangeOldPassword}
-               onPressClear={this.onClearOldPassword}
-            />
+               <TextInputAnimated
+                  label="Mật khẩu mới"
+                  style={styles.input}
+                  isPassword
+                  value={newPassword}
+                  onChangeText={this.onChangeNewPassword}
+                  onPressClear={this.onClearNewPassword}
+               />
 
-            <TextInputAnimated
-               label="Mật khẩu mới"
-               style={styles.input}
-               isPassword
-               value={newPassword}
-               onChangeText={this.onChangeNewPassword}
-               onPressClear={this.onClearNewPassword}
-            />
-
-            <TextInputAnimated
-               label="Nhập lại mật khẩu mơi"
-               style={styles.input}
-               isPassword
-               value={confirmPassword}
-               onChangeText={this.onChangeConfirmPassword}
-               onPressClear={this.onClearConfirmPassword}
-            />
-            <TouchableOpacity style={styles.btnLogin} onPress={this.onPressApply}>
-               <Text style={styles.txtBtnLogin}>Xác nhận</Text>
-            </TouchableOpacity>
-         </ScrollView>
+               <TextInputAnimated
+                  label="Nhập lại mật khẩu mới"
+                  style={styles.input}
+                  isPassword
+                  value={confirmPassword}
+                  onChangeText={this.onChangeConfirmPassword}
+                  onPressClear={this.onClearConfirmPassword}
+               />
+               <TouchableOpacity style={styles.btnLogin} onPress={this.onPressApply}>
+                  <Text style={styles.txtBtnLogin}>Xác nhận</Text>
+               </TouchableOpacity>
+            </ScrollView>
+         </KeyboardAvoidingView>
       );
    }
 }

@@ -14,6 +14,8 @@ const colors = {
    green1: '#4DD077',
    green2: '#8CE1A7',
    green2: '#EBFAEF',
+   lime: '#A0D911',
+   lime1: '#BAE637',
    yellow: '#FFEC3D',
    yellow1: '#FADB14',
    yellow2: '#FFFB8F',
@@ -45,6 +47,10 @@ const colors = {
    orange3: '#FF9C6E',
    orange4: '#FFBB96',
    orange5: '#FFD8BF',
+   pink: '#C41D7F',
+   pink1: '#EB2F96',
+   pink2: '#F759AB',
+   pink3: '#FF85C0',
 };
 ///////////////////////////////////////////////
 const screenWidth = Dimensions.get('window').width;
