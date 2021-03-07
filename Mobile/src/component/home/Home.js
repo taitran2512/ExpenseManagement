@@ -187,7 +187,6 @@ export default class Home extends Component {
    }
    ///////////////////////////
    render() {
-      // console.log(this.props);
       return (
          <View style={styles.container}>
             <Header isShowMenu onPressMenu={() => this.props.navigation.openDrawer()} title="Trang chủ" />

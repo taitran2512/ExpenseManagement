@@ -16,6 +16,7 @@ import StatusBarView from '../custom/StatusBarView';
 import TextInputAnimated from '../custom/TextInputAnimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingView from '../custom/LoadingView';
+import { emtyValue } from '../../res/function/Functions';
 const logoSize = screenWidth * 0.7;
 const duration = 350;
 export default class Login extends Component {
@@ -40,6 +41,9 @@ export default class Login extends Component {
          if (jsonValue != null) {
             var data = JSON.parse(jsonValue);
             this.setState({ username: data.username, password: data.password, saveLogin: true });
+            if (!emtyValue(data.password) && !emtyValue(data.username)) {
+               this.props.loginAction(data.username, data.password);
+            }
          }
       } catch (e) {
          // error reading value
@@ -121,7 +125,7 @@ export default class Login extends Component {
       }
    };
    ///////////////////////////////
-   async componentDidUpdate(prevProps) {
+   componentDidUpdate(prevProps) {
       if (this.props.status !== null && this.props.status !== prevProps.status) {
          if (this.props.status === 'success') {
             this.saveLogin();

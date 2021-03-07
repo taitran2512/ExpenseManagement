@@ -36,6 +36,27 @@ export default class DrawerComponent extends Component {
          </View>
       </Pressable>
    );
+   logOut = () => {
+      Alert.alert('Thông báo', 'Bạn có muốn đăng xuất', [
+         { text: 'Cancel', style: 'cancel' },
+         {
+            text: 'ok',
+            onPress: async () => {
+               try {
+                  const jsonValue = JSON.stringify({
+                     username: userData.username,
+                     password: '',
+                  });
+                  await AsyncStorage.setItem('@saveLogin', jsonValue);
+               } catch (e) {
+                  // saving error
+               }
+               this.props.navigation.replace('Login');
+               this.props.logoutAction();
+            },
+         },
+      ]);
+   };
    render() {
       return (
          <View style={{ flex: 1 }}>
@@ -48,27 +69,7 @@ export default class DrawerComponent extends Component {
                   <Pressable
                      android_ripple={{ color: colors.black_transparent }}
                      style={styles.itemMenu}
-                     onPress={() => {
-                        Alert.alert('Thông báo', 'Bạn có muốn đăng xuất', [
-                           { text: 'Cancel', style: 'cancel' },
-                           {
-                              text: 'ok',
-                              onPress: async () => {
-                                 try {
-                                    const jsonValue = JSON.stringify({
-                                       username: userData.username,
-                                       password: '',
-                                    });
-                                    await AsyncStorage.setItem('@saveLogin', jsonValue);
-                                 } catch (e) {
-                                    // saving error
-                                 }
-                                 this.props.navigation.replace('Login');
-                                 this.props.logoutAction();
-                              },
-                           },
-                        ]);
-                     }}>
+                     onPress={this.logOut}>
                      <Image style={styles.icon} source={Images.ic_exit} />
                      <Text style={styles.txtMenu}>Đăng xuất</Text>
                   </Pressable>

@@ -35,7 +35,7 @@ export default class Statistic extends Component {
       return (
          <View style={styles.container}>
             <Header isShowMenu onPressMenu={() => this.props.navigation.openDrawer()} title="Thống kê" />
-            <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+            {/* <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
                <LineChart
                   data={data}
                   width={screenWidth}
@@ -44,7 +44,7 @@ export default class Statistic extends Component {
                   chartConfig={chartConfig}
                   bezier
                />
-            </ScrollView>
+            </ScrollView> */}
          </View>
       );
    }
