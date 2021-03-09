@@ -1,7 +1,8 @@
 import { FAB, Portal, Provider } from 'react-native-paper';
 import * as React from 'react';
-import { colors } from '../../../res/style/theme';
+import { colors, screenHeight } from '../../../res/style/theme';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { getStatusBarHeight } from '../../../res/function/StatusBarHeight';
 
 const AcitonButton = (props) => {
    const [state, setState] = React.useState({ open: false });
@@ -14,8 +15,10 @@ const AcitonButton = (props) => {
       <FAB.Group
          open={open}
          icon={open ? 'close' : 'plus'}
-         // theme={{ colors: { backdrop: 'transparent' } }}
-         fabStyle={{ backgroundColor: colors.app }}
+         fabStyle={{
+            backgroundColor: colors.app,
+            marginBottom: getStatusBarHeight(true),
+         }}
          color={colors.white}
          actions={[
             {
