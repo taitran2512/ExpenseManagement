@@ -17,7 +17,7 @@ const AcitonButton = (props) => {
          icon={open ? 'close' : 'plus'}
          fabStyle={{
             backgroundColor: colors.app,
-            marginBottom: getStatusBarHeight(true),
+            marginBottom: getStatusBarHeight(),
          }}
          color={colors.white}
          actions={[
