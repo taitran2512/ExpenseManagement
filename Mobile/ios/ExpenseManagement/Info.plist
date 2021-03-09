@@ -25,8 +25,8 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
-	<!-- <key>CodePushDeploymentKey</key> -->
-	<!-- <string>txT7BXWtA7odzOBgOgXhodNleMD2Z3iqjvvRu</string> -->
+	<key>CodePushDeploymentKey</key>
+	<string>RoQtaYAta4iUvL9Ic01ZgNsNbYaApJk6ism7B</string>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
