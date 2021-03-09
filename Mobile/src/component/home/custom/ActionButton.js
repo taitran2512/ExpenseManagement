@@ -3,6 +3,7 @@ import * as React from 'react';
 import { colors, screenHeight } from '../../../res/style/theme';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { getStatusBarHeight } from '../../../res/function/StatusBarHeight';
+import { Platform } from 'react-native';
 
 const AcitonButton = (props) => {
    const [state, setState] = React.useState({ open: false });
@@ -15,10 +16,12 @@ const AcitonButton = (props) => {
       <FAB.Group
          open={open}
          icon={open ? 'close' : 'plus'}
-         fabStyle={{
-            backgroundColor: colors.app,
-            marginBottom: getStatusBarHeight(),
-         }}
+         fabStyle={[
+            {
+               backgroundColor: colors.app,
+            },
+            Platform.OS === 'ios' ? { marginBottom: getStatusBarHeight() } : null,
+         ]}
          color={colors.white}
          actions={[
             {
