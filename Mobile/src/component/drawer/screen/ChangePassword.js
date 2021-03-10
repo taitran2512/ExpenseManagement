@@ -115,7 +115,9 @@ export default class ChangePassword extends Component {
                   onChangeText={this.onChangeConfirmPassword}
                   onPressClear={this.onClearConfirmPassword}
                />
-               <TouchableOpacity style={styles.btnLogin} onPress={this.onPressApply}>
+               <TouchableOpacity
+                  style={[styles.btnLogin, { backgroundColor: colors.app }]}
+                  onPress={this.onPressApply}>
                   <Text style={styles.txtBtnLogin}>Xác nhận</Text>
                </TouchableOpacity>
             </ScrollView>
@@ -139,7 +141,6 @@ const styles = StyleSheet.create({
    },
    btnLogin: {
       height: 44,
-      backgroundColor: colors.blue,
       justifyContent: 'center',
       alignItems: 'center',
       marginHorizontal: 16,
