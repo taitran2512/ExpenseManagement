@@ -11,6 +11,7 @@ export class HistoryContainer extends Component {
 const mapStateToProps = (state) => {
    return {
       data: state.getHistoryReducer.data,
+      color: state.setColorReducer.color,
    };
 };
 

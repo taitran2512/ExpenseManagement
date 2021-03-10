@@ -33,7 +33,7 @@ export default class InfoApp extends Component {
                </View>
                <Text style={[styles.txtVersion, { color: colors.lightblue1 }]}>Điều khoản sử dụng</Text>
                <Text style={[styles.txtVersion, { color: colors.gray }]}>
-                  Phát triển bởi công ty phần mềm di động TP sofware
+                  Phát triển bởi công ty phần mềm di động TP Software
                </Text>
             </ScrollView>
          </>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Alert } from 'react-native';
 import CodePush from 'react-native-code-push';
+import DownloadView from '../component/custom/DownloadView';
 import LoadingView from '../component/custom/LoadingView';
 
 //auto check when open app
@@ -34,8 +35,11 @@ const withCodePush = (WrappedComponent) => {
                   // console.log('code-push status: ', status);
                }
             },
-            () => {
-               this.setState({ loading: true });
+            (progress) => {
+               this.setState({
+                  loading: true,
+                  percent: (progress.receivedBytes / progress.totalBytes) * 100,
+               });
             },
          );
       }
@@ -43,7 +47,8 @@ const withCodePush = (WrappedComponent) => {
       render() {
          return (
             <>
-               <LoadingView visible={this.state.loading} loadingText="Đang tải bản cập nhật" />
+               {/* <LoadingView visible={this.state.loading} loadingText="Đang tải bản cập nhật" /> */}
+               <DownloadView visible={this.state.loading} percent={`${String(this.state.percent)}%`} />
                <WrappedComponent />
             </>
          );

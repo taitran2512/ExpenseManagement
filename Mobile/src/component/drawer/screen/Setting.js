@@ -5,6 +5,7 @@ import Header from '../../custom/Header';
 import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
 import BottomSheet from '../../custom/BottomSheet';
 import Images from '../../../res/image';
+import Switcher from '../../custom/Switcher';
 
 const dataColor = [
    { title: 'Xanh dương', color: colors.blue },
@@ -23,8 +24,10 @@ export default class Setting extends Component {
       super(props);
       this.state = {
          selectedColor: '',
+         activeBio: false,
       };
       this.BottomSheetColor = React.createRef();
+      this.SwitcherRef = React.createRef();
    }
 
    itemColor = ({ item, index }) => (
@@ -37,6 +40,12 @@ export default class Setting extends Component {
          <View style={{ backgroundColor: item.color, height: 18, width: 18, borderRadius: 18 }} />
       </TouchableOpacity>
    );
+   onPressBio = () => {
+      this.state.activeBio ? this.SwitcherRef.current.off() : this.SwitcherRef.current.on();
+   };
+   onChangeBiometric = (active) => {
+      this.setState({ activeBio: active });
+   };
    render() {
       return (
          <View style={styles.container}>
@@ -45,6 +54,9 @@ export default class Setting extends Component {
                <Image style={styles.img} source={Images.ic_setting} />
 
                <Item title="Màu sắc" onPress={() => this.BottomSheetColor.current.open()} />
+               <Item title="Bảo mật sinh trắc học" onPress={this.onPressBio}>
+                  <Switcher ref={this.SwitcherRef} onChange={this.onChangeBiometric} />
+               </Item>
                <BottomSheet ref={this.BottomSheetColor} title="Chọn màu">
                   <FlatList
                      data={dataColor}
@@ -61,7 +73,7 @@ export default class Setting extends Component {
 const Item = (props) => (
    <TouchableOpacity onPress={() => props.onPress()} style={styles.item}>
       <Text style={styles.txtTitle}>{props.title}</Text>
-      <FontAwesome5 name={'angle-right'} size={18} color={colors.app} />
+      {props.children || <FontAwesome5 name={'angle-right'} size={18} color={colors.app} />}
    </TouchableOpacity>
 );
 const styles = StyleSheet.create({
