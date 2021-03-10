@@ -5,7 +5,7 @@ import { colors } from '../../res/style/theme';
 
 const Switcher = forwardRef((props, ref) => {
    const [active, setActive] = useState(false);
-   const time = 300;
+   const time = 100;
    const [animation, setAnimation] = useState(new Animated.Value(0));
    ////////
    useImperativeHandle(ref, () => ({
