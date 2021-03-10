@@ -33,10 +33,17 @@ const bottomTab = () => {
    return (
       <Tab.Navigator
          initialRouteName="Home"
-         activeColor={colors.white}
-         inactiveColor={colors.black1}
+         activeColor={colors.black}
+         inactiveColor={colors.gray1}
          shifting={true}
-         barStyle={{ backgroundColor: colors.app, height: 48, justifyContent: 'center' }}
+         barStyle={{
+            backgroundColor: colors.white,
+            height: 48,
+            justifyContent: 'center',
+            borderWidth: 1,
+            borderTopColor: colors.gray2,
+            overflow: 'hidden',
+         }}
          iconStyle={{ width: 48, height: 48 }}
          backBehavior="initialRoute">
          <Tab.Screen
