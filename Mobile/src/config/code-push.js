@@ -38,7 +38,7 @@ const withCodePush = (WrappedComponent) => {
             (progress) => {
                this.setState({
                   loading: true,
-                  percent: (progress.receivedBytes / progress.totalBytes) * 100,
+                  percent: Math.round((progress.receivedBytes / progress.totalBytes) * 100),
                });
             },
          );
