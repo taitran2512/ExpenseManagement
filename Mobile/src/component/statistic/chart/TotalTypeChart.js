@@ -4,7 +4,7 @@ import { PieChart } from 'react-native-chart-kit';
 import { emtyValue, formatMoney } from '../../../res/function/Functions';
 import { colors, fonts, screenWidth } from '../../../res/style/theme';
 
-export default class TotalTypeChart extends Component {
+export default class TotalTypeChart extends React.PureComponent {
    constructor(props) {
       super(props);
       this.state = {
@@ -18,7 +18,7 @@ export default class TotalTypeChart extends Component {
    }
    getTotalType = (prevProps) => {
       if (this.props.expense.status !== null && this.props.expense.status !== prevProps.expense.status) {
-         if (this.props.expense.status === 'success' && !emtyValue(this.props.expense.data)) {
+         if (this.props.expense.status === 'success' && this.props.expense.data.length > 0) {
             let totalExpense =
                this.props.expense.data.length < 2
                   ? this.props.expense.data[0].money
@@ -27,11 +27,12 @@ export default class TotalTypeChart extends Component {
          }
       }
       if (this.props.income.status !== null && this.props.income.status !== prevProps.income.status) {
-         if (this.props.income.status === 'success' && !emtyValue(this.props.income.data)) {
+         if (this.props.income.status === 'success' && this.props.income.data.length > 0) {
             let totalIncome =
                this.props.income.data.length < 2
                   ? this.props.income.data[0].money
                   : this.props.income.data.reduce((a, b) => a.money + b.money);
+
             this.setState({ totalIncome: totalIncome });
          }
       }
@@ -47,14 +48,14 @@ export default class TotalTypeChart extends Component {
                data={[
                   {
                      name: 'Chi tiêu',
-                     population: this.state.totalExpense,
+                     population: 0,
                      color: colors.blue,
                      legendFontColor: '#7F7F7F',
                      legendFontSize: 15,
                   },
                   {
                      name: 'Thu nhập',
-                     population: this.state.totalIncome,
+                     population: 0,
                      color: colors.red,
                      legendFontColor: '#7F7F7F',
                      legendFontSize: 15,

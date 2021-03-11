@@ -11,7 +11,7 @@ const DownloadView = (props) => {
             <View style={styles.outside}>
                <View style={[styles.inside, { backgroundColor: colors.app, width: props.percent }]} />
             </View>
-            <Text style={styles.title}>{props.percent}</Text>
+            <Text style={[styles.title, { marginTop: 10 }]}>{props.percent}</Text>
          </View>
       </Modal>
    );
@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
       height: 8,
    },
    icon: {
-      width: screenWidth * 0.4,
-      height: screenWidth * 0.4,
+      width: screenWidth * 0.5,
+      height: screenWidth * 0.5,
       alignSelf: 'center',
    },
 });

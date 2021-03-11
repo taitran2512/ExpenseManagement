@@ -4,7 +4,7 @@ import { colors } from '../../res/style/theme';
 import Header from '../custom/Header';
 import LoadingView from '../custom/LoadingView';
 import TotalTypeChart from './chart/TotalTypeChart';
-export default class Statistic extends React.PureComponent {
+export default class Statistic extends Component {
    constructor(props) {
       super(props);
       this.state = {};
