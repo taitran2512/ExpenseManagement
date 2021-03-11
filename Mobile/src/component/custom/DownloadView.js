@@ -11,7 +11,7 @@ const DownloadView = (props) => {
             <View style={styles.outside}>
                <View style={[styles.inside, { backgroundColor: colors.app, width: props.percent }]} />
             </View>
-            <Text style={styles.title}>{props.percent + '%'}</Text>
+            <Text style={styles.title}>{props.percent}</Text>
          </View>
       </Modal>
    );
