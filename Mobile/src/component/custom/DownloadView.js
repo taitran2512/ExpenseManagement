@@ -1,14 +1,17 @@
 import React from 'react';
-import { View, Text, Modal, StyleSheet } from 'react-native';
-import { colors, fonts } from '../../res/style/theme';
+import { View, Text, Modal, StyleSheet, Image } from 'react-native';
+import Images from '../../res/image';
+import { colors, fonts, screenWidth } from '../../res/style/theme';
 const DownloadView = (props) => {
    return (
       <Modal statusBarTranslucent transparent animationType="fade" visible={props.visible}>
          <View style={styles.container}>
+            <Image source={Images.ic_downloading} style={styles.icon} />
             <Text style={styles.title}>{props.title}</Text>
             <View style={styles.outside}>
                <View style={[styles.inside, { backgroundColor: colors.app, width: props.percent }]} />
             </View>
+            <Text style={styles.title}>{props.percent + '%'}</Text>
          </View>
       </Modal>
    );
@@ -42,5 +45,10 @@ const styles = StyleSheet.create({
    inside: {
       borderRadius: 10,
       height: 8,
+   },
+   icon: {
+      width: screenWidth * 0.4,
+      height: screenWidth * 0.4,
+      alignSelf: 'center',
    },
 });

@@ -16,7 +16,7 @@ export default class App extends Component {
    }
    loadItems(day) {
       setTimeout(() => {
-         for (let i = -15; i < 30; i++) {
+         for (let i = -30; i < 15; i++) {
             const time = day.timestamp + i * 24 * 60 * 60 * 1000;
             const strTime = this.timeToString(time);
             if (!this.state.items[strTime]) {

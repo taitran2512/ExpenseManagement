@@ -15,7 +15,7 @@ export default class DetailHistory extends Component {
    render() {
       return (
          <View style={styles.container}>
-            <Header isShowBack onPressBack={() => this.props.navigation.goBack()} title="Lịch sử" />
+            <Header isShowBack onPressBack={() => this.props.navigation.goBack()} title="Phân loại" />
             <TabviewHistory {...this.props} />
          </View>
       );

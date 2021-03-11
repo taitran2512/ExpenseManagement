@@ -111,5 +111,6 @@ const Images = {
    ic_error: require('./img/icon/ic_error.png'),
    ic_success: require('./img/icon/ic_success.png'),
    ic_changepassword: require('./img/icon/changepassword.png'),
+   ic_downloading: require('./img/icon/ic_downloading.png'),
 };
 export default Images;

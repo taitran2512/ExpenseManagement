@@ -1,11 +1,11 @@
 import React from 'react';
 import { forwardRef, useState, useEffect, useImperativeHandle } from 'react';
-import { View, Text, Animated, StyleSheet } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 import { colors } from '../../res/style/theme';
 
 const Switcher = forwardRef((props, ref) => {
    const [active, setActive] = useState(false);
-   const time = 100;
+   const time = 150;
    const [animation, setAnimation] = useState(new Animated.Value(0));
    ////////
    useImperativeHandle(ref, () => ({
@@ -67,13 +67,13 @@ const styles = StyleSheet.create({
    container: {
       width: 50,
       height: 25,
-      borderRadius: 25,
+      borderRadius: 50,
       justifyContent: 'center',
    },
    circle: {
       height: 20,
       width: 20,
-      borderRadius: 20,
+      borderRadius: 50,
       backgroundColor: colors.white,
    },
 });
