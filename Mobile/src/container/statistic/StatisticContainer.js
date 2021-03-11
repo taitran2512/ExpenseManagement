@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Statistic from '../../component/statistic/Statistic';
-import { getHistoryExpenseAction, getHistoryIncomeAction } from '../../redux/action/history/getHistoryType';
-
+import { getTotalByTypeAction } from '../../redux/action/statistic/getTotalByTypeAction';
 export class StatisticContainer extends Component {
    render() {
       return <Statistic {...this.props} />;
@@ -11,27 +10,19 @@ export class StatisticContainer extends Component {
 
 const mapStateToProps = (state) => {
    return {
-      expense: {
-         status: state.getExpenseReducer.status,
-         data: state.getExpenseReducer.data,
-         loading: state.getExpenseReducer.loading,
-         message: state.getExpenseReducer.message,
-         error: state.getExpenseReducer.error,
-      },
-      income: {
-         status: state.getIncomeReducer.status,
-         data: state.getIncomeReducer.data,
-         loading: state.getIncomeReducer.loading,
-         message: state.getIncomeReducer.message,
-         error: state.getIncomeReducer.error,
+      getTotalMoney: {
+         status: state.getTotalByTypeReducer.status,
+         data: state.getTotalByTypeReducer.data,
+         loading: state.getTotalByTypeReducer.loading,
+         message: state.getTotalByTypeReducer.message,
+         error: state.getTotalByTypeReducer.error,
       },
    };
 };
 
 const mapDispatchToProps = (dispatch) => {
    return {
-      getHistoryExpenseAction: () => dispatch(getHistoryExpenseAction()),
-      getHistoryIncomeAction: () => dispatch(getHistoryIncomeAction()),
+      getTotalByTypeAction: () => dispatch(getTotalByTypeAction()),
    };
 };
 

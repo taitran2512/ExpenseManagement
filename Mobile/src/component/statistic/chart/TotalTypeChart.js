@@ -4,7 +4,7 @@ import { PieChart } from 'react-native-chart-kit';
 import { emtyValue, formatMoney } from '../../../res/function/Functions';
 import { colors, fonts, screenWidth } from '../../../res/style/theme';
 
-export default class TotalTypeChart extends React.PureComponent {
+export default class TotalTypeChart extends Component {
    constructor(props) {
       super(props);
       this.state = {
@@ -12,31 +12,13 @@ export default class TotalTypeChart extends React.PureComponent {
          totalIncome: 0,
       };
    }
-   componentDidMount() {
-      this.props.getHistoryExpenseAction();
-      this.props.getHistoryIncomeAction();
+   shouldComponentUpdate(nextProps, nextState) {
+      return this.props.getTotalMoney !== nextProps.getTotalMoney;
    }
-   getTotalType = (prevProps) => {
-      if (this.props.expense.status !== null && this.props.expense.status !== prevProps.expense.status) {
-         if (this.props.expense.status === 'success' && this.props.expense.data.length > 0) {
-            let totalExpense =
-               this.props.expense.data.length < 2
-                  ? this.props.expense.data[0].money
-                  : this.props.expense.data.reduce((a, b) => a.money + b.money);
-            this.setState({ totalExpense: totalExpense });
-         }
-      }
-      if (this.props.income.status !== null && this.props.income.status !== prevProps.income.status) {
-         if (this.props.income.status === 'success' && this.props.income.data.length > 0) {
-            let totalIncome =
-               this.props.income.data.length < 2
-                  ? this.props.income.data[0].money
-                  : this.props.income.data.reduce((a, b) => a.money + b.money);
-
-            this.setState({ totalIncome: totalIncome });
-         }
-      }
-   };
+   componentDidMount() {
+      this.props.getTotalByTypeAction();
+   }
+   getTotalType = (prevProps) => {};
    componentDidUpdate(prevProps) {
       this.getTotalType(prevProps);
    }
@@ -48,14 +30,14 @@ export default class TotalTypeChart extends React.PureComponent {
                data={[
                   {
                      name: 'Chi tiêu',
-                     population: 0,
+                     population: this.props.getTotalMoney.data?.totalExpense ?? 0,
                      color: colors.blue,
                      legendFontColor: '#7F7F7F',
                      legendFontSize: 15,
                   },
                   {
                      name: 'Thu nhập',
-                     population: 0,
+                     population: this.props.getTotalMoney.data?.totalIncome ?? 0,
                      color: colors.red,
                      legendFontColor: '#7F7F7F',
                      legendFontSize: 15,
@@ -73,11 +55,15 @@ export default class TotalTypeChart extends React.PureComponent {
             />
             <View style={styles.item}>
                <View style={[styles.ic, { backgroundColor: colors.blue }]} />
-               <Text style={styles.txt}>Tổng chi tiêu: {formatMoney(this.state.totalExpense)} đ</Text>
+               <Text style={styles.txt}>
+                  Tổng chi tiêu: {formatMoney(this.props.getTotalMoney.data?.totalExpense)} đ
+               </Text>
             </View>
             <View style={styles.item}>
                <View style={[styles.ic, { backgroundColor: colors.red }]} />
-               <Text style={styles.txt}>Tổng thu nhập: {formatMoney(this.state.totalIncome)} đ</Text>
+               <Text style={styles.txt}>
+                  Tổng thu nhập: {formatMoney(this.props.getTotalMoney.data?.totalIncome)} đ
+               </Text>
             </View>
          </View>
       );

@@ -13,6 +13,7 @@ import { watchDeleteWalletSaga } from './home/deleteWalletSaga';
 import { watchGetWalletSaga } from './home/getWalletSaga';
 import { watchUpdateWalletSaga } from './home/updateWalletSaga';
 import { watchChangePasswordSaga } from './account/forget/changePasswordSaga';
+import { watchGetTotalByTypeSaga } from './statistic/getTotalByTypeSaga';
 
 export default function* rootSaga() {
    yield all([
@@ -30,5 +31,6 @@ export default function* rootSaga() {
       watchGetHistoryIncomeSaga(),
       watchPostHistorySaga(),
       watchChangePasswordSaga(),
+      watchGetTotalByTypeSaga(),
    ]);
 }
