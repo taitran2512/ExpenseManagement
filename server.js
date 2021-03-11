@@ -17,6 +17,9 @@ app.use("/api/wallet", WalletController);
 //history
 const HistoryController = require("./controller/HistoryController");
 app.use("/api/history", HistoryController);
+//filter
+const FilterController = require("./controller/FilterController");
+app.use("/api/filter", FilterController);
 
 app.listen(PORT, function () {
 	console.log("Server is running on Port:", PORT);
