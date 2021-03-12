@@ -17,6 +17,7 @@ const mapStateToProps = (state) => {
          message: state.getTotalByTypeReducer.message,
          error: state.getTotalByTypeReducer.error,
       },
+      dataWallet: state.getWalletReducer.data,
    };
 };
 

@@ -16,16 +16,15 @@ export default class TotalTypeChart extends Component {
       return this.props.getTotalMoney !== nextProps.getTotalMoney;
    }
    componentDidMount() {
-      this.props.getTotalByTypeAction();
+      this.props.navigation.addListener('focus', () => {
+         this.props.getTotalByTypeAction();
+      });
    }
-   getTotalType = (prevProps) => {};
-   componentDidUpdate(prevProps) {
-      this.getTotalType(prevProps);
-   }
+
    render() {
       return (
          <View style={styles.container}>
-            <Text style={styles.title}>Thổng chi tiêu và thu nhập</Text>
+            <Text style={styles.title}>Tổng chi tiêu và thu nhập</Text>
             <PieChart
                data={[
                   {

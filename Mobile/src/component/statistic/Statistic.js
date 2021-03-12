@@ -4,6 +4,7 @@ import { colors } from '../../res/style/theme';
 import Header from '../custom/Header';
 import LoadingView from '../custom/LoadingView';
 import TotalTypeChart from './chart/TotalTypeChart';
+import WalletChart from './chart/WalletChart';
 export default class Statistic extends Component {
    constructor(props) {
       super(props);
@@ -19,6 +20,7 @@ export default class Statistic extends Component {
                showsVerticalScrollIndicator={false}
                contentContainerStyle={{ flexGrow: 1 }}>
                <TotalTypeChart {...this.props} />
+               <WalletChart dataWallet={this.props.dataWallet} />
             </ScrollView>
          </View>
       );

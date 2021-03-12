@@ -31,8 +31,6 @@ const withCodePush = (WrappedComponent) => {
                   setTimeout(() => {
                      Alert.alert('Thông báo', 'Cập nhật ứng dụng thành công');
                   }, 10);
-               } else {
-                  // console.log('code-push status: ', status);
                }
             },
             (progress) => {
@@ -47,7 +45,6 @@ const withCodePush = (WrappedComponent) => {
       render() {
          return (
             <>
-               {/* <LoadingView visible={this.state.loading} loadingText="Đang tải bản cập nhật" /> */}
                <DownloadView visible={this.state.loading} percent={`${String(this.state.percent)}%`} />
                <WrappedComponent />
             </>
