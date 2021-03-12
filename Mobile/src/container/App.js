@@ -26,6 +26,7 @@ import SettingContainer from './drawer/SettingContainer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setColorAcion } from '../redux/action/drawer/setColorAcion';
 import InfoApp from '../component/drawer/screen/InfoApp';
+import ExportFileExcel from '../component/drawer/screen/ExportFileExcel';
 ////////////////////////////////////////////////////////////
 //bottom-tab
 const Tab = createMaterialBottomTabNavigator();
@@ -131,6 +132,7 @@ const App = (props) => {
             <Stack.Screen name="DetailHistory" component={DetailHistoryContainer} />
             <Stack.Screen name="Setting" component={SettingContainer} />
             <Stack.Screen name="InfoApp" component={InfoApp} />
+            <Stack.Screen name="ExportExcel" component={ExportFileExcel} />
          </Stack.Navigator>
       </NavigationContainer>
    );
