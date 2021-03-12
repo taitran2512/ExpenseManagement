@@ -58,6 +58,7 @@ export default class TotalTypeChart extends Component {
                }}
                width={screenWidth}
                height={220}
+               showValuesOnTopOfBars
                chartConfig={{
                   backgroundGradientFrom: '#ffff',
                   backgroundGradientTo: '#ffff',
