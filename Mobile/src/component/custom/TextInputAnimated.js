@@ -13,9 +13,8 @@ import {
 import DateTimePicker from '@react-native-community/datetimepicker';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../../res/image/index';
-import { colors, fonts, screenWidth } from '../../res/style/theme';
+import { colors, fonts } from '../../res/style/theme';
 import { convertDate } from '../../res/function/Functions';
-import DatePicker from './DatePicker';
 
 const BASE_SIZE = 16; //text size and padding size
 const VIEW_HEIGHT = BASE_SIZE * 3.5; //chiều cao của view tổng
@@ -118,118 +117,122 @@ export default class TextInputAnimated extends Component {
       };
 
       return (
-         <>
-            <TouchableOpacity
-               activeOpacity={1}
-               {...props}
-               onPress={() => {
-                  // this.props.isPicker ? null : this.textInput.current.focus();
-                  this.props.onPress();
-                  this.props.isDatePicker && this.setState({ showDatePicker: true });
+         <TouchableOpacity
+            activeOpacity={1}
+            {...props}
+            onPress={() => {
+               this.props.isPicker ? null : this.textInput.current.focus();
+               this.props.onPress();
+               this.props.isDatePicker && this.setState({ showDatePicker: true });
+            }}
+            style={[
+               styles.container,
+               isFocused && styles.focus,
+               this.props.disabled && styles.disabled,
+               this.props.style,
+            ]}>
+            {/* //////label floating///// */}
+            <Animated.Text
+               onLayout={(event) => {
+                  labelHeight === 0 && this.setState({ labelHeight: event.nativeEvent.layout.height });
                }}
-               style={[
-                  styles.container,
-                  isFocused && styles.focus,
-                  this.props.disabled && styles.disabled,
-                  this.props.style,
-                  { borderWidth: this.props.isShowPicker ? 0 : 1 },
-               ]}>
-               {/* //////label floating///// */}
-               <Animated.Text
-                  onLayout={(event) => {
-                     labelHeight === 0 && this.setState({ labelHeight: event.nativeEvent.layout.height });
-                  }}
-                  style={[labelStyle, this.props.styleLabel]}>
-                  {label}
-                  {props.isRequired ? this.requireInput() : null}
-               </Animated.Text>
+               style={[labelStyle, this.props.styleLabel]}>
+               {label}
+               {props.isRequired ? this.requireInput() : null}
+            </Animated.Text>
 
-               {this.props.isPassword ? (
-                  ///text input có icon ẩn hiện pass/////
-                  <>
-                     {this.inputPass()}
-                     {this.props.value !== '' && isFocused === true ? (
-                        <>
-                           {this.iconClear(BASE_SIZE + 24)}
-                           <View
-                              style={{
-                                 width: 1,
-                                 height: 12,
-                                 backgroundColor: colors.gray3,
-                                 position: 'absolute',
-                                 right: BASE_SIZE + 24 + 2,
-                              }}
-                           />
-                        </>
-                     ) : null}
-
-                     <TouchableOpacity
-                        style={{ position: 'absolute', right: BASE_SIZE }}
-                        onPress={() => {
-                           this.setState({ hidePassword: !this.state.hidePassword });
-                        }}>
-                        <Image
-                           resizeMode="contain"
-                           style={{ width: 24, height: 24 }}
-                           source={!this.state.hidePassword ? Images.ic_eye : Images.ic_eye_close}
+            {this.props.isPassword ? (
+               ///text input có icon ẩn hiện pass/////
+               <>
+                  {this.inputPass()}
+                  {this.props.value !== '' && isFocused === true ? (
+                     <>
+                        {this.iconClear(BASE_SIZE + 24)}
+                        <View
+                           style={{
+                              width: 1,
+                              height: 12,
+                              backgroundColor: colors.gray3,
+                              position: 'absolute',
+                              right: BASE_SIZE + 24 + 2,
+                           }}
                         />
-                     </TouchableOpacity>
-                  </>
-               ) : this.props.isPicker ? (
-                  //textinput disable edit tích hợp vào picker
-                  <>
-                     <TextInput
-                        {...props}
-                        maxLength={100}
-                        editable={false}
-                        ref={this.textInput}
-                        autoCorrect={false}
-                        autoCompleteType="off"
-                        style={[styles.textInput, { color: colors.black }]}
-                        onFocus={this.handleFocus}
-                        onBlur={this.handleBlur}
-                        blurOnSubmit
+                     </>
+                  ) : null}
+
+                  <TouchableOpacity
+                     style={{ position: 'absolute', right: BASE_SIZE }}
+                     onPress={() => {
+                        this.setState({ hidePassword: !this.state.hidePassword });
+                     }}>
+                     <Image
+                        resizeMode="contain"
+                        style={{ width: 24, height: 24 }}
+                        source={!this.state.hidePassword ? Images.ic_eye : Images.ic_eye_close}
                      />
-                     <View style={{ position: 'absolute', right: BASE_SIZE }}>
-                        <FontAwesome5Icon name="angle-down" size={18} color={colors.gray} />
-                     </View>
-                  </>
-               ) : this.props.isShowPicker ? (
-                  <DatePicker
+                  </TouchableOpacity>
+               </>
+            ) : this.props.isPicker ? (
+               //textinput disable edit tích hợp vào picker
+               <>
+                  <TextInput
                      {...props}
-                     styleContainer={[styles.styleDatePicker, { width: screenWidth * props.widthRatio }]}
-                     placeHolder={
-                        <>
-                           <View>
-                              <View style={[props.stylePicker, styles.pickerContainer]}>
-                                 <View>
-                                    <View style={{ flexDirection: 'row' }}>
-                                       <Text style={props.titleTextInputStyle}> {props.titleTextInput} </Text>
-                                    </View>
-                                    {props.value !== '' ? <Text>{props.value}</Text> : null}
-                                 </View>
-                                 <Image
-                                    resizeMode="contain"
-                                    source={props.Icon}
-                                    style={{
-                                       width: 50,
-                                       height: 50,
-                                    }}
-                                 />
-                              </View>
-                           </View>
-                        </>
-                     }
+                     maxLength={100}
+                     editable={false}
+                     ref={this.textInput}
+                     autoCorrect={false}
+                     autoCompleteType="off"
+                     style={[styles.textInput, { color: colors.black }]}
+                     onFocus={this.handleFocus}
+                     onBlur={this.handleBlur}
+                     blurOnSubmit
                   />
-               ) : (
-                  //text input nhập chữ bình thường////////////
-                  <>
-                     {this.input()}
-                     {this.props.value !== '' && isFocused === true ? <>{this.iconClear()}</> : null}
-                  </>
-               )}
-            </TouchableOpacity>
-         </>
+                  <View style={{ position: 'absolute', right: BASE_SIZE }}>
+                     <FontAwesome5Icon name="angle-down" size={18} color={colors.gray} />
+                  </View>
+               </>
+            ) : this.props.isDatePicker ? (
+               //textinput disable edit tích hợp vào picker
+               <>
+                  <TextInput
+                     {...props}
+                     maxLength={100}
+                     editable={false}
+                     ref={this.textInput}
+                     autoCorrect={false}
+                     autoCompleteType="off"
+                     style={[styles.textInput, { color: colors.black }]}
+                     onFocus={this.handleFocus}
+                     onBlur={this.handleBlur}
+                     blurOnSubmit
+                     value={props.mode === 'time' ? this.props.value : convertDate(this.props.value)}
+                  />
+                  <View style={{ position: 'absolute', right: BASE_SIZE }}>
+                     <FontAwesome5Icon name="angle-down" size={18} color={colors.gray} />
+                  </View>
+                  {this.state.showDatePicker && (
+                     <DateTimePicker
+                        {...this.props}
+                        mode={props.mode || 'date'}
+                        value={new Date()}
+                        is24Hour
+                        onChange={(event, selectedDate) => {
+                           this.setState(
+                              { showDatePicker: false, date: selectedDate?.toISOString() ?? '' },
+                              () => this.props.onChange(this.state.date),
+                           );
+                        }}
+                     />
+                  )}
+               </>
+            ) : (
+               //text input nhập chữ bình thường////////////
+               <>
+                  {this.input()}
+                  {this.props.value !== '' && isFocused === true ? <>{this.iconClear()}</> : null}
+               </>
+            )}
+         </TouchableOpacity>
       );
    }
 }
@@ -241,9 +244,10 @@ const styles = StyleSheet.create({
    container: {
       borderColor: colors.gray3,
       borderRadius: BASE_SIZE / 2,
+      borderWidth: 1,
       marginHorizontal: BASE_SIZE,
-      // paddingHorizontal: BASE_SIZE,
-      // paddingVertical: BASE_SIZE,
+      paddingHorizontal: BASE_SIZE,
+      paddingVertical: BASE_SIZE,
       height: VIEW_HEIGHT,
       justifyContent: 'center',
    },
@@ -273,15 +277,4 @@ const styles = StyleSheet.create({
    },
    disabled: { backgroundColor: colors.gray4 },
    icon32: { width: 32, height: 32 },
-   styleDatePicker: {
-      backgroundColor: '#fff',
-      borderWidth: 0.5,
-      paddingHorizontal: 10,
-      borderRadius: 10,
-   },
-   pickerContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-   },
 });
