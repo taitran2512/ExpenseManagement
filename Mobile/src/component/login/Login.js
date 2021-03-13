@@ -197,15 +197,11 @@ export default class Login extends Component {
             this.props.showAlertAction('success', 'Đăng nhập thành công');
             this.props.navigation.replace('Home');
          } else {
-            setTimeout(() => {
-               // Alert.alert('Thông báo', this.props.message);
-               this.props.showAlertAction('error', this.props.message);
-            }, 10);
+            this.props.showAlertAction('error', this.props.message);
          }
       }
       if (this.props.error !== null && this.props.error !== prevProps.error) {
          setTimeout(() => {
-            // Alert.alert('Thông báo', this.props.error);
             this.props.showAlertAction('error', this.props.message);
          }, 10);
       }

@@ -33,23 +33,15 @@ export default class SignUp extends Component {
    componentDidUpdate(prevProps) {
       if (this.props.status !== null && this.props.status !== prevProps.status) {
          if (this.props.status === 'success') {
-            setTimeout(() => {
-               Alert.alert(
-                  'Thông báo',
-                  this.props.message,
-                  [{ text: 'OK', onPress: () => this.props.navigation.goBack() }],
-                  { cancelable: false },
-               );
-            }, 10);
+            this.props.showAlertAction('success', this.props.message);
+            this.props.navigation.goBack();
          } else {
-            setTimeout(() => {
-               Alert.alert('Thông báo', this.props.message);
-            }, 10);
+            this.props.showAlertAction('error', this.props.message);
          }
       }
       if (this.props.error !== null && this.props.error !== prevProps.error) {
          setTimeout(() => {
-            Alert.alert('Thông báo', this.props.error);
+            this.props.showAlertAction('error', this.props.message);
          }, 10);
       }
    }
@@ -105,10 +97,10 @@ export default class SignUp extends Component {
          email === '' ||
          phone === ''
       ) {
-         Alert.alert('Lưu ý', 'Bạn phải nhập đẩy đủ thông tin đăng kí');
+         this.props.showAlertAction('warn', 'Bạn phải nhập đẩy đủ thông tin đăng kí');
       } else {
          if (password !== confirmPassword) {
-            Alert.alert('Lưu ý', 'Mật khẩu nhập lại không trùng khớp');
+            this.props.showAlertAction('warn', 'Mật khẩu nhập lại không trùng khớp');
          } else {
             this.props.signupAction({
                username,
@@ -162,6 +154,7 @@ export default class SignUp extends Component {
                <TextInputAnimated
                   label="Số điện thoại"
                   keyboardType="number-pad"
+                  maxLength={10}
                   style={styles.input}
                   value={this.state.phone}
                   onChangeText={this.onChangePhone}
