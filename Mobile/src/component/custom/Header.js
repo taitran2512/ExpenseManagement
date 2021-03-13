@@ -45,14 +45,12 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-
-      // borderColor: colors.gray,
-      // borderBottomWidth: 1,
    },
    title: {
       fontSize: 18,
       fontWeight: 'bold',
       color: colors.white,
+      textAlign: 'center',
    },
    iconBack: {
       position: 'absolute',

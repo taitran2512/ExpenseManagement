@@ -61,7 +61,7 @@ export default class DrawerComponent extends Component {
    render() {
       return (
          <View style={{ flex: 1 }}>
-            <Header title={`Xin chào ${userData.fullname}`} />
+            <Header title={`Xin chào\n${userData.fullname}`} />
             <FlatList
                data={listMenu}
                keyExtractor={(item, index) => String(index)}
