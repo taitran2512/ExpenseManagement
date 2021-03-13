@@ -159,7 +159,6 @@ export default class Home extends Component {
                totalMoney += wallet.walletMoney;
             }
             this.setState({ totalMoney: totalMoney });
-            this.props.navigation.navigate('UserWaller', this.state.totalMoney);
          } else {
             this.setState({ totalMoney: 0 });
          }
