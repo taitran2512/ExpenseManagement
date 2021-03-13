@@ -17,8 +17,20 @@ import TextInputAnimated from '../custom/TextInputAnimated';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingView from '../custom/LoadingView';
 import { emtyValue } from '../../res/function/Functions';
+import TouchID from 'react-native-touch-id';
+import { userData } from '../../config/Config';
 const logoSize = screenWidth * 0.7;
 const duration = 350;
+
+const fingerConig = {
+   title: 'Xác thực vân tay',
+   imageColor: colors.blue,
+   imageErrorColor: colors.red,
+   sensorDescription: 'Chạm vào cảm biến',
+   sensorErrorDescription: 'Vân tay không đúng',
+   cancelText: 'Hủy bỏ',
+};
+
 export default class Login extends Component {
    constructor(props) {
       super(props);
@@ -31,23 +43,10 @@ export default class Login extends Component {
       this.keyboardDidShow = this.keyboardDidShow.bind(this);
       this.keyboardDidHide = this.keyboardDidHide.bind(this);
    }
-   async componentDidMount() {
+   componentDidMount() {
       this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
       this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
-
-      //get username and password remember login
-      try {
-         const jsonValue = await AsyncStorage.getItem('@saveLogin');
-         if (jsonValue != null) {
-            var data = JSON.parse(jsonValue);
-            this.setState({ username: data.username, password: data.password, saveLogin: true });
-            if (!emtyValue(data.password) && !emtyValue(data.username)) {
-               this.props.loginAction(data.username, data.password);
-            }
-         }
-      } catch (e) {
-         // error reading value
-      }
+      this.isSupportBio();
    }
    componentWillUnmount() {
       this.keyboardDidShowListener.remove();
@@ -76,7 +75,62 @@ export default class Login extends Component {
          useNativeDriver: false,
       }).start();
    };
-
+   // xác định dt có hỗ trợ vân tay ko
+   isSupportBio = () => {
+      const optionalConfigObject = {
+         unifiedErrors: false, // use unified error messages (default false)
+         passcodeFallback: false, // if true is passed, itwill allow isSupported to return an error if the device is not enrolled in touch id/face id etc. Otherwise, it will just tell you what method is supported, even if the user is not enrolled.  (default false)
+      };
+      TouchID.isSupported(optionalConfigObject)
+         .then((biometryType) => {
+            //nếu dt hỗ trợ vân tay/face id
+            userData.BIOMETRICS = biometryType;
+            this.getValueBio();
+         })
+         .catch((error) => {
+            // nếu dt ko hỗ trợ vân tay/face id thì login bình thường
+            userData.BIOMETRICS = '';
+            this.getValueLogin();
+         });
+   };
+   //get username and password remember login
+   getValueLogin = async () => {
+      try {
+         const jsonValue = await AsyncStorage.getItem('@saveLogin');
+         if (jsonValue != null) {
+            var data = JSON.parse(jsonValue);
+            this.setState({ username: data.username, password: data.password, saveLogin: true });
+            if (!emtyValue(data.password) && !emtyValue(data.username)) {
+               this.props.loginAction(data.username, data.password);
+            }
+         }
+      } catch (e) {
+         // error reading value
+      }
+   };
+   //get value turn on or off Biometrics
+   getValueBio = async () => {
+      try {
+         const value = await AsyncStorage.getItem('@biometric');
+         if (value !== null) {
+            //nếu tài khoản có mở đăng nhập vân tay/face id thì bắt đầu xác thực
+            if (value === 'on') {
+               TouchID.authenticate('', fingerConig)
+                  .then((success) => {
+                     this.getValueLogin();
+                  })
+                  .catch((error) => {
+                     Alert.alert('Thông báo', 'Bạn đã xác thực sai quá nhiều lần, vui  lòng thử lại sau');
+                  });
+            } else {
+               //không mở thì đăng nhập bình thường
+               this.getValueLogin();
+            }
+         }
+      } catch (e) {
+         // error reading value
+      }
+   };
    //
    onChangeUsername = (text) => {
       this.setState({ username: text });

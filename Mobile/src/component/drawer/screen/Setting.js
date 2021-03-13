@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors, fonts, screenWidth } from '../../../res/style/theme';
 import Header from '../../custom/Header';
 import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
 import BottomSheet from '../../custom/BottomSheet';
 import Images from '../../../res/image';
 import Switcher from '../../custom/Switcher';
+import { userData } from '../../../config/Config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const dataColor = [
    { title: 'Xanh dương', color: colors.blue },
@@ -29,7 +31,9 @@ export default class Setting extends Component {
       this.BottomSheetColor = React.createRef();
       this.SwitcherRef = React.createRef();
    }
-
+   componentDidMount() {
+      this.getValueBio();
+   }
    itemColor = ({ item, index }) => (
       <TouchableOpacity
          style={styles.item}
@@ -41,10 +45,32 @@ export default class Setting extends Component {
       </TouchableOpacity>
    );
    onPressBio = () => {
-      this.state.activeBio ? this.SwitcherRef.current.off() : this.SwitcherRef.current.on();
+      if (userData.BIOMETRICS === '') {
+         Alert.alert(
+            'Thông báo',
+            'Điện thoại của bạn không hỗ trợ xác thực vân tay/ khuôn mặt hoặc bạn chưa kích hoạt chức năng lên',
+         );
+      } else {
+         this.state.activeBio ? this.SwitcherRef.current.off() : this.SwitcherRef.current.on();
+      }
    };
-   onChangeBiometric = (active) => {
+   onChangeBiometric = async (active) => {
       this.setState({ activeBio: active });
+      try {
+         await AsyncStorage.setItem('@biometric', active ? 'on' : 'off');
+      } catch (e) {
+         // saving error
+      }
+   };
+   getValueBio = async () => {
+      try {
+         const value = await AsyncStorage.getItem('@biometric');
+         if (value !== null) {
+            if (value === 'on') {
+               this.SwitcherRef.current.on();
+            }
+         }
+      } catch (err) {}
    };
    render() {
       return (

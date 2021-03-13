@@ -48,6 +48,7 @@ export default class DrawerComponent extends Component {
                      password: '',
                   });
                   await AsyncStorage.setItem('@saveLogin', jsonValue);
+                  await AsyncStorage.setItem('@biometric', 'off');
                } catch (e) {
                   // saving error
                }

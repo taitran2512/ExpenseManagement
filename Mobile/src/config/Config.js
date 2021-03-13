@@ -10,6 +10,7 @@ const userData = {
    phone: '',
    createDate: '',
    token: '',
+   BIOMETRICS: '',
 };
 
 export { API_URL, userData };
