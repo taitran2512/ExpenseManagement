@@ -79,7 +79,7 @@ export default class Login extends Component {
    isSupportBio = () => {
       const optionalConfigObject = {
          unifiedErrors: false, // use unified error messages (default false)
-         passcodeFallback: false, // if true is passed, itwill allow isSupported to return an error if the device is not enrolled in touch id/face id etc. Otherwise, it will just tell you what method is supported, even if the user is not enrolled.  (default false)
+         passcodeFallback: true, // if true is passed, itwill allow isSupported to return an error if the device is not enrolled in touch id/face id etc. Otherwise, it will just tell you what method is supported, even if the user is not enrolled.  (default false)
       };
       TouchID.isSupported(optionalConfigObject)
          .then((biometryType) => {
@@ -108,7 +108,7 @@ export default class Login extends Component {
          // error reading value
       }
    };
-   //get value turn on or off Biometrics
+   //get value turn on or off Biometrics and authenticate
    getValueBio = async () => {
       try {
          const value = await AsyncStorage.getItem('@biometric');
@@ -119,8 +119,18 @@ export default class Login extends Component {
                   .then((success) => {
                      this.getValueLogin();
                   })
-                  .catch((error) => {
-                     Alert.alert('Thông báo', 'Bạn đã xác thực sai quá nhiều lần, vui  lòng thử lại sau');
+                  .catch(async (error) => {
+                     if (error.code === 'AUTHENTICATION_CANCELED') {
+                        Alert.alert('Thông báo', 'Vui lòng nhập mật khẩu để tiếp tục');
+                        const jsonValue = await AsyncStorage.getItem('@saveLogin');
+                        if (jsonValue != null) {
+                           var data = JSON.parse(jsonValue);
+                           this.setState({
+                              username: data.username,
+                              saveLogin: true,
+                           });
+                        }
+                     }
                   });
             } else {
                //không mở thì đăng nhập bình thường
@@ -254,18 +264,13 @@ export default class Login extends Component {
                <Text style={styles.txtBtnLogin}>Đăng ký</Text>
             </TouchableOpacity>
             {/* ////////////////////// */}
-            {/* <View style={styles.view}>
+            {/* 
                <TouchableOpacity
                   style={styles.subView}
                   onPress={() => this.props.navigation.navigate('Forget')}>
                   <Text style={styles.txtsignup}>Quên mật khẩu</Text>
                </TouchableOpacity>
-               <TouchableOpacity
-                  style={styles.subView}
-                  onPress={() => this.props.navigation.navigate('SignUp')}>
-                  <Text style={styles.txtsignup}>Đăng ký</Text>
-               </TouchableOpacity>
-            </View> */}
+                */}
          </ScrollView>
       );
    }
