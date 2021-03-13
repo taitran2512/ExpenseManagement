@@ -28,7 +28,6 @@ export default class TextInputAnimated extends Component {
          labelHeight: 0,
          showDatePicker: false,
          date: new Date(),
-         
       };
       this.textInput = React.createRef();
    }
@@ -44,7 +43,7 @@ export default class TextInputAnimated extends Component {
       this.setState({ isFocused: false });
    };
 
-   componentDidUpdate() {  
+   componentDidUpdate() {
       Animated.timing(this._animatedIsFocused, {
          toValue: this.state.isFocused || this.props.value !== '' ? 1 : 0,
          duration: 200,
@@ -202,18 +201,10 @@ export default class TextInputAnimated extends Component {
                      placeHolder={
                         <>
                            <View>
-                              <View
-                                 style={[
-                                    props.style,
-                                    {
-                                       flexDirection: 'row',
-                                       justifyContent: 'space-between',
-                                       alignItems: 'center',
-                                    },
-                                 ]}>
+                              <View style={[props.stylePicker, styles.pickerContainer]}>
                                  <View>
                                     <View style={{ flexDirection: 'row' }}>
-                                       <Text> {props.titleTextInput} </Text>
+                                       <Text style={props.titleTextInputStyle}> {props.titleTextInput} </Text>
                                     </View>
                                     {props.value !== '' ? <Text>{props.value}</Text> : null}
                                  </View>
@@ -287,5 +278,10 @@ const styles = StyleSheet.create({
       borderWidth: 0.5,
       paddingHorizontal: 10,
       borderRadius: 10,
+   },
+   pickerContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
    },
 });

@@ -8,6 +8,7 @@ import Header from '../custom/Header';
 
 const listMenu = [
    { title: 'Thông tin cá nhân', icon: Images.ic_user_info, screen: 'UserInfo' },
+   { title: 'Ví của tôi', icon: Images.ic_money, screen: 'UserWaller' },
    { title: 'Đổi mật khẩu', icon: Images.ic_lock, screen: 'ChangePassword' },
    { title: 'Xuất file Excel', icon: Images.ic_excel, screen: 'ExportExcel' },
    { title: 'Hướng dẫn sử dụng', icon: Images.ic_guide, screen: '' },

@@ -121,7 +121,7 @@ const DatePicker = (props = propsType) => {
                ? pixel * 330
                : pixel * 250
          }
-         title={props.title}
+         title={props.titleBottomSheet}
          rightIcon={
             <Text
                style={{

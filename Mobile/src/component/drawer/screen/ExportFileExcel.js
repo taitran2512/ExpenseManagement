@@ -4,7 +4,7 @@ import Header from '../../custom/Header';
 import TextInputAnimated from '../../custom/TextInputAnimated';
 import { colors, screenWidth } from '../../../res/style/theme';
 import Images from '../../../res/image';
-import { convertDate } from '../../../res/function/Functions';
+import { convertToStringDate } from '../../../res/function/Functions';
 
 export class ExportFileExcel extends Component {
    constructor(props) {
@@ -18,21 +18,19 @@ export class ExportFileExcel extends Component {
          <View style={styles.container}>
             <Header isShowBack onPressBack={() => this.props.navigation.goBack()} title="Xuất file Excel" />
             <TextInputAnimated
-               date
                isShowPicker
-               onCancel={() => this.setState({ isShowSelectDate: false })}
-               show={this.state.isShowSelectDate}
-               title="Ngày tạo"
+               onCancel={() => console.log('oncancel')}
+               titleBottomSheet="Ngày tạo"
                value={this.state.valueDatePicker}
                widthRatio={0.4}
                titleTextInput="Ngày tạo"
                Icon={Images.ic_calendar}
                onSelect={(res) => {
                   let date = new Date();
-                  date.setDate(res.date + 1);
+                  date.setDate(res.date);
                   date.setMonth(res.month - 1);
                   date.setFullYear(res.year);
-                  const convertDate = date.toISOString().slice(0, 10).split('-').reverse().join('/');
+                  const convertDate = convertToStringDate(date);
                   this.setState({
                      valueDatePicker: convertDate,
                   });

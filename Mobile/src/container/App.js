@@ -27,6 +27,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setColorAcion } from '../redux/action/drawer/setColorAcion';
 import InfoApp from '../component/drawer/screen/InfoApp';
 import ExportFileExcel from '../component/drawer/screen/ExportFileExcel';
+import UserWallet from '../component/drawer/screen/UserWallet/UserWallet';
+import { Platform } from 'react-native';
 ////////////////////////////////////////////////////////////
 //bottom-tab
 const Tab = createMaterialBottomTabNavigator();
@@ -39,7 +41,6 @@ const bottomTab = () => {
          shifting={true}
          barStyle={{
             backgroundColor: colors.white,
-            height: 48,
             justifyContent: 'center',
             borderWidth: 1,
             borderTopColor: colors.gray2,
@@ -133,6 +134,7 @@ const App = (props) => {
             <Stack.Screen name="Setting" component={SettingContainer} />
             <Stack.Screen name="InfoApp" component={InfoApp} />
             <Stack.Screen name="ExportExcel" component={ExportFileExcel} />
+            <Stack.Screen name="UserWaller" component={UserWallet} />
          </Stack.Navigator>
       </NavigationContainer>
    );
