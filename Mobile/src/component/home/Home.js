@@ -60,7 +60,7 @@ export default class Home extends Component {
       if (!emtyValue(this.props.getWallet.data)) {
          this.props.navigation.navigate(screen, { getData: this.getData });
       } else {
-         Alert.alert('Lưu ý', 'Hãy tạo mới ví tiền trước');
+         this.props.showAlertAction('warn', 'Hãy tạo mới ví tiền trước');
       }
    };
    renderItemCard = ({ item, index }) => (
@@ -128,9 +128,7 @@ export default class Home extends Component {
       ) {
          if (this.props.createWallet.status === 'success') {
             this.props.getWalletAction();
-            setTimeout(() => {
-               Alert.alert('Thông báo', this.props.createWallet.message);
-            }, 10);
+            this.props.showAlertAction('success', this.props.createWallet.message);
          }
       }
    };
@@ -141,9 +139,7 @@ export default class Home extends Component {
       ) {
          if (this.props.deleteWallet.status === 'success') {
             this.props.getWalletAction();
-            setTimeout(() => {
-               Alert.alert('Thông báo', this.props.deleteWallet.message);
-            }, 10);
+            this.props.showAlertAction('success', this.props.deleteWallet.message);
          }
       }
    };
@@ -172,9 +168,7 @@ export default class Home extends Component {
       ) {
          if (this.props.updateWallet.status === 'success') {
             this.props.getWalletAction();
-            setTimeout(() => {
-               Alert.alert('Thông báo', this.props.updateWallet.message);
-            }, 10);
+            this.props.showAlertAction('success', this.props.updateWallet.message);
          }
       }
    };
@@ -190,14 +184,6 @@ export default class Home extends Component {
       return (
          <View style={styles.container}>
             <Header isShowMenu onPressMenu={() => this.props.navigation.openDrawer()} title="Trang chủ" />
-            {/* <LoadingView
-               visible={
-                  this.props.createWallet.loading ||
-                  this.props.getWallet.loading ||
-                  this.props.deleteWallet.loading ||
-                  this.props.history.loading
-               }
-            /> */}
             {/* ////////////////////////////////////// */}
             <View style={[styles.header, { backgroundColor: colors.app }]}>
                <Text style={[styles.txtWallet, { fontSize: 30 }]}>Tổng số tiền</Text>
@@ -211,13 +197,7 @@ export default class Home extends Component {
             <View style={{ flex: 1 }}>
                <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: colors.app }} />
                <View style={styles.footer}>
-                  <View
-                     style={
-                        {
-                           // borderBottomWidth: 2,
-                           // borderBottomColor: colors.gray2,
-                        }
-                     }>
+                  <View>
                      <FlatList
                         contentContainerStyle={{ padding: 16, flexGrow: 1 }}
                         data={this.props.getWallet.data}
