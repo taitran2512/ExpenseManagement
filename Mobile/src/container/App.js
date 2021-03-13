@@ -27,6 +27,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setColorAcion } from '../redux/action/drawer/setColorAcion';
 import InfoApp from '../component/drawer/screen/InfoApp';
 import ExportFileExcel from '../component/drawer/screen/ExportFileExcel';
+import AlertAnimated from '../component/custom/AlertAnimated';
 
 ////////////////////////////////////////////////////////////
 //bottom-tab
@@ -134,6 +135,7 @@ const App = (props) => {
             <Stack.Screen name="InfoApp" component={InfoApp} />
             <Stack.Screen name="ExportExcel" component={ExportFileExcel} />
          </Stack.Navigator>
+         <AlertAnimated {...props} />
       </NavigationContainer>
    );
 };

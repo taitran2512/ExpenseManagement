@@ -14,6 +14,7 @@ import getIncomeReducer from './history/getIncomeReducer';
 import postHistoryReducer from './history/postHistoryReducer';
 import changePasswordReducer from './account/forget/changePasswordReducer';
 import setColorReducer from './drawer/setColorReducer';
+import showAlertReducer from './alert/showAlertReducer';
 import getTotalByTypeReducer from './statistic/getTotalByTypeReducer';
 const allReducers = combineReducers({
    loginReducer,
@@ -31,6 +32,7 @@ const allReducers = combineReducers({
    postHistoryReducer,
    changePasswordReducer,
    setColorReducer,
+   showAlertReducer,
    getTotalByTypeReducer,
 });
 

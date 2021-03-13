@@ -183,7 +183,8 @@ export default class Login extends Component {
    //press login
    onPressLogin = () => {
       if (this.state.username === '' || this.state.password === '') {
-         Alert.alert('Lưu ý', 'Bạn phải nhập đầy đủ thông tin đăng nhập');
+         // Alert.alert('Lưu ý', 'Bạn phải nhập đầy đủ thông tin đăng nhập');
+         this.props.showAlertAction('warn', 'Bạn phải nhập đầy đủ thông tin đăng nhập');
       } else {
          this.props.loginAction(this.state.username, this.state.password);
       }
@@ -193,16 +194,19 @@ export default class Login extends Component {
       if (this.props.status !== null && this.props.status !== prevProps.status) {
          if (this.props.status === 'success') {
             this.saveLogin();
+            this.props.showAlertAction('success', 'Đăng nhập thành công');
             this.props.navigation.replace('Home');
          } else {
             setTimeout(() => {
-               Alert.alert('Thông báo', this.props.message);
+               // Alert.alert('Thông báo', this.props.message);
+               this.props.showAlertAction('error', this.props.message);
             }, 10);
          }
       }
       if (this.props.error !== null && this.props.error !== prevProps.error) {
          setTimeout(() => {
-            Alert.alert('Thông báo', this.props.error);
+            // Alert.alert('Thông báo', this.props.error);
+            this.props.showAlertAction('error', this.props.message);
          }, 10);
       }
    }

@@ -19,6 +19,7 @@ const colors = {
    yellow: '#FFEC3D',
    yellow1: '#FADB14',
    yellow2: '#FFFB8F',
+   yellow3: '#FAAD14',
    purple: '#722ED1',
    purple1: '#9254DE',
    purple2: '#B37FEB',
