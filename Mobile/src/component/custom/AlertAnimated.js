@@ -6,7 +6,7 @@ import { getStatusBarHeight } from '../../res/function/StatusBarHeight';
 import { colors, fonts } from '../../res/style/theme';
 
 const time = 1000;
-const height = getStatusBarHeight() + 56;
+const height = getStatusBarHeight() + 48;
 const AlertAnimated = (props) => {
    const animation = new Animated.Value(-height);
 

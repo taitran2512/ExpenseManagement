@@ -135,7 +135,7 @@ const App = (props) => {
             <Stack.Screen name="InfoApp" component={InfoApp} />
             <Stack.Screen name="ExportExcel" component={ExportFileExcel} />
          </Stack.Navigator>
-         <AlertAnimated {...props} />
+         <AlertAnimated />
       </NavigationContainer>
    );
 };
