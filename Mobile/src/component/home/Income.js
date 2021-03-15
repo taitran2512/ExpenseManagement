@@ -18,7 +18,7 @@ import Images from '../../res/image';
 import TextInputAnimated from '../custom/TextInputAnimated';
 import ButtonSubmit from '../custom/ButtonSubmit';
 import BottomSheet from '../custom/BottomSheet';
-import { emtyValue } from '../../res/function/Functions';
+import { convertDate, emtyValue } from '../../res/function/Functions';
 import LoadingView from '../custom/LoadingView';
 export default class Expense extends Component {
    constructor(props) {
@@ -156,21 +156,36 @@ export default class Expense extends Component {
                   keyboardType="number-pad"
                />
                <TextInputAnimated
-                  isDatePicker
-                  mode="date"
-                  label="Ngày tháng"
+                  isDatePickers
                   style={styles.mg}
-                  value={this.state.date}
-                  onChange={this.onChangedate}
+                  titleBottomSheet="Ngày tháng"
+                  value={convertDate(this.state.date)}
+                  titleTextInput="Ngày tháng"
+                  onSelect={(res) => {
+                     let date = new Date();
+                     date.setDate(res.date);
+                     date.setMonth(res.month - 1);
+                     date.setFullYear(res.year);
+                     this.setState({
+                        date: date.toISOString(),
+                     });
+                  }}
                />
+
                <TextInputAnimated
-                  isDatePicker
-                  mode="time"
-                  is24Hour
-                  label="Thời gian"
+                  isTimePickers
                   style={styles.mg}
+                  titleBottomSheet="Thời gian"
                   value={this.state.time}
-                  onChange={this.onChangetime}
+                  titleTextInput="Thời gian"
+                  onSelect={(res) => {
+                     this.setState({
+                        time:
+                           (res.hour < 10 ? `0${res.hour}` : res.hour) +
+                           ':' +
+                           (res.min < 10 ? `0${res.min}` : res.min),
+                     });
+                  }}
                />
                <TextInputAnimated
                   isPicker

@@ -340,7 +340,8 @@ const styles = StyleSheet.create({
    icon32: { width: 32, height: 32 },
    styleDatePicker: {
       backgroundColor: '#fff',
-      borderWidth: 0.5,
+      borderWidth: 1,
+      borderColor: colors.gray3,
       paddingHorizontal: 10,
       borderRadius: 10,
       height: VIEW_HEIGHT,
@@ -353,7 +354,8 @@ const styles = StyleSheet.create({
    },
    styleTimePicker: {
       backgroundColor: '#fff',
-      borderWidth: 0.5,
+      borderWidth: 1,
+      borderColor: colors.gray3,
       paddingHorizontal: 10,
       borderRadius: 10,
       height: VIEW_HEIGHT,
