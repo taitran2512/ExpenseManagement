@@ -132,7 +132,7 @@ export default class TextInputAnimated extends Component {
                isFocused && styles.focus,
                this.props.disabled && styles.disabled,
                this.props.style,
-               { borderWidth: this.props.isDatePickers ? 0 : 1 },
+               { borderWidth: this.props.isDatePickers || this.props.isTimePickers ? 0 : 1 },
             ]}>
             {/* //////label floating///// */}
             <Animated.Text
@@ -236,7 +236,10 @@ export default class TextInputAnimated extends Component {
                      placeHolder={
                         <View style={[props.stylePicker, styles.pickerContainer]}>
                            <View>
-                              <Text style={props.titleTextInputStyle}> {props.titleTextInput} </Text>
+                              <Text style={[styles.label, props.titleTextInputStyle]}>
+                                 {' '}
+                                 {props.titleTextInput}{' '}
+                              </Text>
                               {props.value !== '' ? (
                                  <Text
                                     style={{
@@ -266,7 +269,10 @@ export default class TextInputAnimated extends Component {
                      placeHolder={
                         <View style={[props.stylePicker, styles.pickerContainer]}>
                            <View>
-                              <Text style={props.titleTextInputStyle}> {props.titleTextInput} </Text>
+                              <Text style={[styles.label, props.titleTextInputStyle]}>
+                                 {' '}
+                                 {props.titleTextInput}{' '}
+                              </Text>
                               {props.value !== '' ? (
                                  <Text
                                     style={{
@@ -360,5 +366,8 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       height: VIEW_HEIGHT,
       width: screenWidth,
+   },
+   label: {
+      color: colors.gray,
    },
 });

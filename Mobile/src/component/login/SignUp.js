@@ -11,6 +11,7 @@ import {
    Alert,
    SafeAreaView,
 } from 'react-native';
+import { convertDate } from '../../res/function/Functions';
 import Images from '../../res/image';
 import { colors, fonts, screenWidth } from '../../res/style/theme';
 import LoadingView from '../custom/LoadingView';
@@ -144,11 +145,20 @@ export default class SignUp extends Component {
                   onPressClear={this.onClearEmail}
                />
                <TextInputAnimated
-                  label="Ngày sinh"
-                  isDatePicker
+                  isDatePickers
                   style={styles.input}
-                  value={String(this.state.dob)}
-                  onChange={this.onChangeDOB}
+                  titleBottomSheet="Ngày sinh"
+                  value={convertDate(this.state.dob)}
+                  titleTextInput="Ngày sinh"
+                  onSelect={(res) => {
+                     let date = new Date();
+                     date.setDate(res.date);
+                     date.setMonth(res.month - 1);
+                     date.setFullYear(res.year);
+                     this.setState({
+                        dob: date.toISOString(),
+                     });
+                  }}
                />
 
                <TextInputAnimated
