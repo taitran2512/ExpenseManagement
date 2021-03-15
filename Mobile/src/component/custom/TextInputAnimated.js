@@ -16,6 +16,7 @@ import Images from '../../res/image/index';
 import { colors, fonts, screenWidth } from '../../res/style/theme';
 import { convertDate } from '../../res/function/Functions';
 import DatePicker from '../custom/DatePicker';
+import TimePicker from '../custom/TimePicker';
 
 const BASE_SIZE = 16; //text size and padding size
 const VIEW_HEIGHT = BASE_SIZE * 3.5; //chiều cao của view tổng
@@ -231,7 +232,7 @@ export default class TextInputAnimated extends Component {
                <>
                   <DatePicker
                      {...props}
-                     styleContainer={[styles.styleDatePicker, { width: '100%' }]}
+                     styleContainer={[styles.styleDatePicker, props.styleDatePicker, { width: '100%' }]}
                      placeHolder={
                         <View style={[props.stylePicker, styles.pickerContainer]}>
                            <View>
@@ -245,10 +246,39 @@ export default class TextInputAnimated extends Component {
                                  </Text>
                               ) : null}
                            </View>
-
                            <Image
                               resizeMode="contain"
-                              source={props.Icon}
+                              source={Images.ic_calendar}
+                              style={{
+                                 width: 50,
+                                 height: 50,
+                              }}
+                           />
+                        </View>
+                     }
+                  />
+               </>
+            ) : this.props.isTimePickers ? (
+               <>
+                  <TimePicker
+                     {...props}
+                     styleContainer={[styles.styleTimePicker, props.styleTimePicker, { width: '100%' }]}
+                     placeHolder={
+                        <View style={[props.stylePicker, styles.pickerContainer]}>
+                           <View>
+                              <Text style={props.titleTextInputStyle}> {props.titleTextInput} </Text>
+                              {props.value !== '' ? (
+                                 <Text
+                                    style={{
+                                       marginTop: 5,
+                                    }}>
+                                    {props.value}
+                                 </Text>
+                              ) : null}
+                           </View>
+                           <Image
+                              resizeMode="contain"
+                              source={Images.ic_clock}
                               style={{
                                  width: 50,
                                  height: 50,
@@ -320,5 +350,13 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
+   },
+   styleTimePicker: {
+      backgroundColor: '#fff',
+      borderWidth: 0.5,
+      paddingHorizontal: 10,
+      borderRadius: 10,
+      height: VIEW_HEIGHT,
+      width: screenWidth,
    },
 });

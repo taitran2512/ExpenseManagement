@@ -1,9 +1,11 @@
 import { now } from 'moment';
 import React, { Component, useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Text, Platform } from 'react-native';
+import { View, StyleSheet, ScrollView, Text, Platform, Image } from 'react-native';
 import BottomSheet from './BottomSheetCustom';
 import { TimePicker } from 'react-native-wheel-picker-android';
 import Sizes from '../../res/style/size';
+import Images from '../../res/image';
+import { colors } from '../../res/style/theme';
 // import { color } from '../../res/color';
 
 const pixel = Math.round(Sizes.s2);
@@ -23,18 +25,19 @@ const propsType = {
 const DatePicker = (props = propsType) => {
    const [time, setTime] = useState(new Date());
 
-   // useEffect (()=> {
-   //   const valueDefaultTime = props.valueDefaultTime
+   // useEffect(() => {
+   //    const valueDefaultTime = props.valueDefaultTime;
 
-   //   if(valueDefaultTime){
-   //     setTime(valueDefaultTime)
-   //   }
-   // },[props.valueDefaultTime])
+   //    if (valueDefaultTime) {
+   //       setTime(valueDefaultTime);
+   //    }
+   // }, [props.valueDefaultTime]);
 
    return (
       <BottomSheet
+         {...props}
          show={props.show}
-         onCancel={() => props.onCancel()}
+         onCancel={props.onCancel}
          height={
             props.includeTime
                ? Platform.OS == 'ios'
@@ -44,7 +47,7 @@ const DatePicker = (props = propsType) => {
                ? pixel * 330
                : pixel * 250
          }
-         title="Choose time"
+         title={props.titleBottomSheet}
          rightIcon={
             <Text
                style={{
@@ -52,10 +55,21 @@ const DatePicker = (props = propsType) => {
                   color: '#3E62CC',
                   fontSize: Sizes.h32,
                }}>
-               Done
+               Xong
             </Text>
          }
-         leftIcon={<View style={{ width: Sizes.s140, height: 1 }} />}
+         leftIcon={
+            <Image
+               resizeMode="contain"
+               style={{
+                  width: Sizes.s50,
+                  height: Sizes.s50,
+               }}
+               source={props.leftIcon ? Images.ic_close : null}
+            />
+         }
+         close
+         // leftIcon={<View style={{ width: Sizes.s140, height: 1 }} />}
          onRightClick={() => {
             props.onSelect &&
                props.onSelect({
@@ -65,7 +79,7 @@ const DatePicker = (props = propsType) => {
          }}
          placeHolder={props.placeHolder ? props.placeHolder : null}
          children={
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: 1, backgroundColor: colors.white }}>
                <TimePicker onTimeSelected={setTime} format24={true} />
             </View>
          }
@@ -92,3 +106,6 @@ const styles = StyleSheet.create({
 });
 
 export default DatePicker;
+DatePicker.defaultProps = {
+   onCancel: () => {},
+};

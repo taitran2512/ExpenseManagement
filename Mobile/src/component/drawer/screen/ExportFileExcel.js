@@ -11,6 +11,7 @@ export class ExportFileExcel extends Component {
       super(props);
       this.state = {
          valueDatePicker: '',
+         valueTimePicker: '',
       };
    }
    render() {
@@ -19,11 +20,9 @@ export class ExportFileExcel extends Component {
             <Header isShowBack onPressBack={() => this.props.navigation.goBack()} title="Xuất file Excel" />
             <TextInputAnimated
                isDatePickers
-               onCancel={() => console.log('oncancel')}
                titleBottomSheet="Ngày tạo"
                value={this.state.valueDatePicker}
                titleTextInput="Ngày tạo"
-               Icon={Images.ic_calendar}
                onSelect={(res) => {
                   let date = new Date();
                   date.setDate(res.date);
@@ -32,6 +31,22 @@ export class ExportFileExcel extends Component {
                   const convertDate = convertToStringDate(date);
                   this.setState({
                      valueDatePicker: convertDate,
+                  });
+               }}
+            />
+            <TextInputAnimated
+               isTimePickers
+               titleBottomSheet="Ngày tạo"
+               value={this.state.valueTimePicker}
+               styleTimePicker={{ marginTop: 10 }}
+               titleTextInput="Ngày tạo"
+               onSelect={(res) => {
+                  let date = new Date();
+                  date.setHours(res.hour + 7);
+                  date.setMinutes(res.min);
+                  const convertDate = date.toISOString().slice(11, 16);
+                  this.setState({
+                     valueTimePicker: convertDate,
                   });
                }}
             />

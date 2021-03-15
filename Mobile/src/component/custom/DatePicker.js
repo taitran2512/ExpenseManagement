@@ -111,7 +111,7 @@ const DatePicker = (props = propsType) => {
       <BottomSheet
          {...props}
          show={props.show}
-         onCancel={() => props.onCancel()}
+         onCancel={props.onCancel}
          height={
             props.includeTime
                ? Platform.OS == 'ios'
@@ -255,3 +255,6 @@ const styles = StyleSheet.create({
 });
 
 export default DatePicker;
+DatePicker.defaultProps = {
+   onCancel: () => {},
+};
