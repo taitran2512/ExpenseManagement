@@ -7,6 +7,9 @@ const convertDate = (date) => {
       const dateShow = date.slice(0, 10).split('-').reverse().join('/');
       return dateShow;
    }
+   else{
+      return ''
+   }
 };
 
 const convertToStringDate = (date) => {
