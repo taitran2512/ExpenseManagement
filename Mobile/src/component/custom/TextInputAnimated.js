@@ -13,8 +13,9 @@ import {
 import DateTimePicker from '@react-native-community/datetimepicker';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../../res/image/index';
-import { colors, fonts } from '../../res/style/theme';
+import { colors, fonts, screenWidth } from '../../res/style/theme';
 import { convertDate } from '../../res/function/Functions';
+import DatePicker from '../custom/DatePicker';
 
 const BASE_SIZE = 16; //text size and padding size
 const VIEW_HEIGHT = BASE_SIZE * 3.5; //chiều cao của view tổng
@@ -121,7 +122,7 @@ export default class TextInputAnimated extends Component {
             activeOpacity={1}
             {...props}
             onPress={() => {
-               this.props.isPicker ? null : this.textInput.current.focus();
+               this.props.isPicker || this.props.isDatePickers ? null : this.textInput.current.focus();
                this.props.onPress();
                this.props.isDatePicker && this.setState({ showDatePicker: true });
             }}
@@ -130,6 +131,7 @@ export default class TextInputAnimated extends Component {
                isFocused && styles.focus,
                this.props.disabled && styles.disabled,
                this.props.style,
+               { borderWidth: this.props.isDatePickers ? 0 : 1 },
             ]}>
             {/* //////label floating///// */}
             <Animated.Text
@@ -225,6 +227,37 @@ export default class TextInputAnimated extends Component {
                      />
                   )}
                </>
+            ) : this.props.isDatePickers ? (
+               <>
+                  <DatePicker
+                     {...props}
+                     styleContainer={[styles.styleDatePicker, { width: '100%' }]}
+                     placeHolder={
+                        <View style={[props.stylePicker, styles.pickerContainer]}>
+                           <View>
+                              <Text style={props.titleTextInputStyle}> {props.titleTextInput} </Text>
+                              {props.value !== '' ? (
+                                 <Text
+                                    style={{
+                                       marginTop: 5,
+                                    }}>
+                                    {props.value}
+                                 </Text>
+                              ) : null}
+                           </View>
+
+                           <Image
+                              resizeMode="contain"
+                              source={props.Icon}
+                              style={{
+                                 width: 50,
+                                 height: 50,
+                              }}
+                           />
+                        </View>
+                     }
+                  />
+               </>
             ) : (
                //text input nhập chữ bình thường////////////
                <>
@@ -244,9 +277,7 @@ const styles = StyleSheet.create({
    container: {
       borderColor: colors.gray3,
       borderRadius: BASE_SIZE / 2,
-      borderWidth: 1,
       marginHorizontal: BASE_SIZE,
-      paddingHorizontal: BASE_SIZE,
       paddingVertical: BASE_SIZE,
       height: VIEW_HEIGHT,
       justifyContent: 'center',
@@ -277,4 +308,17 @@ const styles = StyleSheet.create({
    },
    disabled: { backgroundColor: colors.gray4 },
    icon32: { width: 32, height: 32 },
+   styleDatePicker: {
+      backgroundColor: '#fff',
+      borderWidth: 0.5,
+      paddingHorizontal: 10,
+      borderRadius: 10,
+      height: VIEW_HEIGHT,
+      width: screenWidth,
+   },
+   pickerContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+   },
 });

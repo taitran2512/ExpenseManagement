@@ -18,11 +18,10 @@ export class ExportFileExcel extends Component {
          <View style={styles.container}>
             <Header isShowBack onPressBack={() => this.props.navigation.goBack()} title="Xuất file Excel" />
             <TextInputAnimated
-               isShowPicker
+               isDatePickers
                onCancel={() => console.log('oncancel')}
                titleBottomSheet="Ngày tạo"
                value={this.state.valueDatePicker}
-               widthRatio={0.4}
                titleTextInput="Ngày tạo"
                Icon={Images.ic_calendar}
                onSelect={(res) => {
