@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { getStatusBarHeight } from '../../res/function/StatusBarHeight';
 import { colors, fonts } from '../../res/style/theme';
 
-const time = 1000;
+const time = 250;
 const height = getStatusBarHeight() + 48;
-const AlertAnimated = (props) => {
+const AlertAnimated = React.memo((props) => {
    const animation = new Animated.Value(-height);
 
    useEffect(() => {
@@ -19,18 +19,18 @@ const AlertAnimated = (props) => {
    const slideDown = () => {
       Animated.timing(animation, {
          toValue: 0,
-         time: time,
+         duration: time,
          useNativeDriver: true,
       }).start(() =>
          setTimeout(() => {
             slideUp();
-         }, 2000),
+         }, 1500),
       );
    };
    const slideUp = () => {
       Animated.timing(animation, {
          toValue: -height,
-         time: time,
+         duration: time,
          useNativeDriver: true,
       }).start();
    };
@@ -86,7 +86,7 @@ const AlertAnimated = (props) => {
          </View>
       </Animated.View>
    );
-};
+});
 
 const mapStateToProps = (state) => {
    return {
