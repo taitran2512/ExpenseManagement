@@ -202,7 +202,7 @@ export default class Login extends Component {
       }
       if (this.props.error !== null && this.props.error !== prevProps.error) {
          setTimeout(() => {
-            this.props.showAlertAction('error', this.props.message);
+            this.props.showAlertAction('error', this.props.error);
          }, 10);
       }
    }
