@@ -137,6 +137,8 @@ export default class Login extends Component {
                //không mở thì đăng nhập bình thường
                this.getValueLogin();
             }
+         } else {
+            this.getValueLogin();
          }
       } catch (e) {
          // error reading value
@@ -195,7 +197,6 @@ export default class Login extends Component {
       if (this.props.status !== null && this.props.status !== prevProps.status) {
          if (this.props.status === 'success') {
             this.saveLogin();
-            this.props.showAlertAction('success', 'Đăng nhập thành công');
             this.props.navigation.replace('Home');
          } else {
             this.props.showAlertAction('error', this.props.message);
