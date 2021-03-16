@@ -29,14 +29,7 @@ export default class TotalTypeChart extends Component {
          value: [],
       };
    }
-   shouldComponentUpdate(nextProps, nextState) {
-      return (
-         this.props.dataWallet !== nextProps.dataWallet ||
-         this.state.label !== nextState.label ||
-         this.state.value !== nextState.value
-      );
-   }
-   componentDidMount() {
+   calculateValue = () => {
       let label = [];
       for (var item of this.props.dataWallet) {
          label.push(item.walletName);
@@ -46,6 +39,14 @@ export default class TotalTypeChart extends Component {
          value.push(items.walletMoney / 1000000);
       }
       this.setState({ label: label, value: value });
+   };
+   componentDidMount() {
+      this.calculateValue();
+   }
+   componentDidUpdate(prevProps) {
+      if (this.props.dataWallet !== null && this.props.dataWallet !== prevProps.dataWallet) {
+         this.calculateValue();
+      }
    }
    render() {
       return (

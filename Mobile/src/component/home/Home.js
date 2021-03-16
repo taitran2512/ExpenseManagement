@@ -8,6 +8,7 @@ import {
    TouchableOpacity,
    BackHandler,
    ActivityIndicator,
+   Image,
 } from 'react-native';
 import { convertDate, emtyValue, formatMoney } from '../../res/function/Functions';
 import { colors, fonts, screenHeight, screenWidth } from '../../res/style/theme';
@@ -18,6 +19,7 @@ import ItemHistory from './custom/ItemHistory';
 import WalletModal from './custom/WalletModal';
 import LoadingView from '../custom/LoadingView';
 import Skeleton from '../custom/Skeleton';
+import Images from '../../res/image';
 export default class Home extends Component {
    constructor(props) {
       super(props);
@@ -186,12 +188,13 @@ export default class Home extends Component {
             <Header isShowMenu onPressMenu={() => this.props.navigation.openDrawer()} title="Trang chủ" />
             {/* ////////////////////////////////////// */}
             <View style={[styles.header, { backgroundColor: colors.app }]}>
-               <Text style={[styles.txtWallet, { fontSize: 30 }]}>Tổng số tiền</Text>
+               {/* <Text style={[styles.txtWallet, { fontSize: 30 }]}>Tổng số tiền</Text>
                {this.props.getWallet.loading ? (
                   <ActivityIndicator color="white" size="small" />
                ) : (
                   <Text style={styles.txtWallet}>{formatMoney(this.state.totalMoney)} đ</Text>
-               )}
+               )} */}
+               <TotalMoneyView totalMoney={this.state.totalMoney} loading={this.props.getWallet.loading} />
             </View>
             {/* ////////////footer///////////////// */}
             <View style={{ flex: 1 }}>
@@ -244,6 +247,26 @@ export default class Home extends Component {
       );
    }
 }
+const TotalMoneyView = (props) => {
+   const [showMoney, setShowMoney] = React.useState(false);
+   return (
+      <>
+         <Text style={[styles.txtWallet, { fontSize: 30 }]}>Tổng số dư</Text>
+         <View style={styles.totalMoneyView}>
+            {/* {props.loading ? (
+               <ActivityIndicator color="white" size="small" />
+            ) : (
+               <> */}
+            <Text style={styles.txtWallet}>{showMoney ? formatMoney(props.totalMoney) : '*******'}</Text>
+            <TouchableOpacity onPress={() => setShowMoney(!showMoney)}>
+               <Image source={showMoney ? Images.ic_eye : Images.ic_eye_close} style={styles.ic_eye} />
+            </TouchableOpacity>
+            {/* </>
+            )} */}
+         </View>
+      </>
+   );
+};
 const styles = StyleSheet.create({
    container: {
       flex: 1,
@@ -261,10 +284,22 @@ const styles = StyleSheet.create({
       backgroundColor: colors.white3,
       borderTopLeftRadius: 75,
    },
+   totalMoneyView: {
+      flexDirection: 'row',
+      alignItems: 'center',
+   },
+   ic_eye: {
+      width: 24,
+      height: 24,
+      resizeMode: 'contain',
+      tintColor: colors.white,
+      marginLeft: 10,
+   },
    txtWallet: {
       color: colors.white,
       fontFamily: fonts.semibold,
       fontSize: 35,
+      textAlign: 'center',
    },
    txtHistory: {
       fontSize: 20,
