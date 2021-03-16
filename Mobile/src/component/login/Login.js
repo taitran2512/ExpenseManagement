@@ -8,6 +8,7 @@ import {
    ScrollView,
    TouchableOpacity,
    Alert,
+   Image,
 } from 'react-native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import Images from '../../res/image';
@@ -20,7 +21,7 @@ import { emtyValue } from '../../res/function/Functions';
 import TouchID from 'react-native-touch-id';
 import { userData } from '../../config/Config';
 const logoSize = screenWidth * 0.7;
-const duration = 350;
+const duration = 200;
 
 const fingerConig = {
    title: 'Xác thực vân tay',
@@ -263,7 +264,15 @@ export default class Login extends Component {
                onPress={() => this.props.navigation.navigate('SignUp')}>
                <Text style={styles.txtBtnLogin}>Đăng ký</Text>
             </TouchableOpacity>
-            {/* ////////////////////// */}
+            {/* //////////// FOOTER ////////// */}
+            <View style={styles.footerView}>
+               <TouchableOpacity onPress={() => alert('Tính năng đang được cập nhật')}>
+                  <Image source={Images.ic_facebook} style={styles.sizeIcon} />
+               </TouchableOpacity>
+               <TouchableOpacity onPress={() => alert('Tính năng đang được cập nhật')}>
+                  <Image source={Images.ic_gmail} style={styles.sizeIcon} />
+               </TouchableOpacity>
+            </View>
             {/* 
                <TouchableOpacity
                   style={styles.subView}
@@ -338,5 +347,15 @@ const styles = StyleSheet.create({
       color: colors.app,
       marginLeft: 8,
       fontFamily: fonts.medium,
+   },
+   footerView: {
+      flexDirection: 'row',
+      justifyContent: 'space-evenly',
+      alignItems: 'center',
+      marginTop: 20,
+   },
+   sizeIcon: {
+      height: 80,
+      width: 80,
    },
 });
