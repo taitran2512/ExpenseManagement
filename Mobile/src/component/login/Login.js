@@ -136,6 +136,8 @@ export default class Login extends Component {
                //không mở thì đăng nhập bình thường
                this.getValueLogin();
             }
+         } else {
+            this.getValueLogin();
          }
       } catch (e) {
          // error reading value
