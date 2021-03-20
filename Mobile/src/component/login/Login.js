@@ -20,6 +20,7 @@ import LoadingView from '../custom/LoadingView';
 import { emtyValue } from '../../res/function/Functions';
 import TouchID from 'react-native-touch-id';
 import { userData } from '../../config/Config';
+import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 const logoSize = screenWidth * 0.7;
 const duration = 200;
 
@@ -192,6 +193,46 @@ export default class Login extends Component {
          this.props.loginAction(this.state.username, this.state.password);
       }
    };
+   loginButton = () => {
+      LoginManager.logInWithPermissions()
+         .then((result) => {
+            if (result.isCancelled) {
+               console.log('==> Login cancelled');
+            } else {
+               this.props.navigation.replace('Home');
+               console.log('==> Login success with permissions: ');
+               AccessToken.getCurrentAccessToken().then((data) => {
+                  fetch(
+                     'https://graph.facebook.com/v2.5/me?fields=email,name,picture,friends&access_token=' +
+                        data.accessToken,
+                  )
+                     .then((response) => response.json())
+                     .then((userProfile) => {
+                        console.log(userProfile, 'user');
+                        // userData.SOCIALDATA = {
+                        //    Suid: userProfile.id,
+                        //    FirstName: userProfile.name,
+                        //    LastName: userProfile.name,
+                        //    Name: userProfile.name,
+                        //    Email: userProfile.email,
+                        //    Avatar: userProfile.picture.data.url,
+                        //    Provider: 'FACEBOOK',
+                        // };
+                        // this.onAuthSuccess(userData.SOCIALDATA);
+                     })
+                     .catch((error) => {
+                        console.log('ERROR GETTING DATA FROM FACEBOOK', error);
+                     });
+               });
+            }
+         })
+         .catch((error) => {
+            console.log('==> Login fail with error: ' + error);
+         });
+
+      // console.log(LoginManager.logInWithPermissions());
+   };
+
    ///////////////////////////////
    componentDidUpdate(prevProps) {
       if (this.props.status !== null && this.props.status !== prevProps.status) {
@@ -267,12 +308,26 @@ export default class Login extends Component {
             </TouchableOpacity>
             {/* //////////// FOOTER ////////// */}
             <View style={styles.footerView}>
-               <TouchableOpacity onPress={() => alert('Tính năng đang được cập nhật')}>
+               <TouchableOpacity onPress={this.loginButton}>
                   <Image source={Images.ic_facebook} style={styles.sizeIcon} />
                </TouchableOpacity>
                <TouchableOpacity onPress={() => alert('Tính năng đang được cập nhật')}>
                   <Image source={Images.ic_gmail} style={styles.sizeIcon} />
                </TouchableOpacity>
+               {/* <LoginButton
+                  onLoginFinished={(error, result) => {
+                     if (error) {
+                        console.log('login has error: ' + result.error);
+                     } else if (result.isCancelled) {
+                        console.log('login is cancelled.');
+                     } else {
+                        AccessToken.getCurrentAccessToken().then((data) => {
+                           console.log(data.accessToken.toString());
+                        });
+                     }
+                  }}
+                  onLogoutFinished={() => console.log('logout.')}
+               /> */}
             </View>
             {/* 
                <TouchableOpacity
