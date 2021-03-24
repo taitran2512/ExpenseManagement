@@ -342,7 +342,7 @@ export default class Login extends Component {
 }
 const styles = StyleSheet.create({
    container: {
-      flex: 1,
+      flexGrow: 1,
       backgroundColor: colors.white,
    },
    input: {
