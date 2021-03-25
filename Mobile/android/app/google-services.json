@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "178822643465",
+    "project_id": "mewpay220299",
+    "storage_bucket": "mewpay220299.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178822643465:android:135eeac86b2b89ce911dd8",
+        "android_client_info": {
+          "package_name": "com.expensemanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "178822643465-c7tqt55rolok078q1fj3igj6m7bujh2t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.expensemanagement",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "178822643465-etq4rjeroh9h8db5nbk8kmsjj4j8vlac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNURd0n2dD8Yec8hp2BQaUg1Rhevsy6EE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "178822643465-etq4rjeroh9h8db5nbk8kmsjj4j8vlac.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "178822643465-d63cbkli9c43eeh4mrs5fdtk1k3ei0id.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.expensemanagement"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

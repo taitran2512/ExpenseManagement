@@ -11,6 +11,7 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.microsoft.codepush.react.CodePush;//codepush
+import co.apptailor.googlesignin.RNGoogleSigninPackage; //login with google
 
 public class MainApplication extends Application implements ReactApplication {
 

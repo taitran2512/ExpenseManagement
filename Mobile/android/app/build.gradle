@@ -1,4 +1,8 @@
 apply plugin: "com.android.application"
+apply plugin: "com.google.gms.google-services"
+
+import com.android.build.OutputFile
+
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
  * and bundleReleaseJsAndAssets).
@@ -181,19 +185,26 @@ android {
 
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    //compile project(':react-native-code-push') //code push
 
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation platform('com.google.firebase:firebase-bom:26.7.0')
+    implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.facebook.android:facebook-login:8.2.0' // login with FB
     implementation 'com.facebook.android:facebook-android-sdk:8.2.0' // login with FB
     implementation project(':react-native-fbsdk') // login with FB
+    implementation(project(":react-native-google-signin")) //login with google
+    implementation 'com.google.android.gms:play-services-auth:19.0.0' //login with google
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group: 'com.facebook.fbjni'
