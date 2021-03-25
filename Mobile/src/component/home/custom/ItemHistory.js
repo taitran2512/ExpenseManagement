@@ -20,7 +20,7 @@ const ItemHistory = (props) => {
                   {props.time ? ` - ${props.time}` : null}
                </Text>
                <Text style={styles.txt}>{getType()?.title}</Text>
-               <Text numberOfLines={1} style={[styles.date, { width: '60%' }]}>
+               <Text numberOfLines={1} style={[styles.date]}>
                   {props.note}
                </Text>
             </View>
@@ -66,5 +66,6 @@ const styles = StyleSheet.create({
       color: colors.gray,
       fontSize: 14,
       fontFamily: fonts.regular,
+      lineHeight: 20,
    },
 });
