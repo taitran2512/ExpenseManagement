@@ -113,5 +113,6 @@ const Images = {
    ic_changepassword: require('./img/icon/changepassword.png'),
    ic_downloading: require('./img/icon/ic_downloading.png'),
    ic_close: require('./img/icon/ic_close.png'),
+   ic_google: require('./img/icon/ic_google.png'),
 };
 export default Images;

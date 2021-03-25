@@ -312,7 +312,7 @@ export default class Login extends Component {
                   <Image source={Images.ic_facebook} style={styles.sizeIcon} />
                </TouchableOpacity>
                <TouchableOpacity onPress={() => alert('Tính năng đang được cập nhật')}>
-                  <Image source={Images.ic_gmail} style={styles.sizeIcon} />
+                  <Image source={Images.ic_google} style={styles.sizeIcon} />
                </TouchableOpacity>
                {/* <LoginButton
                   onLoginFinished={(error, result) => {
@@ -411,7 +411,7 @@ const styles = StyleSheet.create({
       marginTop: 20,
    },
    sizeIcon: {
-      height: 80,
-      width: 80,
+      height: 70,
+      width: 70,
    },
 });
