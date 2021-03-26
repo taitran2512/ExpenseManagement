@@ -24,6 +24,7 @@ const loginReducer = (state = initialState, action) => {
          userData.phone = '';
          userData.createDate = '';
          userData.token = '';
+         userData.socialType = '';
          return state;
       case LOGIN_ACTION:
          return {
