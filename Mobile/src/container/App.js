@@ -28,7 +28,7 @@ import { setColorAcion } from '../redux/action/drawer/setColorAcion';
 import InfoApp from '../component/drawer/screen/InfoApp';
 import ExportFileExcel from '../component/drawer/screen/ExportFileExcel';
 import AlertAnimated from '../component/custom/AlertAnimated';
-
+import Welcome from '../component/welcome/Welcome';
 ////////////////////////////////////////////////////////////
 //bottom-tab
 const Tab = createMaterialBottomTabNavigator();
@@ -122,6 +122,7 @@ const App = (props) => {
                headerShown: false,
                ...TransitionPresets.SlideFromRightIOS,
             }}>
+            <Stack.Screen name="Welcome" component={Welcome} />
             <Stack.Screen name="Login" component={LoginContainer} />
             <Stack.Screen name="SignUp" component={SignUpContainer} />
             <Stack.Screen name="Forget" component={ForgetContainer} />

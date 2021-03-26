@@ -306,7 +306,7 @@ export default class Login extends Component {
                style={[styles.logo, { height: logoHeight, width: logoWidth }]}
             />
             {/* /////////////////////////// */}
-            <Text style={styles.login}>Expense Management</Text>
+            <Text style={styles.login}>MY E WALLET</Text>
             <TextInputAnimated
                label="Tên đăng nhập hoặc Email"
                style={styles.input}
