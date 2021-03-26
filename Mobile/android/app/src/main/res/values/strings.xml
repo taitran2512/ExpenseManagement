@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">ExpenseManagement</string>
-    <string name="CodePushDeploymentKey" moduleConfig="true">MgIWE7ZIyoVMBF9S_l56vdTUT9yHlVXmfe6e0</string>
+    <string name="app_name">Mew.</string>
+    <string name="CodePushDeploymentKey" moduleConfig="true"></string>
     <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
     <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
     <!-- Facebook -->
@@ -8,6 +8,14 @@
     <string name="fb_login_protocol_scheme">fb1265001953860092</string>
     <!-- Facebook -->
 </resources>
-    <!--Debug-->
+    <!-- CodePushDeploymentKey -->
+    <!-- Production: MgIWE7ZIyoVMBF9S_l56vdTUT9yHlVXmfe6e0 -->
+    <!-- Staging: -->
+
+    <!--KeyStore Debug-->
     <!--SHA-1: 5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25-->
     <!--Hashkey: Xo8WBi6jzSxKDVR4drqm84yr9iU=-->
+
+    <!--KeyStore Release-->
+    <!--SHA-1: -->
+    <!--Hashkey: -->
