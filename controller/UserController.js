@@ -54,7 +54,7 @@ router.route('/signup').post((req, res) => {
                      .then(() => {
                         const dataUser = newUser.toObject();
                         delete dataUser.password;
-                        return res.json(ResultModel('success', 'Đăng kí thành công', null , dataUser));
+                        return res.json(ResultModel('success', 'Đăng kí thành công', null, dataUser));
                      })
                      .catch((err) => res.status(400).json({ error: err }));
                }
@@ -187,5 +187,22 @@ router.route('/changePassword').post((req, res) => {
          })
          .catch((err) => res.status(400).json({ error: err }));
    });
+});
+
+//login with social
+router.route('/loginSocial').post((req, res) => {
+   const { _id, fullname, email, socialType } = req.body;
+   try {
+      const userAuthors = {
+         _id: _id,
+         username: fullname,
+         email: email,
+      };
+      const token = generateToken(userAuthors);
+      const dataUser = { _id, fullname, email, socialType };
+      res.json(ResultModel('success', 'Đăng nhập thành công', token, dataUser));
+   } catch (err) {
+      res.json(ResultModel('error', 'Đã có lỗi xảy ra, vui lòng thử lại sau'));
+   }
 });
 module.exports = router;
