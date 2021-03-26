@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>ExpenseManagement</string>
+	<string>Mew.</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -88,13 +88,13 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1188985151556214</string>
+				<string>fb270035004662710</string>
 			</array>
 		</dict>
 	</array>
 	<key>FacebookAppID</key>
-	<string>1188985151556214</string>
+	<string>270035004662710</string>
 	<key>FacebookDisplayName</key>
-	<string>EXM</string>
+	<string>Mew.</string>
 </dict>
 </plist>

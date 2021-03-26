@@ -4,17 +4,17 @@
     <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
     <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
     <!-- Facebook -->
-    <string name="facebook_app_id">1265001953860092</string>
-    <string name="fb_login_protocol_scheme">fb1265001953860092</string>
+    <string name="facebook_app_id">270035004662710</string>
+    <string name="fb_login_protocol_scheme">fb270035004662710</string>
     <!-- Facebook -->
 </resources>
-    <!-- CodePushDeploymentKey -->
-    <!-- Production: MgIWE7ZIyoVMBF9S_l56vdTUT9yHlVXmfe6e0 -->
+    <!-- CodePushDeploymentKey v1.2-->
+    <!-- Production: iSI5FZVNRFRt_zcumizVBOb-AJIMaQradkfaj -->
     <!-- Staging: -->
 
     <!--KeyStore Debug-->
-    <!--SHA-1: 5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25-->
-    <!--Hashkey: Xo8WBi6jzSxKDVR4drqm84yr9iU=-->
+    <!--SHA-1: 5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25 -->
+    <!--Hashkey: Xo8WBi6jzSxKDVR4drqm84yr9iU= -->
 
     <!--KeyStore Release-->
     <!--SHA-1: -->
