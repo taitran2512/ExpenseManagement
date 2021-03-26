@@ -21,6 +21,7 @@ import { emtyValue } from '../../res/function/Functions';
 import TouchID from 'react-native-touch-id';
 import { userData } from '../../config/Config';
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
+import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin';
 const logoSize = screenWidth * 0.7;
 const duration = 200;
 
@@ -32,6 +33,10 @@ const fingerConig = {
    sensorErrorDescription: 'Vân tay không đúng',
    cancelText: 'Hủy bỏ',
 };
+
+GoogleSignin.configure({
+   offlineAccess: false, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+});
 
 export default class Login extends Component {
    constructor(props) {
@@ -193,7 +198,10 @@ export default class Login extends Component {
          this.props.loginAction(this.state.username, this.state.password);
       }
    };
-   loginButton = () => {
+   //Login with Facebook
+   loginFB = () => {
+      //Phải logout trước để không bị lỗi: User logged in as different Facebook user.
+      LoginManager.logOut()
       LoginManager.logInWithPermissions()
          .then((result) => {
             if (result.isCancelled) {
@@ -203,12 +211,12 @@ export default class Login extends Component {
                console.log('==> Login success with permissions: ');
                AccessToken.getCurrentAccessToken().then((data) => {
                   fetch(
-                     'https://graph.facebook.com/v2.5/me?fields=email,name,picture,friends&access_token=' +
-                        data.accessToken,
+                     'https://graph.facebook.com/v10.0/me?fields=email,name,picture,friends&access_token=' +
+                     data.accessToken,
                   )
                      .then((response) => response.json())
                      .then((userProfile) => {
-                        console.log(userProfile, 'user');
+                        console.log("dataFacebook:",userProfile);
                         // userData.SOCIALDATA = {
                         //    Suid: userProfile.id,
                         //    FirstName: userProfile.name,
@@ -231,6 +239,56 @@ export default class Login extends Component {
          });
 
       // console.log(LoginManager.logInWithPermissions());
+   };
+   //Login with Google
+   loginGoogle = async () => {
+      try {
+         await GoogleSignin.signOut();
+         await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+         const userInfo = await GoogleSignin.signIn();
+         // this.setState({
+         //     userGoogleInfo: userInfo,
+         //     loaded: true
+         // })
+         // this.props.navigation.navigate('DRAWER');
+         // console.log(this.state.userGoogleInfo);
+
+         // let userProfile = userInfo.user
+         // userData.SOCIALDATA = {
+         //    Suid: userProfile.id,
+         //    FirstName: userProfile.givenName,
+         //    LastName: userProfile.familyName,
+         //    Name: userProfile.name,
+         //    Email: userProfile.email,
+         //    Avatar: userProfile.photo,
+         //    Provider: 'GOOGLE'
+         // }
+         //this.onAuthSuccess(userData.SOCIALDATA)
+         this.props.navigation.replace('Home');
+         console.log("dataGoogle:", userInfo.user);
+      } catch (error) {
+         if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+            console.log("e 1", error);
+         } else if (error.code === statusCodes.IN_PROGRESS) {
+            console.log("e 2", error);
+         } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+            Alert.alert(
+               'Thông báo',
+               'Bạn chưa cài Google Services',
+               [{ text: 'OK'}],
+               { cancelable: false },
+            );
+            console.log("GoogleSignin err", error);
+         } else {
+            Alert.alert(
+               'Thông báo',
+               'Có lỗi xảy ra, vui lòng thử lại sau',
+               [{ text: 'OK'}],
+               { cancelable: false },
+            );
+            console.log("GoogleSignin err", error);
+         }
+      }
    };
 
    ///////////////////////////////
@@ -308,10 +366,10 @@ export default class Login extends Component {
             </TouchableOpacity>
             {/* //////////// FOOTER ////////// */}
             <View style={styles.footerView}>
-               <TouchableOpacity onPress={this.loginButton}>
+               <TouchableOpacity onPress={this.loginFB}>
                   <Image source={Images.ic_facebook} style={styles.sizeIcon} />
                </TouchableOpacity>
-               <TouchableOpacity onPress={() => alert('Tính năng đang được cập nhật')}>
+               <TouchableOpacity onPress={this.loginGoogle}>
                   <Image source={Images.ic_google} style={styles.sizeIcon} />
                </TouchableOpacity>
                {/* <LoginButton

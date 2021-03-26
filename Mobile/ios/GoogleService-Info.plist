@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>178822643465-d63cbkli9c43eeh4mrs5fdtk1k3ei0id.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.178822643465-d63cbkli9c43eeh4mrs5fdtk1k3ei0id</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>178822643465-c7tqt55rolok078q1fj3igj6m7bujh2t.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBOFnj5z-q8teuYKGBpdLtus0zLvV0zSC0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>178822643465</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.expensemanagement</string>
+	<key>PROJECT_ID</key>
+	<string>mewpay220299</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mewpay220299.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:178822643465:ios:d6a6b6f3cd74d00b911dd8</string>
+</dict>
+</plist>
