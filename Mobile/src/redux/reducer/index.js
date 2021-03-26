@@ -16,6 +16,7 @@ import changePasswordReducer from './account/forget/changePasswordReducer';
 import setColorReducer from './drawer/setColorReducer';
 import showAlertReducer from './alert/showAlertReducer';
 import getTotalByTypeReducer from './statistic/getTotalByTypeReducer';
+import loginSocialReducer from './account/loginSocialReducer';
 const allReducers = combineReducers({
    loginReducer,
    signupReducer,
@@ -34,6 +35,7 @@ const allReducers = combineReducers({
    setColorReducer,
    showAlertReducer,
    getTotalByTypeReducer,
+   loginSocialReducer,
 });
 
 export default allReducers;

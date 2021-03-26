@@ -192,7 +192,6 @@ export default class Login extends Component {
    //press login
    onPressLogin = () => {
       if (this.state.username === '' || this.state.password === '') {
-         // Alert.alert('Lưu ý', 'Bạn phải nhập đầy đủ thông tin đăng nhập');
          this.props.showAlertAction('warn', 'Bạn phải nhập đầy đủ thông tin đăng nhập');
       } else {
          this.props.loginAction(this.state.username, this.state.password);
@@ -201,35 +200,28 @@ export default class Login extends Component {
    //Login with Facebook
    loginFB = () => {
       //Phải logout trước để không bị lỗi: User logged in as different Facebook user.
-      LoginManager.logOut()
+      LoginManager.logOut();
       LoginManager.logInWithPermissions()
          .then((result) => {
             if (result.isCancelled) {
-               console.log('==> Login Facebook cancelled');
             } else {
-               this.props.navigation.replace('Home');
-               console.log('==> Login Facebook success with permissions:', result.grantedPermissions);
                AccessToken.getCurrentAccessToken().then((data) => {
                   fetch(
                      'https://graph.facebook.com/v10.0/me?fields=email,name,friends&access_token=' +
-                     data.accessToken,
+                        data.accessToken,
                   )
                      .then((response) => response.json())
                      .then((userProfile) => {
-                        console.log("dataFacebook:", userProfile);
-                        // userData.SOCIALDATA = {
-                        //    Suid: userProfile.id,
-                        //    FirstName: userProfile.name,
-                        //    LastName: userProfile.name,
-                        //    Name: userProfile.name,
-                        //    Email: userProfile.email,
-                        //    Avatar: userProfile.picture.data.url,
-                        //    Provider: 'FACEBOOK',
-                        // };
-                        // this.onAuthSuccess(userData.SOCIALDATA);
+                        const inputData = {
+                           _id: userProfile.id,
+                           fullname: userProfile.name,
+                           email: userProfile.email,
+                           socialType: 'facebook',
+                        };
+                        this.props.loginSocialAction(inputData);
                      })
                      .catch((error) => {
-                        console.log('ERROR GETTING DATA FROM FACEBOOK', error);
+                        this.props.showAlertAction('error', 'Đăng nhập facebook thất bại');
                      });
                });
             }
@@ -244,53 +236,30 @@ export default class Login extends Component {
          await GoogleSignin.signOut();
          await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
          const userInfo = await GoogleSignin.signIn();
-         // this.setState({
-         //     userGoogleInfo: userInfo,
-         //     loaded: true
-         // })
-         // this.props.navigation.navigate('DRAWER');
-         // console.log(this.state.userGoogleInfo);
-
-         // let userProfile = userInfo.user
-         // userData.SOCIALDATA = {
-         //    Suid: userProfile.id,
-         //    FirstName: userProfile.givenName,
-         //    LastName: userProfile.familyName,
-         //    Name: userProfile.name,
-         //    Email: userProfile.email,
-         //    Avatar: userProfile.photo,
-         //    Provider: 'GOOGLE'
-         // }
-         //this.onAuthSuccess(userData.SOCIALDATA)
-         this.props.navigation.replace('Home');
-         console.log("dataGoogle:", userInfo.user);
+         const inputData = {
+            _id: userInfo.user.id,
+            fullname: userInfo.user.name,
+            email: userInfo.user.email,
+            socialType: 'google',
+         };
+         this.props.loginSocialAction(inputData);
       } catch (error) {
-         if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-            console.log("e 1", error);
-         } else if (error.code === statusCodes.IN_PROGRESS) {
-            console.log("e 2", error);
-         } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-            Alert.alert(
-               'Thông báo',
-               'Bạn chưa cài Google Services',
-               [{ text: 'OK' }],
-               { cancelable: false },
-            );
-            console.log("GoogleSignin err", error);
-         } else {
-            Alert.alert(
-               'Thông báo',
-               'Có lỗi xảy ra, vui lòng thử lại sau',
-               [{ text: 'OK' }],
-               { cancelable: false },
-            );
-            console.log("GoogleSignin err", error);
-         }
+         // if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+         // } else if (error.code === statusCodes.IN_PROGRESS) {
+         // } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+         //    Alert.alert('Thông báo', 'Bạn chưa cài Google Services', [{ text: 'OK' }], { cancelable: false });
+         // } else {
+         //    Alert.alert('Thông báo', 'Có lỗi xảy ra, vui lòng thử lại sau', [{ text: 'OK' }], {
+         //       cancelable: false,
+         //    });
+         // }
+         this.props.showAlertAction('error', 'Đăng nhập google thất bại');
       }
    };
 
    ///////////////////////////////
    componentDidUpdate(prevProps) {
+      //login with account
       if (this.props.status !== null && this.props.status !== prevProps.status) {
          if (this.props.status === 'success') {
             this.saveLogin();
@@ -299,10 +268,20 @@ export default class Login extends Component {
             this.props.showAlertAction('error', this.props.message);
          }
       }
-      if (this.props.error !== null && this.props.error !== prevProps.error) {
-         setTimeout(() => {
-            this.props.showAlertAction('error', this.props.error);
-         }, 10);
+      //login with social account
+      if (this.props.statusSocial !== null && this.props.statusSocial !== prevProps.statusSocial) {
+         if (this.props.statusSocial === 'success') {
+            this.props.navigation.replace('Home');
+         } else {
+            this.props.showAlertAction('error', this.props.messageSocial);
+         }
+      }
+      //lỗi login
+      if (
+         (this.props.error !== null && this.props.error !== prevProps.error) ||
+         (this.props.errorSocial !== null && this.props.errorSocial !== prevProps.errorSocial)
+      ) {
+         this.props.showAlertAction('error', this.props.error || this.props.errorSocial);
       }
    }
    render() {
@@ -320,7 +299,7 @@ export default class Login extends Component {
             contentContainerStyle={styles.container}
             keyboardShouldPersistTaps="handled">
             <StatusBarView />
-            <LoadingView visible={this.props.loading} />
+            <LoadingView visible={this.props.loading || this.props.loadingSocial} />
             {/* /////////logo////////// */}
             <Animated.Image
                source={Images.wallet}
@@ -370,20 +349,6 @@ export default class Login extends Component {
                <TouchableOpacity onPress={this.loginGoogle}>
                   <Image source={Images.ic_google} style={styles.sizeIcon} />
                </TouchableOpacity>
-               {/* <LoginButton
-                  onLoginFinished={(error, result) => {
-                     if (error) {
-                        console.log('login has error: ' + result.error);
-                     } else if (result.isCancelled) {
-                        console.log('login is cancelled.');
-                     } else {
-                        AccessToken.getCurrentAccessToken().then((data) => {
-                           console.log(data.accessToken.toString());
-                        });
-                     }
-                  }}
-                  onLogoutFinished={() => console.log('logout.')}
-               /> */}
             </View>
             {/* 
                <TouchableOpacity

@@ -11,6 +11,7 @@ const userData = {
    createDate: '',
    token: '',
    BIOMETRICS: '',
+   socialType: '',
 };
 
 export { API_URL, userData };

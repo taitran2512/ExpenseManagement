@@ -60,7 +60,7 @@ export default class Home extends Component {
    //
    useMoney = (screen) => {
       if (!emtyValue(this.props.getWallet.data)) {
-         this.props.navigation.navigate(screen, { getData: this.getData });
+         this.props.navigation.navigate(screen);
       } else {
          this.props.showAlertAction('warn', 'Hãy tạo mới ví tiền trước');
       }

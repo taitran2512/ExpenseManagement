@@ -124,7 +124,8 @@ export default class Expense extends Component {
                         text: 'OK',
                         onPress: () => {
                            this.props.navigation.goBack();
-                           this.props.route.params.getData();
+                           this.props.getWalletAction();
+                           this.props.getHistoryAction();
                         },
                      },
                   ],
