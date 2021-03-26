@@ -205,18 +205,18 @@ export default class Login extends Component {
       LoginManager.logInWithPermissions()
          .then((result) => {
             if (result.isCancelled) {
-               console.log('==> Login cancelled');
+               console.log('==> Login Facebook cancelled');
             } else {
                this.props.navigation.replace('Home');
-               console.log('==> Login success with permissions: ');
+               console.log('==> Login Facebook success with permissions:', result.grantedPermissions);
                AccessToken.getCurrentAccessToken().then((data) => {
                   fetch(
-                     'https://graph.facebook.com/v10.0/me?fields=email,name,picture,friends&access_token=' +
+                     'https://graph.facebook.com/v10.0/me?fields=email,name,friends&access_token=' +
                      data.accessToken,
                   )
                      .then((response) => response.json())
                      .then((userProfile) => {
-                        console.log("dataFacebook:",userProfile);
+                        console.log("dataFacebook:", userProfile);
                         // userData.SOCIALDATA = {
                         //    Suid: userProfile.id,
                         //    FirstName: userProfile.name,
@@ -235,10 +235,8 @@ export default class Login extends Component {
             }
          })
          .catch((error) => {
-            console.log('==> Login fail with error: ' + error);
+            console.log('==> Login Facebook failed:' + error);
          });
-
-      // console.log(LoginManager.logInWithPermissions());
    };
    //Login with Google
    loginGoogle = async () => {
@@ -275,7 +273,7 @@ export default class Login extends Component {
             Alert.alert(
                'Thông báo',
                'Bạn chưa cài Google Services',
-               [{ text: 'OK'}],
+               [{ text: 'OK' }],
                { cancelable: false },
             );
             console.log("GoogleSignin err", error);
@@ -283,7 +281,7 @@ export default class Login extends Component {
             Alert.alert(
                'Thông báo',
                'Có lỗi xảy ra, vui lòng thử lại sau',
-               [{ text: 'OK'}],
+               [{ text: 'OK' }],
                { cancelable: false },
             );
             console.log("GoogleSignin err", error);
