@@ -26,6 +26,7 @@
 		93CA4903E15B43EA89347850 /* SanFranciscoText-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 67F02B72DD274F1C8A22C0D7 /* SanFranciscoText-Regular.otf */; };
 		B7276A7090E9CCA76BC381F5 /* libPods-ExpenseManagement-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1534B3D135CFA010518E4156 /* libPods-ExpenseManagement-tvOS.a */; };
 		C29BB03F4B428335A52235CB /* libPods-ExpenseManagement-ExpenseManagementTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E60E426134F33D47B497E7 /* libPods-ExpenseManagement-ExpenseManagementTests.a */; };
+		CAE19CFF260E5C9000D1EB21 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CAE19CFE260E5C9000D1EB21 /* GoogleService-Info.plist */; };
 		EF3CCAF02601F70100398308 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3CCAEF2601F70100398308 /* File.swift */; };
 		FCE5DF17E59E48EF9FB1D6C6 /* SanFranciscoText-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = A4351820E58341F5AAA1D723 /* SanFranciscoText-Light.otf */; };
 /* End PBXBuildFile section */
@@ -105,6 +106,7 @@
 		BE33951BFF3244C79B91A2B3 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = ../src/res/fonts/Entypo.ttf; sourceTree = "<group>"; };
 		C2B0852B04D947B89B9C82DC /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = ../src/res/fonts/FontAwesome.ttf; sourceTree = "<group>"; };
 		CA2E0A2D773C41368C69801A /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		CAE19CFE260E5C9000D1EB21 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CDECF2ADC7414A138338071D /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = ../src/res/fonts/EvilIcons.ttf; sourceTree = "<group>"; };
 		CDF77DF50CF2D29A450A9CAD /* Pods-ExpenseManagement-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpenseManagement-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-ExpenseManagement-tvOSTests/Pods-ExpenseManagement-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D321AB650D674CBBAA66A201 /* SanFranciscoText-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SanFranciscoText-Thin.otf"; path = "../src/res/fonts/SanFranciscoText-Thin.otf"; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 		13B07FAE1A68108700A75B9A /* ExpenseManagement */ = {
 			isa = PBXGroup;
 			children = (
+				CAE19CFE260E5C9000D1EB21 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -307,7 +310,7 @@
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
 				7DADA55CAF690CC91AC53402 /* [CP] Copy Pods Resources */,
-				961D17DF4665919D96A1CA86 /* [CP] Embed Pods Frameworks */,
+				DA26130F4C7E69A23CB30A22 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -330,7 +333,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				0B3FE3E5F3B391232A612B2F /* [CP] Copy Pods Resources */,
-				827CEAB69BFED43B4771A6AB /* [CP] Embed Pods Frameworks */,
+				7782418DBFF6A967BA2A8BFE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -393,7 +396,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = QFB8RU4N8P;
+						DevelopmentTeam = LVDS8Y23R5;
 						LastSwiftMigration = 1220;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -447,6 +450,7 @@
 				FCE5DF17E59E48EF9FB1D6C6 /* SanFranciscoText-Light.otf in Resources */,
 				81D6227F7A694AF2B1CD9FA4 /* SanFranciscoText-Medium.otf in Resources */,
 				93CA4903E15B43EA89347850 /* SanFranciscoText-Regular.otf in Resources */,
+				CAE19CFF260E5C9000D1EB21 /* GoogleService-Info.plist in Resources */,
 				0208706E8A4E4EE7B8666A39 /* SanFranciscoText-Semibold.otf in Resources */,
 				3CF96DCCA1DC477BA5E6BFCB /* SanFranciscoText-Thin.otf in Resources */,
 			);
@@ -618,6 +622,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7782418DBFF6A967BA2A8BFE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ExpenseManagement/Pods-ExpenseManagement-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ExpenseManagement/Pods-ExpenseManagement-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7DADA55CAF690CC91AC53402 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -672,25 +694,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ExpenseManagement-ExpenseManagementTests/Pods-ExpenseManagement-ExpenseManagementTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		827CEAB69BFED43B4771A6AB /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ExpenseManagement/Pods-ExpenseManagement-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ExpenseManagement/Pods-ExpenseManagement-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		961D17DF4665919D96A1CA86 /* [CP] Embed Pods Frameworks */ = {
+		DA26130F4C7E69A23CB30A22 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -874,16 +878,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QFB8RU4N8P;
+				DEVELOPMENT_TEAM = LVDS8Y23R5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = ExpenseManagement/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.expensemanagement;
 				PRODUCT_NAME = ExpenseManagement;
 				SWIFT_OBJC_BRIDGING_HEADER = "ExpenseManagement-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -899,15 +904,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QFB8RU4N8P;
+				DEVELOPMENT_TEAM = LVDS8Y23R5;
 				INFOPLIST_FILE = ExpenseManagement/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.expensemanagement;
 				PRODUCT_NAME = ExpenseManagement;
 				SWIFT_OBJC_BRIDGING_HEADER = "ExpenseManagement-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

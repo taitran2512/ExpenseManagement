@@ -201,15 +201,14 @@ export default class Login extends Component {
    loginFB = () => {
       //Phải logout trước để không bị lỗi: User logged in as different Facebook user.
       LoginManager.logOut();
-      LoginManager.logInWithPermissions()
+      //Đôi lúc Facebook không get được email
+      LoginManager.logInWithPermissions(["public_profile", "email"])
          .then((result) => {
             if (result.isCancelled) {
             } else {
                AccessToken.getCurrentAccessToken().then((data) => {
                   fetch(
-                     'https://graph.facebook.com/v10.0/me?fields=email,name,friends&access_token=' +
-                        data.accessToken,
-                  )
+                     'https://graph.facebook.com/v10.0/me?fields=email,name,friends&access_token='+data.accessToken)
                      .then((response) => response.json())
                      .then((userProfile) => {
                         const inputData = {
@@ -306,7 +305,7 @@ export default class Login extends Component {
                style={[styles.logo, { height: logoHeight, width: logoWidth }]}
             />
             {/* /////////////////////////// */}
-            <Text style={styles.login}>Expense Management</Text>
+            <Text style={styles.login}>MY E WALLET</Text>
             <TextInputAnimated
                label="Tên đăng nhập hoặc Email"
                style={styles.input}

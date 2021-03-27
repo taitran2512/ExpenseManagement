@@ -6,6 +6,7 @@ const Images = {
    wallet: require('./img/wallet.png'),
    card: require('./img/card.png'),
    signup_logo: require('./img/siguplogo.png'),
+   mew_logo: require('./img/mew_logo.png'),
    //icon bubbles
    ic_add: require('./img/icon/ic_add.png'),
    ic_baby: require('./img/icon/ic_baby.png'),

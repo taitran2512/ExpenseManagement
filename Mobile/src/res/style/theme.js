@@ -27,6 +27,7 @@ const colors = {
    blue1: '#69C0FF',
    blue2: '#91D5FF',
    blue3: '#BAE7FF',
+   blue4: '#4CB8DA',
    lightblue: '#F1F6FF',
    lightblue1: '#1890FF',
    cyan: '#13C2C2',
