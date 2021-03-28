@@ -156,7 +156,7 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
-            //Bỏ build cho nền tảng x86 cho app nhẹ hơn
+            //Bỏ build x86 cho app nhẹ hơn
             ndk {
                 abiFilters "arm64-v8a", "armeabi-v7a"
             }

@@ -18,11 +18,11 @@ export default class InfoApp extends Component {
             <ScrollView style={styles.container}>
                <View style={styles.containerVersion}>
                   <Image source={Images.ic_money1} style={styles.img} />
-                  <Text style={styles.txtVersion}>Phiên bản 1.0.0 build 30080</Text>
+                  <Text style={styles.txtVersion}>Phiên bản 1.2</Text>
                </View>
                <View style={styles.containerList}>
                   <Item
-                     title="Bình chọn cho ExpenseManagement"
+                     title="Bình chọn cho My E Walle (Mew)"
                      onPress={() => Alert.alert('Thông báo', 'Chức năng đăng được cập nhật')}
                   />
                   <Item
@@ -32,9 +32,7 @@ export default class InfoApp extends Component {
                   />
                </View>
                <Text style={[styles.txtVersion, { color: colors.lightblue1 }]}>Điều khoản sử dụng</Text>
-               <Text style={[styles.txtVersion, { color: colors.gray }]}>
-                  Phát triển bởi công ty phần mềm di động TP Software
-               </Text>
+               <Text style={[styles.txtVersion, { color: colors.gray }]}>Phát triển bởi 5que Solutions</Text>
             </ScrollView>
          </>
       );
