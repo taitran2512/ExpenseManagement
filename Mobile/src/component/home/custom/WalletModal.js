@@ -1,5 +1,6 @@
 import React, { useState, forwardRef, useRef, useImperativeHandle } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { convertMoney } from '../../../res/function/Functions';
 import { colors, fonts } from '../../../res/style/theme';
 import Modals from '../../custom/Modals';
 import TextInputAnimated from '../../custom/TextInputAnimated';
@@ -7,14 +8,14 @@ import TextInputAnimated from '../../custom/TextInputAnimated';
 const WalletModal = forwardRef((props, ref) => {
    const modalRef = useRef();
    const [cardName, setCardName] = useState(props.cardName);
-   const [money, setMoney] = useState(String(props.money));
+   const [money, setMoney] = useState(convertMoney(props.money));
 
    const onCancel = () => {
       onClose();
    };
    const onClose = () => {
       setCardName(props.cardName);
-      setMoney(String(props.money));
+      setMoney(convertMoney(props.money));
       modalRef.current.close();
    };
    useImperativeHandle(ref, () => ({
@@ -25,7 +26,7 @@ const WalletModal = forwardRef((props, ref) => {
       if (cardName === '' || money === '') {
          Alert.alert('Lưu ý', 'Bạn phải nhập đầy đủ thông tin ví tiền');
       } else {
-         props.onSubmit(cardName, parseInt(money));
+         props.onSubmit(cardName, parseInt(money.split('.').join('')));
          modalRef.current.close();
       }
    };
@@ -45,7 +46,7 @@ const WalletModal = forwardRef((props, ref) => {
                style={styles.input}
                label="Số tiền"
                value={money}
-               onChangeText={(text) => setMoney(text)}
+               onChangeText={(text) => setMoney(convertMoney(text))}
                onPressClear={() => setMoney('')}
             />
             <View style={styles.viewBtn}>

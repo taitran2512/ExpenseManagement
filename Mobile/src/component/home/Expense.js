@@ -18,7 +18,7 @@ import Images from '../../res/image';
 import TextInputAnimated from '../custom/TextInputAnimated';
 import ButtonSubmit from '../custom/ButtonSubmit';
 import BottomSheet from '../custom/BottomSheet';
-import { convertDate, emtyValue } from '../../res/function/Functions';
+import { convertDate, convertMoney, emtyValue } from '../../res/function/Functions';
 import LoadingView from '../custom/LoadingView';
 export default class Expense extends Component {
    constructor(props) {
@@ -74,7 +74,7 @@ export default class Expense extends Component {
       this.setState({ money: '' });
    };
    onChangeMoney = (txt) => {
-      this.setState({ money: txt });
+      this.setState({ money: convertMoney(txt) });
    };
    onClearnote = () => {
       this.setState({ note: '' });
@@ -105,7 +105,7 @@ export default class Expense extends Component {
          walletId: this.state.wallet._id,
          type: 'expense',
          code: this.state.selectedOption.code,
-         money: parseInt(this.state.money),
+         money: parseInt(this.state.money.split('.').join('')),
          note: this.state.note,
          date: this.state.date,
          time: this.state.time,
