@@ -22,6 +22,7 @@ import TouchID from 'react-native-touch-id';
 import { userData } from '../../config/Config';
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin';
+import NotifService from './custom/NotifService';
 const logoSize = screenWidth * 0.7;
 const duration = 200;
 
@@ -49,11 +50,34 @@ export default class Login extends Component {
       this.zoomLogo = new Animated.Value(0);
       this.keyboardDidShow = this.keyboardDidShow.bind(this);
       this.keyboardDidHide = this.keyboardDidHide.bind(this);
+
+      //push noti
+      this.notif = new NotifService(
+         this.onRegister.bind(this),
+         this.onNotif.bind(this),
+      );
    }
+
+   //push noti
+   onRegister(token) {
+      this.setState({ registerToken: token.token, fcmRegistered: true });
+   }
+
+   onNotif(notif) {
+      //Alert.alert(notif.title, notif.message);
+   }
+
+   handlePerm(perms) {
+      Alert.alert('Permissions', JSON.stringify(perms));
+   }
+   //
+
    componentDidMount() {
       this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
       this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
       this.isSupportBio();
+      this.notif.requestPermissions(); //yêu cầu quyền cho push noti
+      this.notif.abandonPermissions(); //chấp nhận quyền cho push noti
    }
    componentWillUnmount() {
       this.keyboardDidShowListener.remove();
@@ -208,7 +232,7 @@ export default class Login extends Component {
             } else {
                AccessToken.getCurrentAccessToken().then((data) => {
                   fetch(
-                     'https://graph.facebook.com/v10.0/me?fields=email,name,friends&access_token='+data.accessToken)
+                     'https://graph.facebook.com/v10.0/me?fields=email,name,friends&access_token=' + data.accessToken)
                      .then((response) => response.json())
                      .then((userProfile) => {
                         const inputData = {
@@ -348,6 +372,11 @@ export default class Login extends Component {
                <TouchableOpacity onPress={this.loginGoogle}>
                   <Image source={Images.ic_google} style={styles.sizeIcon} />
                </TouchableOpacity>
+               {/* <TextInput
+                  style={styles.textField}
+                  value={this.state.registerToken}
+                  placeholder="Register token"
+               /> */}
             </View>
             {/* 
                <TouchableOpacity
@@ -357,8 +386,11 @@ export default class Login extends Component {
                </TouchableOpacity>
                 */}
          </ScrollView>
+
+
       );
    }
+
 }
 const styles = StyleSheet.create({
    container: {
