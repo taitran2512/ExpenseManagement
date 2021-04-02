@@ -25,6 +25,7 @@
     "appcenter-analytics": "4.0.2",
     "appcenter-cli": "^2.8.1",
     "appcenter-crashes": "4.0.2",
+    "code-push": "4.0.2",
     "react": "17.0.2",
     "react-native": "^0.64.0",
     "react-native-calendars": "^1.1254.0",
