@@ -1,54 +1,87 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, SafeAreaView, StyleSheet, Image, Animated } from 'react-native';
-import Images from '../../res/image';
 import { colors, fonts, screenWidth } from '../../res/style/theme';
+import Images from '../../res/image';
+import Video from 'react-native-video';
 import StatusBarView from '../custom/StatusBarView';
 
-export default class Welcome extends Component {
-   constructor(props) {
-      super(props);
-      this.state = {};
-      this.animation = new Animated.Value(0);
-   }
+// export default class Welcome extends React.Component {
+//    constructor(props) {
+//       super(props);
+//       this.state = {};
+//       this.animation = new Animated.Value(0);
+//    }
+//    componentDidMount() {
+//       this.loading();
+//    }
+//    loading = () => {
+//       const time = Math.floor(Math.random() * 2 + 1) * 1000;
+//       Animated.timing(this.animation, {
+//          toValue: 1,
+//          duration: time,
+//          useNativeDriver: false,
+//       }).start(() => this.props.navigation.replace('Login'));
+//    };
+//    render() {
+//       return (
+//          <View style={styles.container}>
+//             <StatusBarView />
+//             <SafeAreaView />
+//             <Image source={Images.mew_logo} style={styles.logo} />
+//             <Text style={styles.title}>Ví điện tử tiện lợi cho mọi người</Text>
+//             {/* //Progress */}
+//             <View style={styles.parentProgress}>
+//                <Animated.View
+//                   style={[
+//                      styles.childProgress,
+//                      {
+//                         width: this.animation.interpolate({
+//                            inputRange: [0, 1],
+//                            outputRange: ['0%', '100%'],
+//                         }),
+//                      },
+//                   ]}
+//                />
+//             </View>
+//             {/* //copyright */}
+//             <Text style={styles.copyright}>{'\u00A9'} Mew. {new Date().getFullYear()}</Text>
+//             <SafeAreaView />
+//          </View>
+//       );
+//    }
+// }
+export default class Welcome extends React.Component {
    componentDidMount() {
-      this.loading();
+      setTimeout(() => {
+         this.props.navigation.replace('Login');
+      }, 4000)
    }
-   loading = () => {
-      const time = Math.floor(Math.random() * 3 + 1) * 1000;
-      Animated.timing(this.animation, {
-         toValue: 1,
-         duration: time,
-         useNativeDriver: false,
-      }).start(() => this.props.navigation.replace('Login'));
-   };
    render() {
       return (
-         <View style={styles.container}>
-            <StatusBarView />
-            <SafeAreaView />
-            <Image source={Images.mew_logo} style={styles.logo} />
-            <Text style={styles.title}>Ví điện tử tiện lợi cho mọi người</Text>
-            {/* //Progress */}
-            <View style={styles.parentProgress}>
-               <Animated.View
-                  style={[
-                     styles.childProgress,
-                     {
-                        width: this.animation.interpolate({
-                           inputRange: [0, 1],
-                           outputRange: ['0%', '100%'],
-                        }),
-                     },
-                  ]}
-               />
-            </View>
-            {/* //copyright */}
-            <Text style={styles.copyright}>{'\u00A9'} Copyright by TPMNA</Text>
-            <SafeAreaView />
+         <View style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%'
+         }}>
+            <Video source={require('../../res/image/img/splash.mp4')}
+               style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+               }}
+               //muted={true}
+               resizeMode="cover" />
          </View>
-      );
+
+      )
    }
+
 }
+
 const styles = StyleSheet.create({
    container: {
       flex: 1,
