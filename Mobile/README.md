@@ -1,19 +1,16 @@
-
 Mew. Application
 =========================
-
 Description
 -----------------------------------------
 
 `1` Project Name: VÍ ĐIỆN TỬ TIỆN DỤNG MEW. \
-`2` Project Code: MEW_CUSPORTAL_2021_PM \
+`2` Project Code: \
 `3` Type of project : Mobile Application (Android / iOS) \
 `4` Technology : React-Native version `0.64` \
 `5` Programing language: Javascript ES6 
 
 How to run this project: 
 ------------------------
-
 `1` Make sure you have the Android/IOS development environment set up: `https://reactnative.dev/docs/environment-setup` \
 `2` Clone this project \
 `3` Open terminal 
@@ -25,13 +22,9 @@ How to run this project:
 >>       + type `cd ios` -> `pod install` -> `cd ..` -> `xed ios` 
 >>       + on Xcode tab `Build Phases` -> `Copy pod Resources` -> clear `Copy Pods Resource` -> click on `Triangle button` 
 
-How to build release this project: 
----------------------------------
-
 Mew. Group
 ----------------------
-`1` Head office
-
+Head office:
 >  - Address: Ho Chi Minh, Vietnam 
 >  - Phone:
 >  - Fax:
