@@ -201,7 +201,7 @@ dependencies {
     implementation 'com.facebook.android:facebook-login:8.2.0' // login with FB
     implementation 'com.facebook.android:facebook-android-sdk:8.2.0' // login with FB
     implementation project(':react-native-fbsdk') // login with FB
-    implementation(project(":react-native-google-signin")) //login with google
+    //implementation(project(":react-native-google-signin")) //login with google
     implementation 'com.google.android.gms:play-services-auth:19.0.0' //login with google
 
     implementation 'com.google.firebase:firebase-messaging:21.0.1' //push noti
