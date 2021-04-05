@@ -58,26 +58,14 @@ export default class Welcome extends React.Component {
    }
    render() {
       return (
-         <View style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center'
-         }}>
+         <View style={styles.container}>
             <Video source={require('../../res/image/img/splash.mp4')}
-               style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-               }}
+               style={styles.videoStyle}
                muted={true}
                resizeMode='cover' />
          </View>
-
       )
    }
-
 }
 
 const styles = StyleSheet.create({
@@ -118,4 +106,11 @@ const styles = StyleSheet.create({
       fontFamily: fonts.semibold,
       fontSize: 16,
    },
+   videoStyle: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0
+   }
 });
