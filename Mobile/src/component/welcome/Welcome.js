@@ -61,9 +61,7 @@ export default class Welcome extends React.Component {
          <View style={{
             flex: 1,
             alignItems: 'center',
-            justifyContent: 'center',
-            width: '100%',
-            height: '100%'
+            justifyContent: 'center'
          }}>
             <Video source={require('../../res/image/img/splash.mp4')}
                style={{
@@ -73,8 +71,8 @@ export default class Welcome extends React.Component {
                   right: 0,
                   bottom: 0,
                }}
-               //muted={true}
-               resizeMode="cover" />
+               muted={true}
+               resizeMode='cover' />
          </View>
 
       )
