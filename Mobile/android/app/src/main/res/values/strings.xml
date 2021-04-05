@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Mew.</string>
-    <string name="CodePushDeploymentKey" moduleConfig="true">iSI5FZVNRFRt_zcumizVBOb-AJIMaQradkfaj</string>
+    <string name="CodePushDeploymentKey" moduleConfig="true">CUqrvp_PrxM1McjBHp8ogXzBvriVCRwYnavSu</string>
     <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
     <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
     <!-- Facebook -->
@@ -8,8 +8,8 @@
     <string name="fb_login_protocol_scheme">fb270035004662710</string>
     <!-- Facebook -->
 </resources>
-    <!-- CodePushDeploymentKey v1.2-->
-    <!-- Production: iSI5FZVNRFRt_zcumizVBOb-AJIMaQradkfaj -->
+    <!-- CodePushDeploymentKey v1.3-->
+    <!-- Production: CUqrvp_PrxM1McjBHp8ogXzBvriVCRwYnavSu -->
     <!-- Staging: -->
 
     <!--KeyStore Debug-->
