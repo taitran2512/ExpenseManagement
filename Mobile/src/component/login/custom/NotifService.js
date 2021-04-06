@@ -175,12 +175,12 @@ export default class NotifService {
         PushNotification.getDeliveredNotifications(callback);
     }
 
-    sendNotiLocal(title, message, bigText) {
+    sendNotiLocal(title, message) {
         PushNotification.localNotification({
             channelId: 'sound-channel-id',
+            bigText: '\u00A9 Mew. ' + new Date().getFullYear(),
             title: title,
             message: message,
-            bigText: bigText,
             vibrate: false,
             playSound: true,
             soundName: 'mew.mp3',

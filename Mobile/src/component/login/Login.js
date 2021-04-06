@@ -82,8 +82,7 @@ export default class Login extends Component {
       //Tạo local noti
       this.notif.sendNotiLocal(
          title = 'Chào mừng bạn đến với Mew.',
-         message = 'Ví điện tử tiện lợi cho mọi người',
-         bigText = '\u00A9 Mew. ' + new Date().getFullYear()
+         message = 'Ví điện tử tiện lợi cho mọi người'
       );
    }
 
