@@ -78,17 +78,28 @@ export default class Login extends Component {
       this.isSupportBio();
       this.notif.requestPermissions(); //yêu cầu quyền cho push noti
       this.notif.abandonPermissions(); //chấp nhận quyền cho push noti
+      
+      //Tạo local noti
+      this.notif.sendNotiLocal(
+         title = 'Chào mừng bạn đến với Mew.',
+         message = 'Ví điện tử tiện lợi cho mọi người',
+         bigText = '\u00A9 Mew. ' + new Date().getFullYear()
+      );
    }
+
    componentWillUnmount() {
       this.keyboardDidShowListener.remove();
       this.keyboardDidHideListener.remove();
    }
+
    keyboardDidShow() {
       this.zoomOutLogo();
    }
+
    keyboardDidHide() {
       this.zoomInLogo();
    }
+
    //thu nho logo
    zoomOutLogo = () => {
       Animated.timing(this.zoomLogo, {
@@ -106,6 +117,7 @@ export default class Login extends Component {
          useNativeDriver: false,
       }).start();
    };
+
    // xác định dt có hỗ trợ vân tay ko
    isSupportBio = () => {
       const optionalConfigObject = {
@@ -124,6 +136,7 @@ export default class Login extends Component {
             this.getValueLogin();
          });
    };
+
    //get username and password remember login
    getValueLogin = async () => {
       try {
@@ -139,6 +152,7 @@ export default class Login extends Component {
          // error reading value
       }
    };
+
    //get value turn on or off Biometrics and authenticate
    getValueBio = async () => {
       try {
@@ -174,16 +188,20 @@ export default class Login extends Component {
          // error reading value
       }
    };
-   //
+
+   //onChange
    onChangeUsername = (text) => {
       this.setState({ username: text });
    };
+
    onClearUsername = () => {
       this.setState({ username: '' });
    };
+
    onClearPassword = () => {
       this.setState({ password: '' });
    };
+
    onChangePassword = (text) => {
       this.setState({ password: text });
    };
@@ -200,6 +218,7 @@ export default class Login extends Component {
          }
       });
    };
+
    saveLogin = async () => {
       if (this.state.saveLogin) {
          try {
@@ -213,6 +232,7 @@ export default class Login extends Component {
          }
       }
    };
+
    //press login
    onPressLogin = () => {
       if (this.state.username === '' || this.state.password === '') {
@@ -221,6 +241,7 @@ export default class Login extends Component {
          this.props.loginAction(this.state.username, this.state.password);
       }
    };
+
    //Login with Facebook
    loginFB = () => {
       //Phải logout trước để không bị lỗi: User logged in as different Facebook user.
@@ -253,6 +274,7 @@ export default class Login extends Component {
             console.log('==> Login Facebook failed:' + error);
          });
    };
+
    //Login with Google
    loginGoogle = async () => {
       try {
@@ -307,6 +329,7 @@ export default class Login extends Component {
          this.props.showAlertAction('error', this.props.error || this.props.errorSocial);
       }
    }
+
    render() {
       const logoWidth = this.zoomLogo.interpolate({
          inputRange: [0, 1],
@@ -316,6 +339,7 @@ export default class Login extends Component {
          inputRange: [0, 1],
          outputRange: [logoSize * 0.65, (logoSize * 0.65) / 2],
       });
+
       return (
          <ScrollView
             showsVerticalScrollIndicator={false}
@@ -386,8 +410,6 @@ export default class Login extends Component {
                </TouchableOpacity>
                 */}
          </ScrollView>
-
-
       );
    }
 

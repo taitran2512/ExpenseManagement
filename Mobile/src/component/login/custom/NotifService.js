@@ -174,4 +174,17 @@ export default class NotifService {
     getDeliveredNotifications(callback) {
         PushNotification.getDeliveredNotifications(callback);
     }
+
+    sendNotiLocal(title, message, bigText) {
+        PushNotification.localNotification({
+            channelId: 'sound-channel-id',
+            title: title,
+            message: message,
+            bigText: bigText,
+            vibrate: false,
+            playSound: true,
+            soundName: 'mew.mp3',
+            largeIconUrl: "https://f15-group-zf.zdn.vn/d918608a68f187afdee0/7428775191399183840",
+        });
+    }
 }

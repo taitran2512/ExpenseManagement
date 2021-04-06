@@ -50,6 +50,7 @@ import StatusBarView from '../custom/StatusBarView';
 //       );
 //    }
 // }
+
 export default class Welcome extends React.Component {
    componentDidMount() {
       setTimeout(() => {
