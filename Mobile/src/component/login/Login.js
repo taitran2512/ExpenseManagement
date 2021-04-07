@@ -78,7 +78,7 @@ export default class Login extends Component {
       this.isSupportBio();
       this.notif.requestPermissions(); //yêu cầu quyền cho push noti
       this.notif.abandonPermissions(); //chấp nhận quyền cho push noti
-      
+
       //Tạo local noti
       this.notif.sendNotiLocal(
          title = 'Chào mừng bạn đến với Mew.',

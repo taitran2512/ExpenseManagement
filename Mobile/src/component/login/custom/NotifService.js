@@ -177,13 +177,13 @@ export default class NotifService {
 
     sendNotiLocal(title, message) {
         PushNotification.localNotification({
-            channelId: 'sound-channel-id',
-            bigText: '\u00A9 Mew. ' + new Date().getFullYear(),
+            channelId: "sound-channel-id",
+            subText: "\u00A9 Mew. " + new Date().getFullYear(),
             title: title,
             message: message,
             vibrate: false,
             playSound: true,
-            soundName: 'mew.mp3',
+            soundName: "sample.mp3", //Phải đặt tên trùng với sound-channel đã tạo ở trên
             largeIconUrl: "https://f15-group-zf.zdn.vn/d918608a68f187afdee0/7428775191399183840",
         });
     }
