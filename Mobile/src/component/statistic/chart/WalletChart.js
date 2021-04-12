@@ -31,14 +31,19 @@ export default class TotalTypeChart extends Component {
    }
    calculateValue = () => {
       let label = [];
-      for (var item of this.props.dataWallet) {
-         label.push(item.walletName);
+      if(item){
+         for (var item of this.props.dataWallet) {
+            label.push(item.walletName);
+         }
       }
       let value = [];
-      for (var items of this.props.dataWallet) {
-         value.push(items.walletMoney / 1000000);
+      if(items){
+         for (var items of this.props.dataWallet) {
+            value.push(items.walletMoney / 1000000);
+         }
       }
-      this.setState({ label: label, value: value });
+      if (label !== null && value !== null)
+         this.setState({ label: label, value: value });
    };
    componentDidMount() {
       this.calculateValue();
