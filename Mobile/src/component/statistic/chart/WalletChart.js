@@ -31,17 +31,19 @@ export default class TotalTypeChart extends Component {
    }
    calculateValue = () => {
       let label = [];
-      if(item){
+      if(this.props.dataWallet !== null){
          for (var item of this.props.dataWallet) {
             label.push(item.walletName);
          }
       }
+         
       let value = [];
-      if(items){
+      if (this.props.dataWallet !== null) {
          for (var items of this.props.dataWallet) {
             value.push(items.walletMoney / 1000000);
          }
       }
+      
       if (label !== null && value !== null)
          this.setState({ label: label, value: value });
    };
