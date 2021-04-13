@@ -25,7 +25,9 @@ export default class DrawerComponent extends Component {
          android_ripple={{ color: colors.black_transparent }}
          onPress={() => {
             if (item.screen === '') {
-               Alert.alert('Thông báo', 'Chức năng đang được cập nhật');
+               //Alert.alert('Thông báo', 'Chức năng đang được cập nhật');
+               this.props.showAlertAction('warn', 'Chức năng đang được cập nhật');
+               this.props.navigation.closeDrawer();
             } else {
                this.props.navigation.navigate(item.screen);
             }

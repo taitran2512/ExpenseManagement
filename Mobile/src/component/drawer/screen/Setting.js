@@ -46,10 +46,11 @@ export default class Setting extends Component {
    );
    onPressBio = () => {
       if (userData.BIOMETRICS === '') {
-         Alert.alert(
-            'Thông báo',
-            'Điện thoại của bạn không hỗ trợ xác thực vân tay/ khuôn mặt hoặc bạn chưa kích hoạt chức năng lên',
-         );
+         // Alert.alert(
+         //    'Thông báo',
+         //    'Điện thoại của bạn không hỗ trợ xác thực vân tay/ khuôn mặt hoặc bạn chưa kích hoạt chức năng lên',
+         // );
+         this.props.showAlertAction('warn', 'Điện thoại của bạn không hỗ trợ tính năng này');
       } else {
          this.state.activeBio ? this.SwitcherRef.current.off() : this.SwitcherRef.current.on();
       }
