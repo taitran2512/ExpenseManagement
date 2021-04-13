@@ -26,9 +26,8 @@ export default class Expense extends Component {
       this.state = {
          money: '',
          date: new Date().toISOString(),
-         time: `${new Date().getHours() < 10 ? '0' + new Date().getHours() : new Date().getHours()}:${
-            new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()
-         }`,
+         time: `${new Date().getHours() < 10 ? '0' + new Date().getHours() : new Date().getHours()}:${new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()
+            }`,
          note: '',
          wallet: '',
          selectedOption: '',
@@ -89,13 +88,11 @@ export default class Expense extends Component {
    onChangetime = (time) => {
       this.setState({
          time: time
-            ? `${
-                 new Date(time).getHours() < 10 ? '0' + new Date(time).getHours() : new Date(time).getHours()
-              }:${
-                 new Date(time).getMinutes() < 10
-                    ? '0' + new Date(time).getMinutes()
-                    : new Date(time).getMinutes()
-              }`
+            ? `${new Date(time).getHours() < 10 ? '0' + new Date(time).getHours() : new Date(time).getHours()
+            }:${new Date(time).getMinutes() < 10
+               ? '0' + new Date(time).getMinutes()
+               : new Date(time).getMinutes()
+            }`
             : '',
       });
    };
@@ -115,27 +112,32 @@ export default class Expense extends Component {
    componentDidUpdate(prevProps) {
       if (this.props.status !== null && this.props.status !== prevProps.status) {
          if (this.props.status === 'success') {
-            setTimeout(() => {
-               Alert.alert(
-                  'Thông báo',
-                  this.props.message,
-                  [
-                     {
-                        text: 'OK',
-                        onPress: () => {
-                           this.props.navigation.goBack();
-                           this.props.getWalletAction();
-                           this.props.getHistoryAction();
-                        },
-                     },
-                  ],
-                  { cancelable: false },
-               );
-            }, 10);
+            // setTimeout(() => {
+            //    Alert.alert(
+            //       'Thông báo',
+            //       this.props.message,
+            //       [
+            //          {
+            //             text: 'OK',
+            //             onPress: () => {
+            //                this.props.navigation.goBack();
+            //                this.props.getWalletAction();
+            //                this.props.getHistoryAction();
+            //             },
+            //          },
+            //       ],
+            //       { cancelable: false },
+            //    );
+            // }, 10);
+            this.props.showAlertAction('success', this.props.message);
+            this.props.navigation.goBack();
+            this.props.getWalletAction();
+            this.props.getHistoryAction();
          } else if (this.props.status === 'error') {
-            setTimeout(() => {
-               Alert.alert('Thông báo', this.props.message);
-            }, 10);
+            // setTimeout(() => {
+            //    Alert.alert('Thông báo', this.props.message);
+            // }, 10);
+            this.props.showAlertAction('error', this.props.message);
          }
       }
    }
@@ -246,6 +248,8 @@ export default class Expense extends Component {
       );
    }
 }
+
+
 const styles = StyleSheet.create({
    container: {
       flex: 1,

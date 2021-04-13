@@ -22,7 +22,7 @@ export default class InfoApp extends Component {
                </View>
                <View style={styles.containerList}>
                   <Item
-                     title="Bình chọn cho My E Walle (Mew)"
+                     title="Bình chọn cho My E Wallet (Mew.)"
                      onPress={() => Alert.alert('Thông báo', 'Chức năng đăng được cập nhật')}
                   />
                   <Item
