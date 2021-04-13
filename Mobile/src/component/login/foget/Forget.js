@@ -47,14 +47,16 @@ export default class Forget extends Component {
       switch (this.state.pageIndex) {
          case 0:
             if (!validEmail(this.SendEmail.current.getEmail())) {
-               Alert.alert('Thông báo', 'Email không hợp lệ');
+               //Alert.alert('Thông báo', 'Email không hợp lệ');
+               this.props.showAlertAction('error', 'Email không hợp lệ');
             } else {
                this.props.sendOTPAction(this.SendEmail.current.getEmail());
             }
             break;
          case 1:
             if (this.VerifyOTP.current.getOTP().length < 6) {
-               Alert.alert('Thông báo', 'Mã OTP không hợp lệ');
+               //Alert.alert('Thông báo', 'Mã OTP không hợp lệ');
+               this.props.showAlertAction('error', 'Mã OTP không hợp lệ');
             } else {
                this.props.verifyOTPAction(this.props.sendOtp._id, this.VerifyOTP.current.getOTP());
             }
@@ -64,13 +66,15 @@ export default class Forget extends Component {
                this.ChangePassword.current.getPassword().length === 0 ||
                this.ChangePassword.current.getConfirmPassword().length === 0
             ) {
-               Alert.alert('Thông báo', 'Vui lòng nhập đầy đủ');
+               //Alert.alert('Thông báo', 'Vui lòng nhập đầy đủ');
+               this.props.showAlertAction('warn', 'Vui lòng nhập đầy đủ');
             } else {
                if (
                   this.ChangePassword.current.getPassword() !==
                   this.ChangePassword.current.getConfirmPassword()
                ) {
-                  Alert.alert('Thông báo', 'Mật khẩu nhập lại không trùng khớp');
+                  //Alert.alert('Thông báo', 'Mật khẩu nhập lại không trùng khớp');
+                  this.props.showAlertAction('warn', 'Mật khẩu nhập lại không trùng khớp');
                } else {
                   this.props.createNewPassAction(
                      this.props.sendOtp._id,
@@ -90,7 +94,8 @@ export default class Forget extends Component {
                // this.FooterButton.current.showBack();
             });
          } else {
-            Alert.alert('Thông báo', this.props.sendOtp.message);
+            //Alert.alert('Thông báo', this.props.sendOtp.message);
+            this.props.showAlertAction('error', this.props.sendOtp.message);
          }
       }
    };
@@ -105,7 +110,8 @@ export default class Forget extends Component {
                this.slide.current.scrollToIndex({ index: this.state.pageIndex });
             });
          } else {
-            Alert.alert('Thông báo', this.props.verifyOtp.message);
+            //Alert.alert('Thông báo', this.props.verifyOtp.message);
+            this.props.showAlertAction('error', this.props.verifyOtp.message);
          }
       }
    };
@@ -116,12 +122,14 @@ export default class Forget extends Component {
       ) {
          if (this.props.createNewPass.status === 'success') {
          } else {
-            Alert.alert(
-               'Thông báo',
-               this.props.createNewPass.message,
-               [{ text: 'OK', onPress: () => this.props.navigation.goBack() }],
-               { cancelable: false },
-            );
+            // Alert.alert(
+            //    'Thông báo',
+            //    this.props.createNewPass.message,
+            //    [{ text: 'OK', onPress: () => this.props.navigation.goBack() }],
+            //    { cancelable: false },
+            // );
+            this.props.showAlertAction('success', this.props.createNewPass.message);
+            this.props.navigation.goBack();
          }
       }
    };

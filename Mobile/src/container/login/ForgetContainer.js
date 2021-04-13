@@ -4,6 +4,7 @@ import Forget from '../../component/login/foget/Forget';
 import { sendOTPAction } from '../../redux/action/account/forget/sendOTPAction';
 import { verifyOTPAction } from '../../redux/action/account/forget/verifyOTPAction';
 import { createNewPassAction } from '../../redux/action/account/forget/createNewPassAction';
+import { showAlertAction } from '../../redux/action/alert/showAlertAction';
 
 export class ForgetContainer extends Component {
    render() {
@@ -40,6 +41,7 @@ const mapDispatchToProps = (dispatch) => {
       sendOTPAction: (email) => dispatch(sendOTPAction(email)),
       verifyOTPAction: (_id, otp) => dispatch(verifyOTPAction(_id, otp)),
       createNewPassAction: (_id, newPassword) => dispatch(createNewPassAction(_id, newPassword)),
+      showAlertAction: (form, message) => dispatch(showAlertAction(form, message))
    };
 };
 

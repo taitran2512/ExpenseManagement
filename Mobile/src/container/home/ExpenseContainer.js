@@ -4,6 +4,8 @@ import Expense from '../../component/home/Expense';
 import { postHistoryAction } from '../../redux/action/history/postHistoryAction';
 import { getHistoryAction } from '../../redux/action/history/getHistoryAction';
 import { getWalletAction } from '../../redux/action/home/getWalletAction';
+import { showAlertAction } from '../../redux/action/alert/showAlertAction';
+
 
 export class ExpenseContainer extends Component {
    render() {
@@ -26,6 +28,7 @@ const mapDispatchToProps = (dispatch) => {
       postHistoryAction: (input) => dispatch(postHistoryAction(input)),
       getHistoryAction: () => dispatch(getHistoryAction()),
       getWalletAction: () => dispatch(getWalletAction()),
+      showAlertAction: (form, message) => dispatch(showAlertAction(form, message))
    };
 };
 

@@ -165,7 +165,8 @@ export default class Login extends Component {
                   })
                   .catch(async (error) => {
                      if (error.code === 'AUTHENTICATION_CANCELED') {
-                        Alert.alert('Thông báo', 'Vui lòng nhập mật khẩu để tiếp tục');
+                        //Alert.alert('Thông báo', 'Vui lòng nhập mật khẩu để tiếp tục');
+                        this.props.showAlertAction('warn', 'Vui lòng nhập mật khẩu để tiếp tục');
                         const jsonValue = await AsyncStorage.getItem('@saveLogin');
                         if (jsonValue != null) {
                            var data = JSON.parse(jsonValue);
