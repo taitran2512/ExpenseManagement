@@ -1,5 +1,11 @@
 import { Dimensions } from 'react-native';
 
+const language = {
+   app: 'vi',
+   vi: 'vi',
+   en: 'en'
+}
+
 const colors = {
    app: '#4D89FF',
    white: '#FFFFFF',
@@ -66,4 +72,4 @@ const fonts = {
    semibold: 'SanFranciscoText-Semibold',
    thin: 'SanFranciscoText-Thin',
 };
-export { colors, screenWidth, screenHeight, fonts };
+export { language, colors, screenWidth, screenHeight, fonts };

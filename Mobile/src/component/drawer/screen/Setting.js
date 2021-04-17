@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { colors, fonts, screenWidth } from '../../../res/style/theme';
+import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
+import { colors, fonts, screenWidth, screenHeight } from '../../../res/style/theme';
 import Header from '../../custom/Header';
 import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
 import BottomSheet from '../../custom/BottomSheet';
@@ -8,6 +8,12 @@ import Images from '../../../res/image';
 import Switcher from '../../custom/Switcher';
 import { userData } from '../../../config/Config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import I18n from '../../../config/i18n';
+
+const dataLanguage = [
+   { title: I18n.t('vietnamese'), lang: 'vi' },
+   { title: I18n.t('english'), lang: 'en' },
+];
 
 const dataColor = [
    { title: 'Xanh dương', color: colors.blue },
@@ -28,17 +34,28 @@ export default class Setting extends Component {
          selectedColor: '',
          activeBio: false,
       };
+      this.BottomSheetLanguage = React.createRef();
       this.BottomSheetColor = React.createRef();
       this.SwitcherRef = React.createRef();
    }
    componentDidMount() {
       this.getValueBio();
    }
+   itemLanguage = ({ item, index }) => (
+      <TouchableOpacity
+         style={styles.item}
+         onPress={() => {
+            this.BottomSheetLanguage.current.close(() => this.props.setLanguageAction(item.lang));
+         }}>
+         <Text style={[styles.txtTitle, { fontSize: 16 }]}>{item.title}</Text>
+         <View style={{ height: 18, width: 18, borderRadius: 18 }} />
+      </TouchableOpacity>
+   );
    itemColor = ({ item, index }) => (
       <TouchableOpacity
          style={styles.item}
          onPress={() => {
-            this.BottomSheetColor.current.close(() => this.props.setColorAcion(item.color));
+            this.BottomSheetColor.current.close(() => this.props.setColorAction(item.color));
          }}>
          <Text style={[styles.txtTitle, { fontSize: 16 }]}>{item.title}</Text>
          <View style={{ backgroundColor: item.color, height: 18, width: 18, borderRadius: 18 }} />
@@ -71,25 +88,34 @@ export default class Setting extends Component {
                this.SwitcherRef.current.on();
             }
          }
-      } catch (err) {}
+      } catch (err) { }
    };
    render() {
       return (
          <View style={styles.container}>
-            <Header isShowBack onPressBack={() => this.props.navigation.goBack()} title="Cài đặt" />
+            <Header isShowBack onPressBack={() => this.props.navigation.goBack()} title={I18n.t('setting')} />
             <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
                <Image style={styles.img} source={Images.ic_setting} />
 
-               <Item title="Màu sắc" onPress={() => this.BottomSheetColor.current.open()} />
-               <Item title="Bảo mật sinh trắc học" onPress={this.onPressBio}>
+               <Item title={I18n.t('lang')} onPress={() => this.BottomSheetLanguage.current.open()} />
+               <Item title={I18n.t('color')} onPress={() => this.BottomSheetColor.current.open()} />
+               <Item title={I18n.t('biometric_security')} onPress={this.onPressBio}>
                   <Switcher ref={this.SwitcherRef} onChange={this.onChangeBiometric} />
                </Item>
-               <BottomSheet ref={this.BottomSheetColor} title="Chọn màu">
+               <BottomSheet ref={this.BottomSheetColor} title={I18n.t('select_color')}>
                   <FlatList
                      data={dataColor}
                      keyExtractor={(item, index) => String(index)}
                      showsVerticalScrollIndicator={false}
                      renderItem={this.itemColor}
+                  />
+               </BottomSheet>
+               <BottomSheet ref={this.BottomSheetLanguage} title={I18n.t('select_lang')} height={screenHeight * 0.2}>
+                  <FlatList
+                     data={dataLanguage}
+                     keyExtractor={(item, index) => String(index)}
+                     showsVerticalScrollIndicator={false}
+                     renderItem={this.itemLanguage}
                   />
                </BottomSheet>
             </ScrollView>

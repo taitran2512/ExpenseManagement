@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Setting from '../../component/drawer/screen/Setting';
-import { setColorAcion } from '../../redux/action/drawer/setColorAcion';
+import { setLanguageAction } from '../../redux/action/drawer/setLanguageAction';
+import { setColorAction } from '../../redux/action/drawer/setColorAction';
 import { showAlertAction } from '../../redux/action/alert/showAlertAction';
 export class SettingContainer extends Component {
    render() {
@@ -11,13 +12,15 @@ export class SettingContainer extends Component {
 
 const mapStateToProps = (state) => {
    return {
-      color: state.setColorReducer.color,
+      lang: state.setLanguageReducer.lang,
+      color: state.setColorReducer.color
    };
 };
 
 const mapDispatchToProps = (dispatch) => {
    return {
-      setColorAcion: (color) => dispatch(setColorAcion(color)),
+      setLanguageAction: (lang) => dispatch(setLanguageAction(lang)),
+      setColorAction: (color) => dispatch(setColorAction(color)),
       showAlertAction: (form, message) => dispatch(showAlertAction(form, message))
    };
 };

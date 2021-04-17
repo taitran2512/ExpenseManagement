@@ -6,7 +6,7 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { colors } from '../res/style/theme';
+import { language, colors } from '../res/style/theme';
 import { connect } from 'react-redux';
 
 ////////////////////////////////////////////////////////////
@@ -24,7 +24,8 @@ import HistoryContainer from './history/HistoryContainer';
 import ChangePasswordContainer from './drawer/screen/ChangePasswordContainer';
 import SettingContainer from './drawer/SettingContainer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { setColorAcion } from '../redux/action/drawer/setColorAcion';
+import { setLanguageAction } from '../redux/action/drawer/setLanguageAction';
+import { setColorAction } from '../redux/action/drawer/setColorAction';
 import InfoApp from '../component/drawer/screen/InfoApp';
 import ExportFileExcel from '../component/drawer/screen/ExportFileExcel';
 import AlertAnimated from '../component/custom/AlertAnimated';
@@ -92,7 +93,18 @@ const App = (props) => {
          colors.app = props.color;
          storeColor();
       }
-   }, [props.color]);
+      if (props.lang !== language.app) {
+         language.app = props.lang;
+         storeLanguage();
+      }
+   }, [props.color, props.lang]);
+   async function storeLanguage() {
+      try {
+         await AsyncStorage.setItem('@appLanguage', props.lang);
+      } catch (e) {
+         // saving error
+      }
+   }
    async function storeColor() {
       try {
          await AsyncStorage.setItem('@appColor', props.color);
@@ -101,15 +113,28 @@ const App = (props) => {
       }
    }
    React.useEffect(() => {
+      getLanguage();
       getColor();
    }, []);
+   async function getLanguage() {
+      try {
+         const value = await AsyncStorage.getItem('@appLanguage');
+         if (value !== null && value !== undefined && value !== '') {
+            // value previously stored
+            language.app = value;
+            props.setLanguageAction(value);
+         }
+      } catch (e) {
+         // error reading value
+      }
+   }
    async function getColor() {
       try {
          const value = await AsyncStorage.getItem('@appColor');
          if (value !== null && value !== undefined && value !== '') {
             // value previously stored
             colors.app = value;
-            props.setColorAcion(value);
+            props.setColorAction(value);
          }
       } catch (e) {
          // error reading value
@@ -144,12 +169,14 @@ const App = (props) => {
 
 const mapStateToProps = (state) => {
    return {
+      lang: state.setLanguageReducer.lang,
       color: state.setColorReducer.color,
    };
 };
 const mapDispatchToProps = (dispatch) => {
    return {
-      setColorAcion: (color) => dispatch(setColorAcion(color)),
+      setLanguageAction: (lang) => dispatch(setLanguageAction(lang)),
+      setColorAction: (color) => dispatch(setColorAction(color)),
    };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(App);

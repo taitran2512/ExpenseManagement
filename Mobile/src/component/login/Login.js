@@ -23,6 +23,7 @@ import { userData } from '../../config/Config';
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin';
 import NotifService from './custom/NotifService';
+import I18n from '../../config/i18n';
 const logoSize = screenWidth * 0.7;
 const duration = 200;
 
@@ -81,8 +82,8 @@ export default class Login extends Component {
 
       //Tạo local noti
       this.notif.sendNotiLocal(
-         title = 'Chào mừng bạn đến với Mew.',
-         message = 'Ví điện tử tiện lợi cho mọi người'
+         title = I18n.t('noti_title'),
+         message = I18n.t('noti_message')
       );
    }
 
