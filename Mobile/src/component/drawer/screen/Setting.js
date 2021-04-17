@@ -41,6 +41,9 @@ export default class Setting extends Component {
    componentDidMount() {
       this.getValueBio();
    }
+   showAlert=()=>{
+      this.props.showAlertAction('pro','Chức năng này đang phát triển')
+   }
    itemLanguage = ({ item, index }) => (
       <TouchableOpacity
          style={styles.item}
@@ -97,7 +100,7 @@ export default class Setting extends Component {
             <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
                <Image style={styles.img} source={Images.ic_setting} />
 
-               <Item title={I18n.t('lang')} onPress={() => this.BottomSheetLanguage.current.open()} />
+               <Item title={I18n.t('lang')} onPress={() => this.showAlert()} />
                <Item title={I18n.t('color')} onPress={() => this.BottomSheetColor.current.open()} />
                <Item title={I18n.t('biometric_security')} onPress={this.onPressBio}>
                   <Switcher ref={this.SwitcherRef} onChange={this.onChangeBiometric} />

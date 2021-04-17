@@ -42,6 +42,8 @@ const AlertAnimated = React.memo((props) => {
             return <FontAwesome5 name="exclamation-circle" color={colors.white} size={32} />;
          case 'success':
             return <FontAwesome5 name="laugh-beam" color={colors.white} size={32} />;
+         case 'pro':
+            return <FontAwesome5 name="tools" color={colors.white} size={32} />;
          default:
             return <FontAwesome5 name="laugh-beam" color={colors.white} size={32} />;
       }
@@ -54,6 +56,8 @@ const AlertAnimated = React.memo((props) => {
             return 'Error';
          case 'success':
             return 'Success';
+         case 'pro':
+            return 'Prospect';
          default:
             return 'Success';
       }
@@ -66,6 +70,8 @@ const AlertAnimated = React.memo((props) => {
             return colors.red1;
          case 'success':
             return colors.green;
+         case 'pro':
+            return colors.blue5;
          default:
             return colors.green;
       }
