@@ -4,8 +4,7 @@ import Header from '../../custom/Header';
 import Images from '../../../res/image';
 import { colors, fonts, screenWidth } from '../../../res/style/theme';
 import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
-import { color } from 'react-native-reanimated';
-
+import DeviceInfo from 'react-native-device-info';
 export default class InfoApp extends Component {
    render() {
       return (
@@ -18,7 +17,7 @@ export default class InfoApp extends Component {
             <ScrollView style={styles.container}>
                <View style={styles.containerVersion}>
                   <Image source={Images.ic_money1} style={styles.img} />
-                  <Text style={styles.txtVersion}>Phiên bản 1.2</Text>
+                  <Text style={styles.txtVersion}>Phiên bản {DeviceInfo.getVersion()}</Text>
                </View>
                <View style={styles.containerList}>
                   <Item
@@ -43,7 +42,7 @@ const Item = (props) => (
    <TouchableOpacity onPress={() => props.onPress()} style={styles.item}>
       <Text style={styles.txtTitle}>{props.title}</Text>
       <View style={styles.itemWeb}>
-         {props.showWeb && <Text style={{ color: colors.gray }}>https://exmana.vn</Text>}
+         {props.showWeb && <Text style={{ color: colors.gray, paddingRight:20 }}>https://exmana.vn</Text>}
          <FontAwesome5 name={'angle-right'} size={18} color={colors.app} />
       </View>
    </TouchableOpacity>

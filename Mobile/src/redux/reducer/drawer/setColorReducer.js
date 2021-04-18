@@ -1,5 +1,5 @@
 import { colors } from '../../../res/style/theme';
-import { SET_COLOR } from '../../action/drawer/setColorAcion';
+import { SET_COLOR } from '../../action/drawer/setColorAction';
 
 const setColorReducer = (state = { color: colors.app }, action) => {
    switch (action.type) {

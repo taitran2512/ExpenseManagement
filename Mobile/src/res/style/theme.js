@@ -1,5 +1,11 @@
 import { Dimensions } from 'react-native';
 
+const language = {
+   app: 'vi',
+   vi: 'vi',
+   en: 'en'
+}
+
 const colors = {
    app: '#4D89FF',
    white: '#FFFFFF',
@@ -28,6 +34,7 @@ const colors = {
    blue2: '#91D5FF',
    blue3: '#BAE7FF',
    blue4: '#4CB8DA',
+   blue5:'#0F9EFF',
    lightblue: '#F1F6FF',
    lightblue1: '#1890FF',
    cyan: '#13C2C2',
@@ -66,4 +73,4 @@ const fonts = {
    semibold: 'SanFranciscoText-Semibold',
    thin: 'SanFranciscoText-Thin',
 };
-export { colors, screenWidth, screenHeight, fonts };
+export { language, colors, screenWidth, screenHeight, fonts };

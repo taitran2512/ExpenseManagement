@@ -51,7 +51,7 @@ const expenseType = [
 
 const incomeType = [
    { code: 'salary', title: 'Tiền lương', icon: Images.ic_card },
-   { code: 'bonus', title: 'Tiền Thưởng', icon: Images.ic_bonus },
+   { code: 'bonus', title: 'Tiền thưởng', icon: Images.ic_bonus },
    { code: 'sale', title: 'Bán hàng', icon: Images.ic_sale },
    { code: 'loan', title: 'Mượn nợ', icon: Images.ic_money_return },
    { code: 'lease', title: 'Cho thuê', icon: Images.ic_money },
