@@ -117,5 +117,7 @@ const Images = {
    ic_google: require('./img/icon/ic_google.png'),
    ic_card: require('./img/icon/ic_card.png'),
    ic_money_return: require('./img/icon/ic_money_return.png'),
+   ic_milk_tea: require('./img/icon/ic_milk_tea.png'),
+   ic_cafe: require('./img/icon/ic_cafe.png'),
 };
 export default Images;

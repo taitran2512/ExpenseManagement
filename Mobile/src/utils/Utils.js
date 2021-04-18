@@ -4,6 +4,8 @@ const expenseType = [
    { code: 'eating', title: 'Ăn uống', icon: Images.ic_food },
    { code: 'snacks', title: 'Ăn vặt', icon: Images.ic_food1 },
    { code: 'clothes', title: 'Quần áo', icon: Images.ic_clothes },
+   { code: 'milktea', title: 'Trà sữa', icon: Images.ic_milk_tea },
+   { code: 'cafe', title: 'Cà phê', icon: Images.ic_cafe },
    { code: 'fruit', title: 'Trái cây', icon: Images.ic_fruit },
    { code: 'market', title: 'Đi chợ', icon: Images.ic_market },
    { code: 'shopping', title: 'Shopping', icon: Images.ic_shopping },
