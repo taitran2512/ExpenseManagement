@@ -98,13 +98,13 @@ router.route('/deleteWallet/:_id').get((req, res) => {
 router.route('/transferMoney').post((req, res) => {
    //id2: id wallet muốn chuyển tiền đến
    const { id1, id2, moneyTransfer } = req.body
-   verifyToken(req, res, (decoded) => {
+   verifyToken(req, res,async (decoded) => {
       try {
-         Wallet.findOne({ _id: id1 }).then((wallet1) => {
+         await Wallet.findOne({ _id: id1 }).then((wallet1) => {
             const moneyAfterTransfer1 = wallet1.walletMoney - moneyTransfer
-            Wallet.findByIdAndUpdate(id1, { walletMoney: moneyAfterTransfer })
+            Wallet.findByIdAndUpdate(id1, { walletMoney: moneyAfterTransfer1 })
          })
-         Wallet.findOne({ _id: id2 }).then((wallet2) => {
+         await Wallet.findOne({ _id: id2 }).then((wallet2) => {
             const moneyAfterTransfer2 = wallet2.walletMoney + moneyTransfer
             Wallet.findByIdAndUpdate(id1, { walletMoney: moneyAfterTransfer2 })
          })
