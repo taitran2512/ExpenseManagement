@@ -54,7 +54,12 @@ const BottomSheet = forwardRef((props, ref) => {
       }).start();
    };
    return (
-      <Modal visible={show} animationType="fade" statusBarTranslucent transparent>
+      <Modal
+         visible={show}
+         animationType="fade"
+         statusBarTranslucent
+         transparent
+         onRequestClose={() => close()}>
          <TouchableWithoutFeedback onPress={() => close()}>
             <KeyboardAvoidingView style={[styles.container, props.modalStyle]} behavior="padding">
                <TouchableWithoutFeedback onPress={() => {}}>

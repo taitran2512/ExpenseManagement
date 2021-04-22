@@ -53,10 +53,10 @@ export const App = (): React.Node => {
 
         PushNotificationIOS.requestPermissions().then(
             (data) => {
-                console.log('PushNotificationIOS.requestPermissions', data);
+               //  console.log('PushNotificationIOS.requestPermissions', data);
             },
             (data) => {
-                console.log('PushNotificationIOS.requestPermissions failed', data);
+               //  console.log('PushNotificationIOS.requestPermissions failed', data);
             },
         );
 

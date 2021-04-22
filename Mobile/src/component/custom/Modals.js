@@ -22,7 +22,7 @@ const Modals = forwardRef((props, ref) => {
    };
 
    return (
-      <Modal visible={show} animationType="fade" statusBarTranslucent transparent>
+      <Modal visible={show} animationType="fade" statusBarTranslucent transparent onRequestClose={onHide}>
          <TouchableWithoutFeedback onPress={props.pressOutToClose ? onHide : null}>
             <KeyboardAvoidingView style={[styles.container, props.modalStyle]} behavior="padding">
                <TouchableWithoutFeedback onPress={() => {}}>{props.children}</TouchableWithoutFeedback>
