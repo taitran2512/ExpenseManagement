@@ -95,7 +95,7 @@ router.route('/deleteWallet/:_id').get((req, res) => {
 })
 
 //chuyển tiền sang ví khác
-router.route('/updateWallet').post((req, res) => {
+router.route('/transferMoney').post((req, res) => {
    //id2: id wallet muốn chuyển tiền đến
    const { id1, id2, moneyTransfer } = req.body
    verifyToken(req, res, (decoded) => {
