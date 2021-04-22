@@ -93,4 +93,19 @@ router.route("/getHistoryIncome/:userId").get((req, res) => {
 	});
 });
 
+//xóa lịch sử
+router.route('/deletetHistory/:_id').get((req, res) => {
+   const _id = req.params._id
+   verifyToken(req, res, (decoded) => {
+      History.findOneAndRemove({ _id })
+         .then((his) => {
+            if (his) {
+               res.json(ResultModel('success', 'Xóa ví tiền thành công', ))
+            } else {
+               res.json(ResultModel('error', 'Xóa ví tiền thất bại', ))
+            }
+         })
+         .catch((err) => res.status(400).json({ error: err }))
+   })
+})
 module.exports = router;
