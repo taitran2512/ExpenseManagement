@@ -80,7 +80,7 @@ const BottomSheet = forwardRef((props, ref) => {
 
 export default React.memo(BottomSheet);
 BottomSheet.defaultProps = {
-   height: screenHeight * 0.5,
+   height: screenHeight * 0.7,
 };
 const styles = StyleSheet.create({
    bottomSheet: {

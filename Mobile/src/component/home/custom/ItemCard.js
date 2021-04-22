@@ -5,11 +5,13 @@ import { formatMoney } from '../../../res/function/Functions';
 import Images from '../../../res/image';
 import { colors, fonts, screenWidth } from '../../../res/style/theme';
 import WalletModal from './WalletModal';
+import TransferModal from './TransferModal';
 
 const cardWidth = screenWidth * 0.6;
 
 const ItemCard = (props) => {
    const walletModal = useRef();
+   const transferModal = useRef();
 
    return (
       <ImageBackground
@@ -21,6 +23,10 @@ const ItemCard = (props) => {
          <Text style={styles.money}>{formatMoney(props.money)}</Text>
          {/* ///////action icon///////////////////////// */}
          <View style={styles.action}>
+            <TouchableOpacity onPress={() => transferModal.current.open()} style={{ padding: 8 }}>
+               <FontAwesome5 name="share" color={colors.white} size={20} />
+            </TouchableOpacity>
+
             <TouchableOpacity onPress={() => walletModal.current.open()} style={{ padding: 8 }}>
                <FontAwesome5 name="edit" color={colors.white} size={20} />
             </TouchableOpacity>
@@ -39,11 +45,17 @@ const ItemCard = (props) => {
             cardName={props.cardName}
             {...props}
          />
+         <TransferModal
+            ref={transferModal}
+            money={props.money}
+            listWallet={props.listWallet}
+            onTransfer={props.onTransfer}
+         />
       </ImageBackground>
    );
 };
 
-export default ItemCard;
+export default React.memo(ItemCard);
 ItemCard.defaultProps = {
    onDelete: () => {},
 };

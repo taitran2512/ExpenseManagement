@@ -72,6 +72,10 @@ export default class Home extends Component {
          money={item.walletMoney}
          onSubmit={(cardName, money) => this.onEditWallet(item._id, cardName, money)}
          onDelete={() => this.onDeleteWallet(item._id)}
+         listWallet={this.props.getWallet.data}
+         onTransfer={(id2, moneyTransfer) =>
+            this.props.transferMoneyAction({ id1: item._id, id2, moneyTransfer })
+         }
       />
    );
    loadingCard = () => (
@@ -174,12 +178,22 @@ export default class Home extends Component {
          }
       }
    };
+   //chuyển tiền
+   transferMoney = (prevProps) => {
+      if (this.props.transfer.status !== null && this.props.transfer.status !== prevProps.transfer.status) {
+         if (this.props.transfer.status === 'success') {
+            this.props.getWalletAction();
+            this.props.showAlertAction('success', this.props.transfer.message);
+         }
+      }
+   };
    /////////
    componentDidUpdate(prevProps) {
       this.createWallet(prevProps);
       this.getWallet(prevProps);
       this.deleteWallet(prevProps);
       this.updateWallet(prevProps);
+      this.transferMoney(prevProps);
    }
    ///////////////////////////
    render() {
@@ -188,12 +202,6 @@ export default class Home extends Component {
             <Header isShowMenu onPressMenu={() => this.props.navigation.openDrawer()} title="Trang chủ" />
             {/* ////////////////////////////////////// */}
             <View style={[styles.header, { backgroundColor: colors.app }]}>
-               {/* <Text style={[styles.txtWallet, { fontSize: 30 }]}>Tổng số tiền</Text>
-               {this.props.getWallet.loading ? (
-                  <ActivityIndicator color="white" size="small" />
-               ) : (
-                  <Text style={styles.txtWallet}>{formatMoney(this.state.totalMoney)} đ</Text>
-               )} */}
                <TotalMoneyView totalMoney={this.state.totalMoney} loading={this.props.getWallet.loading} />
             </View>
             {/* ////////////footer///////////////// */}

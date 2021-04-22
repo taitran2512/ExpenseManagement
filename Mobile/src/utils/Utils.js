@@ -6,6 +6,7 @@ const expenseType = [
    { code: 'clothes', title: 'Quần áo', icon: Images.ic_clothes },
    { code: 'milktea', title: 'Trà sữa', icon: Images.ic_milk_tea },
    { code: 'cafe', title: 'Cà phê', icon: Images.ic_cafe },
+   { code: 'lottery', title: 'Vé số', icon: Images.ic_ticket },
    { code: 'fruit', title: 'Trái cây', icon: Images.ic_fruit },
    { code: 'market', title: 'Đi chợ', icon: Images.ic_market },
    { code: 'shopping', title: 'Shopping', icon: Images.ic_shopping },
@@ -45,6 +46,7 @@ const expenseType = [
    { code: 'tv', title: 'Tiền truyền hình', icon: Images.ic_tv },
    { code: 'house', title: 'Tiền nhà', icon: Images.ic_home },
    { code: 'party', title: 'Đám tiệc', icon: Images.ic_home },
+   { code: 'loan', title: 'Cho vay', icon: Images.ic_loan },
    { code: 'giveback', title: 'Trả nợ', icon: Images.ic_salary },
    { code: 'otherExpense', title: 'Khác', icon: Images.ic_other },
 ];

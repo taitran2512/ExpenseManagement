@@ -18,6 +18,7 @@ import setLanguageReducer from './drawer/setLanguageReducer';
 import showAlertReducer from './alert/showAlertReducer';
 import getTotalByTypeReducer from './statistic/getTotalByTypeReducer';
 import loginSocialReducer from './account/loginSocialReducer';
+import transferMoneyReducer from './home/transferMoneyReducer';
 const allReducers = combineReducers({
    loginReducer,
    signupReducer,
@@ -38,6 +39,7 @@ const allReducers = combineReducers({
    showAlertReducer,
    getTotalByTypeReducer,
    loginSocialReducer,
+   transferMoneyReducer,
 });
 
 export default allReducers;

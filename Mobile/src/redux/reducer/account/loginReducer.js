@@ -14,6 +14,7 @@ var initialState = {
    error: null,
 };
 const loginReducer = (state = initialState, action) => {
+   console.log(action);
    switch (action.type) {
       case LOGOUT_ACTION:
          userData._id = '';

@@ -47,11 +47,10 @@ const convertMoney = (_text) => {
                value;
          }
       } else {
-         return texts;
+         return texts.split('.').join('');
       }
       return value;
    } else {
-      console.log();
       return '0';
    }
 };

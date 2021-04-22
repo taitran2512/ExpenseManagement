@@ -11,7 +11,7 @@ import {
    Text,
    View,
 } from 'react-native';
-import { colors, fonts } from '../../res/style/theme';
+import { colors, fonts, screenHeight } from '../../res/style/theme';
 import Header from '../custom/Header';
 import { incomeType } from '../../utils/Utils';
 import Images from '../../res/image';
@@ -26,8 +26,9 @@ export default class Expense extends Component {
       this.state = {
          money: '',
          date: new Date().toISOString(),
-         time: `${new Date().getHours() < 10 ? '0' + new Date().getHours() : new Date().getHours()}:${new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()
-            }`,
+         time: `${new Date().getHours() < 10 ? '0' + new Date().getHours() : new Date().getHours()}:${
+            new Date().getMinutes() < 10 ? '0' + new Date().getMinutes() : new Date().getMinutes()
+         }`,
          note: '',
          wallet: '',
          selectedOption: '',
@@ -88,11 +89,13 @@ export default class Expense extends Component {
    onChangetime = (time) => {
       this.setState({
          time: time
-            ? `${new Date(time).getHours() < 10 ? '0' + new Date(time).getHours() : new Date(time).getHours()
-            }:${new Date(time).getMinutes() < 10
-               ? '0' + new Date(time).getMinutes()
-               : new Date(time).getMinutes()
-            }`
+            ? `${
+                 new Date(time).getHours() < 10 ? '0' + new Date(time).getHours() : new Date(time).getHours()
+              }:${
+                 new Date(time).getMinutes() < 10
+                    ? '0' + new Date(time).getMinutes()
+                    : new Date(time).getMinutes()
+              }`
             : '',
       });
    };
@@ -197,7 +200,7 @@ export default class Expense extends Component {
                   style={styles.mg}
                   value={this.state.wallet?.walletName ?? ''}
                />
-               <BottomSheet ref={this.BottomSheetWallet} title="Chọn ví tiền">
+               <BottomSheet ref={this.BottomSheetWallet} title="Chọn ví tiền" height={screenHeight * 0.5}>
                   <FlatList
                      contentContainerStyle={{ flexGrow: 1 }}
                      data={this.props.dataWallet}
@@ -248,7 +251,6 @@ export default class Expense extends Component {
       );
    }
 }
-
 
 const styles = StyleSheet.create({
    container: {
