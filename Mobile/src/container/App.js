@@ -147,7 +147,7 @@ const App = (props) => {
                headerShown: false,
                ...TransitionPresets.SlideFromRightIOS,
             }}>
-            <Stack.Screen name="Welcome" component={Welcome} />
+            {/* <Stack.Screen name="Welcome" component={Welcome} /> */}
             <Stack.Screen name="Login" component={LoginContainer} />
             <Stack.Screen name="SignUp" component={SignUpContainer} />
             <Stack.Screen name="Forget" component={ForgetContainer} />

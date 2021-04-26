@@ -9,7 +9,7 @@ import Header from '../custom/Header';
 const listMenu = [
    { title: 'Thông tin cá nhân', icon: Images.ic_user_info, screen: 'UserInfo' },
    { title: 'Đổi mật khẩu', icon: Images.ic_lock, screen: 'ChangePassword' },
-   { title: 'Xuất file Excel', icon: Images.ic_excel, screen: 'ExportExcel' },
+   { title: 'Xuất file Excel', icon: Images.ic_excel, screen: '' },
    { title: 'Hướng dẫn sử dụng', icon: Images.ic_guide, screen: '' },
    { title: 'Cài đặt', icon: Images.ic_setting, screen: 'Setting' },
    { title: 'Thông tin ứng dụng', icon: Images.ic_info, screen: 'InfoApp' },
@@ -25,7 +25,6 @@ export default class DrawerComponent extends Component {
          android_ripple={{ color: colors.black_transparent }}
          onPress={() => {
             if (item.screen === '') {
-               //Alert.alert('Thông báo', 'Chức năng đang được cập nhật');
                this.props.showAlertAction('warn', 'Chức năng đang được cập nhật');
                this.props.navigation.closeDrawer();
             } else {
