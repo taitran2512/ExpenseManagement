@@ -8,7 +8,7 @@ import { colors, fonts } from '../../res/style/theme';
 const time = 250;
 const height = getStatusBarHeight() + 48;
 const AlertAnimated = React.memo((props) => {
-   const animation = new Animated.Value(-height);
+   const animation = React.useRef(new Animated.Value(-height)).current;
 
    useEffect(() => {
       if (props.data.form !== null && props.data.message !== null) {

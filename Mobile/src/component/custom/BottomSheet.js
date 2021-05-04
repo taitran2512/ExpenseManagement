@@ -16,7 +16,7 @@ import TextInputAnimated from './TextInputAnimated';
 
 const BottomSheet = forwardRef((props, ref) => {
    const [show, setShow] = useState(false);
-   const translateY = new Animated.Value(props.height);
+   const translateY = useRef(new Animated.Value(props.height)).current;
    const time = 300;
    useImperativeHandle(ref, () => ({
       open: () => open(),
