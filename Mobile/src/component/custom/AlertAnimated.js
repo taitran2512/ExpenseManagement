@@ -8,15 +8,16 @@ import { colors, fonts } from '../../res/style/theme';
 const time = 250;
 const height = getStatusBarHeight() + 48;
 const AlertAnimated = React.memo((props) => {
-   const animation = React.useRef(new Animated.Value(-height)).current;
-
+   const animation = new Animated.Value(-height);
+   const prevData = React.useRef(props.data).current;
    useEffect(() => {
-      if (props.data.form !== null && props.data.message !== null) {
+      if (props.data.form !== null && props.data.message !== null && props.data !== prevData) {
          slideDown();
       }
    }, [props.data]);
 
    const slideDown = () => {
+      animation.setValue(-height);
       Animated.timing(animation, {
          toValue: 0,
          duration: time,
