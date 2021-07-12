@@ -20,8 +20,8 @@ export default class InfoApp extends Component {
                   <Text style={styles.txtVersion}>Phiên bản {DeviceInfo.getVersion()}</Text>
                </View>
                <View style={styles.containerList}>
-                  <Item title="Bình chọn cho My E Wallet (Mew.)" />
                   <Item title="Website" />
+                  <Item title="Liên hệ" />
                </View>
                <Text style={[styles.txtVersion, { color: colors.lightblue1 }]}>Điều khoản sử dụng</Text>
                <Text style={[styles.txtVersion, { color: colors.gray }]}>Phát triển bởi 5que Solutions</Text>
@@ -32,7 +32,7 @@ export default class InfoApp extends Component {
 }
 
 const Item = (props) => (
-   <TouchableOpacity onPress={() => props.onPress()} style={styles.item}>
+   <TouchableOpacity onPress={props.onPress} style={styles.item}>
       <Text style={styles.txtTitle}>{props.title}</Text>
       <View style={styles.itemWeb}>
          {props.showWeb && <Text style={{ color: colors.gray, paddingRight: 20 }}>https://exmana.vn</Text>}
@@ -40,7 +40,9 @@ const Item = (props) => (
       </View>
    </TouchableOpacity>
 );
-
+Item.defaultProps = {
+   onPress() {},
+};
 const styles = StyleSheet.create({
    container: {
       flex: 1,

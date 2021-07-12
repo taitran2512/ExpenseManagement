@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
+import {
+   Alert,
+   FlatList,
+   Image,
+   ScrollView,
+   StyleSheet,
+   Text,
+   TouchableOpacity,
+   View,
+   Dimensions,
+} from 'react-native';
 import { colors, fonts, screenWidth, screenHeight } from '../../../res/style/theme';
 import Header from '../../custom/Header';
 import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
@@ -41,9 +51,9 @@ export default class Setting extends Component {
    componentDidMount() {
       this.getValueBio();
    }
-   showAlert=()=>{
-      this.props.showAlertAction('pro','Chức năng này đang phát triển')
-   }
+   showAlert = () => {
+      this.props.showAlertAction('pro', 'Chức năng này đang phát triển');
+   };
    itemLanguage = ({ item, index }) => (
       <TouchableOpacity
          style={styles.item}
@@ -66,10 +76,6 @@ export default class Setting extends Component {
    );
    onPressBio = () => {
       if (userData.BIOMETRICS === '') {
-         // Alert.alert(
-         //    'Thông báo',
-         //    'Điện thoại của bạn không hỗ trợ xác thực vân tay/ khuôn mặt hoặc bạn chưa kích hoạt chức năng lên',
-         // );
          this.props.showAlertAction('warn', 'Điện thoại của bạn không hỗ trợ tính năng này');
       } else {
          this.state.activeBio ? this.SwitcherRef.current.off() : this.SwitcherRef.current.on();
@@ -91,7 +97,7 @@ export default class Setting extends Component {
                this.SwitcherRef.current.on();
             }
          }
-      } catch (err) { }
+      } catch (err) {}
    };
    render() {
       return (
@@ -100,7 +106,7 @@ export default class Setting extends Component {
             <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
                <Image style={styles.img} source={Images.ic_setting} />
 
-               <Item title={I18n.t('lang')} onPress={() => this.showAlert()} />
+               <Item title={I18n.t('lang')} onPress={() => this.BottomSheetLanguage.current.open()} />
                <Item title={I18n.t('color')} onPress={() => this.BottomSheetColor.current.open()} />
                <Item title={I18n.t('biometric_security')} onPress={this.onPressBio}>
                   <Switcher ref={this.SwitcherRef} onChange={this.onChangeBiometric} />
@@ -113,7 +119,7 @@ export default class Setting extends Component {
                      renderItem={this.itemColor}
                   />
                </BottomSheet>
-               <BottomSheet ref={this.BottomSheetLanguage} title={I18n.t('select_lang')} height={screenHeight * 0.2}>
+               <BottomSheet ref={this.BottomSheetLanguage} title={I18n.t('select_lang')} height={250}>
                   <FlatList
                      data={dataLanguage}
                      keyExtractor={(item, index) => String(index)}

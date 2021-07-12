@@ -53,10 +53,7 @@ export default class Login extends Component {
       this.keyboardDidHide = this.keyboardDidHide.bind(this);
 
       //push noti
-      this.notif = new NotifService(
-         this.onRegister.bind(this),
-         this.onNotif.bind(this),
-      );
+      this.notif = new NotifService(this.onRegister.bind(this), this.onNotif.bind(this));
    }
 
    //push noti
@@ -80,11 +77,11 @@ export default class Login extends Component {
       this.notif.requestPermissions(); //yêu cầu quyền cho push noti
       this.notif.abandonPermissions(); //chấp nhận quyền cho push noti
 
-      //Tạo local noti
-      this.notif.sendNotiLocal(
-         title = I18n.t('noti_title'),
-         message = I18n.t('noti_message')
-      );
+      // //Tạo local noti
+      // this.notif.sendNotiLocal(
+      //    title = I18n.t('noti_title'),
+      //    message = I18n.t('noti_message')
+      // );
    }
 
    componentWillUnmount() {
@@ -248,13 +245,15 @@ export default class Login extends Component {
       //Phải logout trước để không bị lỗi: User logged in as different Facebook user.
       LoginManager.logOut();
       //Đôi lúc Facebook không get được email
-      LoginManager.logInWithPermissions(["public_profile", "email"])
+      LoginManager.logInWithPermissions(['public_profile', 'email'])
          .then((result) => {
             if (result.isCancelled) {
             } else {
                AccessToken.getCurrentAccessToken().then((data) => {
                   fetch(
-                     'https://graph.facebook.com/v10.0/me?fields=email,name,friends&access_token=' + data.accessToken)
+                     'https://graph.facebook.com/v10.0/me?fields=email,name,friends&access_token=' +
+                        data.accessToken,
+                  )
                      .then((response) => response.json())
                      .then((userProfile) => {
                         const inputData = {
@@ -327,7 +326,7 @@ export default class Login extends Component {
          (this.props.error !== null && this.props.error !== prevProps.error) ||
          (this.props.errorSocial !== null && this.props.errorSocial !== prevProps.errorSocial)
       ) {
-         this.props.showAlertAction('error', this.props.error || this.props.errorSocial);
+         this.props.showAlertAction('error', 'Lỗi, vui lòng thử lại sau');
       }
    }
 
@@ -397,23 +396,14 @@ export default class Login extends Component {
                <TouchableOpacity onPress={this.loginGoogle}>
                   <Image source={Images.ic_google} style={styles.sizeIcon} />
                </TouchableOpacity>
-               {/* <TextInput
-                  style={styles.textField}
-                  value={this.state.registerToken}
-                  placeholder="Register token"
-               /> */}
             </View>
-            {/* 
-               <TouchableOpacity
-                  style={styles.subView}
-                  onPress={() => this.props.navigation.navigate('Forget')}>
-                  <Text style={styles.txtsignup}>Quên mật khẩu</Text>
-               </TouchableOpacity>
-                */}
+
+            {/* <TouchableOpacity style={styles.subView} onPress={() => this.props.navigation.navigate('Forget')}>
+               <Text style={styles.txtsignup}>Quên mật khẩu</Text>
+            </TouchableOpacity> */}
          </ScrollView>
       );
    }
-
 }
 const styles = StyleSheet.create({
    container: {

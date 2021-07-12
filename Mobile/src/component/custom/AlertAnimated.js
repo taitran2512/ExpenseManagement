@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/dist/FontAwesome5';
 import { connect } from 'react-redux';
@@ -8,7 +8,7 @@ import { colors, fonts } from '../../res/style/theme';
 const time = 250;
 const height = getStatusBarHeight() + 48;
 const AlertAnimated = React.memo((props) => {
-   const animation = new Animated.Value(-height);
+   const animation = useRef(new Animated.Value(-height)).current;
    const prevData = React.useRef(props.data).current;
    useEffect(() => {
       if (props.data.form !== null && props.data.message !== null && props.data !== prevData) {
