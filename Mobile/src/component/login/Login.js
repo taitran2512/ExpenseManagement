@@ -23,6 +23,7 @@ import { userData } from '../../config/Config';
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin';
 import NotifService from './custom/NotifService';
+import Matomo from '@valleyelectronics/react-native-matomo';
 import I18n from '../../config/i18n';
 const logoSize = screenWidth * 0.7;
 const duration = 200;
@@ -301,13 +302,18 @@ export default class Login extends Component {
          this.props.showAlertAction('error', 'Đăng nhập google thất bại');
       }
    };
-
+   matomoTracker = (_id) => {
+      Matomo.initTracker('https://tatt19.matomo.cloud/matomo.php', 1);
+		Matomo.setUserId(_id);
+		Matomo.setCustomDimension(1, 'abc');
+   };
    ///////////////////////////////
    componentDidUpdate(prevProps) {
       //login with account
       if (this.props.status !== null && this.props.status !== prevProps.status) {
          if (this.props.status === 'success') {
             this.saveLogin();
+            this.matomoTracker(this.props.data?._id);
             this.props.navigation.replace('Home');
          } else {
             this.props.showAlertAction('error', this.props.message);
