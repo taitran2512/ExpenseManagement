@@ -25,10 +25,6 @@ export default class ChangePassword extends Component {
       };
    }
 
-   componentDidMount() {
-      console.log(this.props.status, 'status');
-   }
-
    componentDidUpdate(prevProps) {
       if (prevProps.status !== this.props.status && this.props.status !== null) {
          if (this.props.status === 'success') {
@@ -55,11 +51,10 @@ export default class ChangePassword extends Component {
       if (this.state.oldPassword == '' || this.state.oldPassword === '' || this.state.newPassword === '') {
          //Alert.alert('Lưu ý', 'Bạn phải nhập đầy đủ thông tin');
          this.props.showAlertAction('warn', 'Bạn phải nhập đầy đủ thông tin');
-      } 
-      if (this.state.newPassword !== this.state.confirmPassword){
-         this.props.showAlertAction('error', 'Mật khẩu mới chưa trùng nhau');
       }
-      else {
+      if (this.state.newPassword !== this.state.confirmPassword) {
+         this.props.showAlertAction('error', 'Mật khẩu mới chưa trùng nhau');
+      } else {
          this.props.changePasswordAction(this.state.oldPassword, this.state.newPassword);
       }
    };

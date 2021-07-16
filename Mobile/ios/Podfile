@@ -22,8 +22,6 @@ target 'ExpenseManagement' do
     pod 'Firebase/InAppMessaging'
     pod 'Firebase/Analytics'
     pod 'Firebase/Messaging'
-	 pod 'matomo-ios', :path => '../node_modules/matomo-ios'
-	 pod 'BNFMatomo', :path => '../node_modules/@milkinteractive/react-native-matomo'
     # add pods for any other desired Firebase products
   use_flipper!
   post_install do |installer|

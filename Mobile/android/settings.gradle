@@ -12,9 +12,4 @@ project(':react-native-google-signin').projectDir = new File(rootProject.project
 
 //push noti
 include ':react-native-push-notification'
-project(':react-native-push-notification').projectDir = file('../node_modules/react-native-push-notification/android')
-
-//matomo
-include ':react-native-matomo'
-project(':react-native-matomo').projectDir = new File(rootProject.projectDir, '../node_modules/@valleyelectronics/react-native-matomo/android/')
-
+project(':react-native-push-notification').projectDir = file('../node_modules/react-native-push-notification/android'

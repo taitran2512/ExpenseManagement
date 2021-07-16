@@ -30,6 +30,9 @@ import InfoApp from '../component/drawer/screen/InfoApp';
 import ExportFileExcel from '../component/drawer/screen/ExportFileExcel';
 import AlertAnimated from '../component/custom/AlertAnimated';
 import Welcome from '../component/welcome/Welcome';
+import MatomoTracker, { MatomoProvider, useMatomo } from 'matomo-tracker-react-native';
+import { userData } from '../config/Config';
+
 ////////////////////////////////////////////////////////////
 //bottom-tab
 const Tab = createMaterialBottomTabNavigator();
@@ -87,7 +90,9 @@ const Drawers = () => {
 };
 //stack navigation
 const Stack = createStackNavigator();
-const App = (props) => {
+const MainStack = (props) => {
+   const { trackAppStart } = useMatomo();
+
    React.useLayoutEffect(() => {
       if (props.color !== colors.app) {
          colors.app = props.color;
@@ -115,6 +120,7 @@ const App = (props) => {
    React.useEffect(() => {
       getLanguage();
       getColor();
+      trackAppStart();
    }, []);
    async function getLanguage() {
       try {
@@ -153,7 +159,7 @@ const App = (props) => {
             <Stack.Screen name="Forget" component={ForgetContainer} />
             <Stack.Screen name="Home" component={Drawers} />
             <Stack.Screen name="Expense" component={ExpenseContainer} />
-            <Stack.Screen name="Income" component={IncomeContainer} />
+            <Stack.Screen name="Income" component={IncomeContainer}/>
             <Stack.Screen name="UserInfo" component={UserInfo} />
             <Stack.Screen name="ChangePassword" component={ChangePasswordContainer} />
             <Stack.Screen name="DetailHistory" component={DetailHistoryContainer} />
@@ -165,8 +171,23 @@ const App = (props) => {
       </NavigationContainer>
    );
 };
-// export default App;
 
+const App = (props) => {
+   const instance = new MatomoTracker({
+      urlBase: 'https://tatt19.matomo.cloud', // required
+      trackerUrl: 'https://tatt19.matomo.cloud/matomo.php', // optional, default value: `${urlBase}matomo.php`
+      siteId: 1, // required, number matching your Matomo project
+      userId: userData._id, // optional, default value: `undefined`.
+      disabled: false, // optional, default value: false. Disables all tracking operations if set to true.
+      log: true, // optional, default value: false. Enables some logs if set to true.
+   });
+
+   return (
+      <MatomoProvider instance={instance}>
+         <MainStack {...props} />
+      </MatomoProvider>
+   );
+};
 const mapStateToProps = (state) => {
    return {
       lang: state.setLanguageReducer.lang,
