@@ -91,7 +91,7 @@ const Drawers = () => {
 //stack navigation
 const Stack = createStackNavigator();
 const MainStack = (props) => {
-   const { trackAppStart } = useMatomo();
+   const { trackAppStart, trackScreenView } = useMatomo();
 
    React.useLayoutEffect(() => {
       if (props.color !== colors.app) {
@@ -146,8 +146,33 @@ const MainStack = (props) => {
          // error reading value
       }
    }
+   function getActiveRouteName(navigationState) {
+      if (!navigationState) {
+         return null;
+      }
+      const route = navigationState.routes[navigationState.index];
+      // dive into nested navigators
+      if (route.routes) {
+         return getActiveRouteName(route);
+      }
+      return route.routeName;
+   }
+   const navigationRef = React.useRef();
+   const routeNameRef = React.useRef();
    return (
-      <NavigationContainer>
+      <NavigationContainer
+         ref={navigationRef}
+         onReady={() => (routeNameRef.current = navigationRef.current.getCurrentRoute().name)}
+         onStateChange={async () => {
+            const previousRouteName = routeNameRef.current;
+            const currentRouteName = navigationRef.current.getCurrentRoute().name;
+
+            if (previousRouteName !== currentRouteName) {
+               trackScreenView(currentRouteName);
+            }
+            // Save the current route name for later comparison
+            routeNameRef.current = currentRouteName;
+         }}>
          <Stack.Navigator
             screenOptions={{
                headerShown: false,
@@ -159,7 +184,7 @@ const MainStack = (props) => {
             <Stack.Screen name="Forget" component={ForgetContainer} />
             <Stack.Screen name="Home" component={Drawers} />
             <Stack.Screen name="Expense" component={ExpenseContainer} />
-            <Stack.Screen name="Income" component={IncomeContainer}/>
+            <Stack.Screen name="Income" component={IncomeContainer} />
             <Stack.Screen name="UserInfo" component={UserInfo} />
             <Stack.Screen name="ChangePassword" component={ChangePasswordContainer} />
             <Stack.Screen name="DetailHistory" component={DetailHistoryContainer} />

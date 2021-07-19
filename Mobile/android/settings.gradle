@@ -12,4 +12,4 @@ project(':react-native-google-signin').projectDir = new File(rootProject.project
 
 //push noti
 include ':react-native-push-notification'
-project(':react-native-push-notification').projectDir = file('../node_modules/react-native-push-notification/android'
+project(':react-native-push-notification').projectDir = file('../node_modules/react-native-push-notification/android')
