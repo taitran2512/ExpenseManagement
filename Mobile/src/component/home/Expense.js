@@ -113,36 +113,16 @@ export default class Expense extends Component {
       this.props.postHistoryAction(input);
    };
    componentDidUpdate(prevProps) {
-      if (this.props.status !== null && this.props.status !== prevProps.status) {
-         if (this.props.status === 'success') {
-            // setTimeout(() => {
-            //    Alert.alert(
-            //       'Thông báo',
-            //       this.props.message,
-            //       [
-            //          {
-            //             text: 'OK',
-            //             onPress: () => {
-            //                this.props.navigation.goBack();
-            //                this.props.getWalletAction();
-            //                this.props.getHistoryAction();
-            //             },
-            //          },
-            //       ],
-            //       { cancelable: false },
-            //    );
-            // }, 10);
-            this.props.showAlertAction('success', this.props.message);
-            this.props.navigation.goBack();
-            this.props.getWalletAction();
-            this.props.getHistoryAction();
-         } else if (this.props.status === 'error') {
-            // setTimeout(() => {
-            //    Alert.alert('Thông báo', this.props.message);
-            // }, 10);
-            this.props.showAlertAction('error', this.props.message);
-         }
-      }
+      // if (this.props.status !== null && this.props.status !== prevProps.status) {
+      //    if (this.props.status === 'success') {
+      //       this.props.showAlertAction('success', this.props.message);
+      //       this.props.navigation.goBack();
+      //       this.props.getWalletAction();
+      //       this.props.getHistoryAction();
+      //    } else if (this.props.status === 'error') {
+      //       this.props.showAlertAction('error', this.props.message);
+      //    }
+      // }
    }
    render() {
       return (

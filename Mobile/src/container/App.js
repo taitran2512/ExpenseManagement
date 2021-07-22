@@ -32,6 +32,7 @@ import AlertAnimated from '../component/custom/AlertAnimated';
 import Welcome from '../component/welcome/Welcome';
 import MatomoTracker, { MatomoProvider, useMatomo } from 'matomo-tracker-react-native';
 import { userData } from '../config/Config';
+import { navigationRef } from './NavigionRef';
 
 ////////////////////////////////////////////////////////////
 //bottom-tab
@@ -147,16 +148,14 @@ const MainStack = (props) => {
       }
    }
 
-   const navigationRef = React.useRef();
    const routeNameRef = React.useRef();
    return (
       <NavigationContainer
          ref={navigationRef}
          onReady={() => (routeNameRef.current = navigationRef.current.getCurrentRoute().name)}
-         onStateChange={async () => {
+         onStateChange={() => {
             const previousRouteName = routeNameRef.current;
             const currentRouteName = navigationRef.current.getCurrentRoute().name;
-
             if (previousRouteName !== currentRouteName) {
                trackScreenView(currentRouteName);
             }
@@ -194,7 +193,7 @@ const App = (props) => {
       siteId: 1, // required, number matching your Matomo project
       userId: userData._id, // optional, default value: `undefined`.
       disabled: false, // optional, default value: false. Disables all tracking operations if set to true.
-      log: true, // optional, default value: false. Enables some logs if set to true.
+      log: false, // optional, default value: false. Enables some logs if set to true.
    });
 
    return (
