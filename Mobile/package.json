@@ -30,7 +30,7 @@
     "matomo-tracker-react-native": "^0.2.3",
     "react": "17.0.2",
     "react-native": "^0.64.0",
-    "react-native-calendars": "^1.1255.0",
+	 "react-native-calendars":"git+https://github.com/taitran2512/react-native-calendars.git",
     "react-native-chart-kit": "^6.11.0",
     "react-native-code-push": "^7.0.1",
     "react-native-device-info": "^8.1.0",

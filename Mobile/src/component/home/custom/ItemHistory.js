@@ -4,6 +4,7 @@ import { formatMoney } from '../../../res/function/Functions';
 import Images from '../../../res/image';
 import { colors, fonts } from '../../../res/style/theme';
 import { expenseType, incomeType } from '../../../utils/Utils';
+
 const ItemHistory = (props) => {
    const getType = () => {
       const iconExpense = expenseType.find((element) => element.code === props.code);
@@ -32,7 +33,7 @@ const ItemHistory = (props) => {
    );
 };
 
-export default ItemHistory;
+export default React.memo(ItemHistory);
 
 const styles = StyleSheet.create({
    container: {
