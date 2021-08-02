@@ -8,7 +8,7 @@ function ResultModel(status, message, data = null, error = null) {
 		error: error,
 	};
 }
-let generateToken = (user, tokenLife = '60s') => {
+let generateToken = (user, tokenLife = '1d') => {
 	return jwt.sign(user, secretKey, { algorithm: "HS256", expiresIn: tokenLife });
 };
 
